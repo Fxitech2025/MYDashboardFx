@@ -1,0 +1,178 @@
+package io.github.gleidsonmt.dashboardfx;
+
+import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
+import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
+import io.github.gleidsonmt.dashboardfx.drawer.*;
+import io.github.gleidsonmt.dashboardfx.drawer.Module;
+import io.github.gleidsonmt.dashboardfx.model.User;
+import io.github.gleidsonmt.dashboardfx.presentation.core.Behavior;
+import io.github.gleidsonmt.dashboardfx.presentation.core.FlowPres;
+import io.github.gleidsonmt.dashboardfx.presentation.core.Introduction;
+import io.github.gleidsonmt.dashboardfx.presentation.core.Wrapper;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.*;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.CardsPres;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.*;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.RegionPres;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.TextFlowPres;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.shapes.TextPres;
+import io.github.gleidsonmt.dashboardfx.utils.Assets;
+import io.github.gleidsonmt.dashboardfx.utils.pages.BuildingPage;
+import io.github.gleidsonmt.dashboardfx.utils.pages.ErrorPage;
+import io.github.gleidsonmt.glad.base.Layout;
+import io.github.gleidsonmt.glad.base.Root;
+import io.github.gleidsonmt.glad.controls.icon.Icon;
+import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
+import io.github.gleidsonmt.glad.responsive.Break;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+
+/**
+ * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
+ * Create on  10/03/2025
+ */
+public class Main extends Root {
+
+    private Drawer drawer;
+    private HBox navBar;
+    private BreadCrumbBar crumb;
+    private VBox wrapper;
+    private ScrollPane body;
+    private Button hamb;
+
+    public Main() {
+        super(new Layout());
+        configLayout();
+
+        this.behavior();
+        this.wrapper();
+        this.flow();
+
+        navBar.setPadding(new Insets(10));
+        navBar.setMinHeight(40);
+        navBar.setAlignment(Pos.CENTER_LEFT);
+
+        crumb = new BreadCrumbBar();
+        navBar.getChildren().add(crumb);
+
+        hamb = new Button("");
+        hamb.setCancelButton(true);
+        hamb.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        hamb.setGraphic(new SVGIcon(Icon.MENU));
+
+        hamb.setOnAction(e -> {
+            behavior().openDrawer();
+        });
+
+        drawer = new Drawer(
+                new View("Home", new Dashboard()),
+                new Module("Core",
+                        new View("Introduction", new Introduction()),
+                        new View("Wrapper", new Wrapper()),
+                        new View("Flow", new FlowPres()),
+                        new View("Behavior", new Behavior())
+                ),
+                new Module("Container",
+                        new View("Region", new RegionPres()),
+                        new View("Text Flow", new TextFlowPres())
+                ),
+                new Module("Shapes",
+                        new View("Text", new TextPres()),
+                        new View("Circle", new BuildingPage())
+                ),
+                new Module("Controls",
+                        new View("SVGIcon", new SVGIconPres()),
+                        new View("Avatar View", new AvatarPres()),
+                        new View("Label", new LabelPres()),
+                        new View("Button", new ButtonPres()),
+                        new View("Toggle Button", new ToggleButtonPres()),
+                        new View("Hyperlink", new HyperlinkPres()),
+                        new View("Progress Bar", new ProgressBarPres()),
+                        new View("Table View", new TableViewPres()),
+                        new View("List View", new ListViewPres())
+                ),
+                new Module("Containers",
+                        new View("TitledPane", new BuildingPage()),
+                        new View("TabPane", new TabPres())
+                ),
+                new Module("Charts",
+                        new View("Bar Chart", new BarChartPres()),
+                        new View("Area Chart", new AreaChartPres()),
+                        new View("Stacked Area Chart", new StackedAreaChartPres()),
+                        new View("Stacked Bar Chart", new StackedBarChartPres()),
+                        new View("Pie Chart", new DonutChartPres()),
+                        new View("Line Chart", new LineChartPres())
+
+                ),
+                new Module("Components",
+                        new View("Drawer", new BuildingPage()),
+                        new View("BreadCrumb", new BuildingPage()),
+                        new View("Cards", new CardsPres())
+                ),
+                new Module("Pages",
+                        new View("Home Page", new BuildingPage()),
+                        new View("Login", new BuildingPage()),
+                        new View("Error Page 404")
+                ),
+                new Module("Utils",
+                        new View("Pallet Color", new BuildingPage()),
+                        new View("Alignment", new BuildingPage())
+                ),
+                new View("About", new BuildingPage())
+        );
+
+        drawer.setHeader(new DrawerHeader());
+        drawer.setFooter(new DrawerFooter(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe")));
+
+        drawer.currentModuleProperty().addListener((observableValue, module, newValue) -> {
+            if (newValue instanceof View view && view.getContent() != null) {
+                body.setContent(view.getContent());
+            } else {
+                body.setContent(new ErrorPage(newValue.getName()));
+            }
+        });
+
+
+        crumb.currentModuleProperty().bind(drawer.currentModuleProperty());
+
+        if (drawer.getCurrentModule() instanceof View view) {
+            body.setContent(view.getContent());
+        }
+
+
+    }
+
+    public Layout getContainer() {
+        return super.getLayout();
+    }
+
+    private void configLayout() {
+        this.wrapper = new VBox();
+        this.navBar = new HBox();
+        this.body = new ScrollPane();
+        VBox.setVgrow(this.body, Priority.ALWAYS);
+        body.setFitToWidth(true);
+        body.setFitToHeight(true);
+
+        this.wrapper.getChildren().setAll(navBar, body);
+
+        this.getContainer().setCenter(wrapper);
+
+        getContainer().addPoint(_ -> {
+            getContainer().setLeft(null);
+            navBar.getChildren().add(0, hamb);
+        }, Break.SM);
+
+        getContainer().addPoint(_ -> {
+            getContainer().setLeft(drawer);
+            navBar.getChildren().remove(hamb);
+            wrapper().close();
+        }, Break.values());
+    }
+
+}

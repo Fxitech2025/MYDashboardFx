@@ -1,0 +1,115 @@
+
+.icon {
+    -fx-fill: -text-color;
+}
+
+Text, .text {
+    -fx-fill: -text-color;
+}
+
+.menu {
+    -fx-padding: 0px;
+    -fx-border-insets: 2px;
+}
+
+.menu-content {
+    -fx-border-color: -light-gray-2;
+    -fx-border-width: 0px 0px 0px 2px;
+    -fx-padding: 0px;
+}
+
+.menu GridPane {
+    -fx-border-color: transparent;
+    -fx-border-width: 0px 0px 0px 2px;
+    -fx-translate-x: -2px;
+}
+
+.menu GridPane:hover {
+    -fx-border-color: -medium-gray-2;
+}
+
+.menu .grid-item:focus-within  {
+    -fx-border-color: -fx-accent;
+}
+
+.menu GridPane .overview-item:selected .text {
+    -fx-fill: -fx-accent;
+    -fx-font-weight: bold;
+}
+
+.menu .overview-item {
+     -fx-background-color: transparent;
+     -fx-cursor: hand;
+}
+
+
+
+
+/** @ BreadCrumb **/
+
+.breadcrumb {
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-width: 0px;
+}
+
+.breadcrumb .hyperlink {
+    -fx-padding: 10px 10px 10px 10px;
+    -fx-background-radius: 10px;
+    -fx-text-fill: -text-color;
+    -fx-font-weight: bold;
+    -fx-alignment: center_left;
+}
+
+
+.breadcrumb .hyperlink .text {
+}
+
+.breadcrumb .hyperlink:visited .text,
+.breadcrumb .hyperlink:visited:hover .text {
+}
+
+.breadcrumb .last .text {
+    -fx-fill: -dark-gray;
+}
+
+
+
+
+.toggle-button:selected {
+    -fx-background-color : transparent;
+}
+
+.toggle-button:selected:focused {
+    -fx-background-insets: 0px;
+}
+
+.toggle-button {
+    -fx-padding: 4px;
+    -fx-border-width: 2px;
+    -fx-background-insets: 0px;
+    -fx-border-color : transparent;
+    -fx-background-color : -fx-accent;
+}
+
+.toggle-button:selected .text {
+    -fx-fill: white;
+}
+
+.toggle-button:selected {
+    -fx-padding: 4px;
+    -fx-background-color:
+            -fx-shadow-highlight-color,
+            linear-gradient(to bottom, derive(-fx-accent, -20%), -fx-accent),
+            linear-gradient(to bottom,
+                    derive(-fx-accent, -22%) 0%,
+                    derive(-fx-accent, -13%) 20%,
+                    derive(-fx-accent, -11%) 50%);
+
+}
+
+
+
+.toggle-button:selected:focused {
+    -fx-background-insets: 0px;
+}

@@ -1,0 +1,49 @@
+package io.github.gleidsonmt.dashboardfx.presentation.presentations.controls;
+
+import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import javafx.scene.Node;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.StackPane;
+
+/**
+ * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
+ * Create on  17/03/2025
+ */
+public class ProgressBarPres extends StackPane {
+
+    public ProgressBarPres() {
+        getChildren().add(
+                new Tutorial()
+                        .h3("Progress Bar")
+                        .text("A specialization of the ProgressIndicator which is represented as a horizontal bar.\n" +
+                              "ProgressBar sets focusTraversable to false.")
+                        .h4("Default", "Progress Bar")
+                        .demo(createDemo())
+                        .h4("Indeterminate", "Progress Bar")
+                        .demo(createDemo(-1))
+                        .h4("Customizing", "Progress Bar")
+                        .demo(
+                                createDemo("bg-danger"),
+                                createDemo("bg-success"),
+                                createDemo("bg-warning"),
+                                createDemo("bg-secondary")
+                        )
+                        .code("""
+                                progressBar.getStyleClass().addAll("bg-[success|..]");
+                                """)
+                        .build()
+                        .getRoot()
+        );
+    }
+
+    private Node createDemo(String... classes) {
+        return createDemo(0.5, classes);
+    }
+
+    private ProgressBar createDemo(double progress, String... classes) {
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setProgress(progress);
+        progressBar.getStyleClass().addAll(classes);
+        return progressBar;
+    }
+}
