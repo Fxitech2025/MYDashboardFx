@@ -155,8 +155,9 @@ public class Dashboard extends ResponsiveGrid {
             this.setVgap(10);
         }, Break.SM);
 
+
         addPoint(_ -> {
-//            this.getColumnConstraints().clear();
+            this.getColumnConstraints().clear();
             GridPane.setConstraints(title, 0, 0);
             GridPane.setConstraints(one, 0, 1);
             GridPane.setConstraints(two, 1, 1);
@@ -168,9 +169,10 @@ public class Dashboard extends ResponsiveGrid {
             GridPane.setConstraints(boxAudience,0,5, REMAINING,1);
             GridPane.setConstraints(boxTable,0,6, REMAINING,1);
             GridPane.setConstraints(boxLineChart,0,7, REMAINING,1);
-        }, Break.MD, Break.LG);
+        }, Break.MD, Break.LG, Break.XL);
 
         addPoint(_ -> {
+            this.getColumnConstraints().clear();
             GridPane.setConstraints(title, 0, 0);
             GridPane.setConstraints(one, 0, 1);
             GridPane.setConstraints(two, 1, 1);

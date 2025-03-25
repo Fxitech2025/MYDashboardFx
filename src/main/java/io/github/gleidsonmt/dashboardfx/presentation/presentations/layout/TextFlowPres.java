@@ -1,5 +1,6 @@
 package io.github.gleidsonmt.dashboardfx.presentation.presentations.layout;
 
+import io.github.gleidsonmt.dashboardfx.ResizablePane;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
@@ -29,27 +30,27 @@ public class TextFlowPres extends StackPane {
                         .h3("Customizing", "Text Flow")
                         .nodes(
                                 createDemo("""
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem.
-                                """,
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem.
+                                                """,
                                         "-fx-background-color: derive(-warning, 96%);",
                                         "border-l-2", "border-warning", "padding-5", "text-warning"),
                                 createDemo("""
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem.
-                                """,
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem.
+                                                """,
                                         "-fx-background-color: derive(-danger, 110%);",
                                         "border-l-2", "border-danger", "padding-5", "text-danger"),
                                 createDemo("""
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem.
-                                """,
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem.
+                                                """,
                                         "-fx-background-color: derive(-info, 110%);",
                                         "border-l-2", "border-info", "padding-5", "text-info"),
                                 createDemo("""
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem.
-                                """,
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem.
+                                                """,
                                         "-fx-background-color: derive(-success, 110%);",
                                         "border-l-2", "border-success", "padding-5", "text-success")
                         )

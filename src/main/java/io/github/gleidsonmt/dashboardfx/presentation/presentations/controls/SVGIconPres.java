@@ -1,5 +1,6 @@
 package io.github.gleidsonmt.dashboardfx.presentation.presentations.controls;
 
+import io.github.gleidsonmt.dashboardfx.ResizablePane;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
@@ -36,6 +37,7 @@ public class SVGIconPres extends StackPane {
                         .h3("Options")
 //                        .demo(createDemos())
                         .demo(demos())
+//                        .demo(new FlowPane(new ResizablePane(demos())))
                         .build()
                         .getRoot()
         );
