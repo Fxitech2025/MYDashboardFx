@@ -18,6 +18,7 @@ public class AreaChartPres extends StackPane {
                         .text("""
                                 AreaChart - Plots the area between the line that connects the data points and the 0 line on the Y axis.
                                 """)
+                        .legend("javafx.scene.chart.AreaChart")
                         .demo(createChart())
                         .code("""
                                 NumberAxis xAxis = new NumberAxis();
@@ -43,6 +44,7 @@ public class AreaChartPres extends StackPane {
                         .text("""
                                 Descendant of area chart with curves.
                                 """)
+                        .legend("io.github.gleidsonmt.glad.controls.charts.CurvedChart")
                         .demo(createCurved())
                         .code("""
                                 NumberAxis xAxis = new NumberAxis();

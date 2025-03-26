@@ -22,6 +22,7 @@ public class DonutChartPres extends StackPane {
                                 The clockwise property is set to true by default, which means slices are placed in the clockwise order. 
                                 The labelsVisible property is used to either display pie slice labels or not.
                                 """)
+                        .legend("javafx.scene.chart.AreaChart")
                         .demo(createPieChart())
                         .code("""
                                 PieChart pieChart = new PieChart();
@@ -43,6 +44,7 @@ public class DonutChartPres extends StackPane {
                         .text("""
                                 The same PieChart, but with a circle inside.
                                 """)
+                        .legend("io.github.gleidsonmt.glad.controls.charts.DonutChart")
                         .demo(createChart())
                         .code("""
                                 DonutChart donutChart = new DonutChart();

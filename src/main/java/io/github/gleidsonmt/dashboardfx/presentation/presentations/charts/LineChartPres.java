@@ -23,6 +23,7 @@ public class LineChartPres extends StackPane {
                                 The cumulative nature of the StackedAreaChart gives an idea of the total Y data value at any given point along the X axis. 
                                 Since data points across multiple series may not be common, StackedAreaChart interpolates values along the line joining the data points whenever necessary.
                                 """)
+                        .legend("javafx.scene.chart.LineChart")
                         .demo(createChart())
                         .code("""
                                 NumberAxis xAxis = new NumberAxis();

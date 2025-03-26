@@ -22,6 +22,7 @@ public class BarChartPres extends StackPane {
                                 The bars can be vertical or horizontal depending on which axis is a category axis.
                                 Adding data with multiple occurrences of a category to a series shows the last occurrence.
                                 """)
+                        .legend("javafx.scene.chart.BarChart")
                         .demo(createChart())
                         .code("""
                                 CategoryAxis xAxis = new CategoryAxis();
