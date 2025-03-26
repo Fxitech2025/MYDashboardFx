@@ -9,12 +9,14 @@ import io.github.gleidsonmt.dashboardfx.presentation.core.Behavior;
 import io.github.gleidsonmt.dashboardfx.presentation.core.FlowPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Introduction;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Wrapper;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.HomePage;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.CardsPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.RegionPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.TextFlowPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.shapes.TextPres;
+import io.github.gleidsonmt.dashboardfx.presentation.util.ColorsPres;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.dashboardfx.utils.pages.BuildingPage;
 import io.github.gleidsonmt.dashboardfx.utils.pages.ErrorPage;
@@ -115,12 +117,12 @@ public class Main extends Root {
                         new View("Cards", new CardsPres())
                 ),
                 new Module("Pages",
-                        new View("Home Page", new BuildingPage()),
+                        new View("Home Page", new HomePage()),
                         new View("Login", new BuildingPage()),
                         new View("Error Page 404")
                 ),
                 new Module("Utils",
-                        new View("Pallet Color", new BuildingPage()),
+                        new View("Pallet Color", new ColorsPres()),
                         new View("Alignment", new BuildingPage())
                 ),
                 new View("About", new BuildingPage())

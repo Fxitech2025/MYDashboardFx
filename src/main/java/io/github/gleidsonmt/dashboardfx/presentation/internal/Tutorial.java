@@ -73,7 +73,7 @@ public class Tutorial extends Presentation<Tutorial> {
         body.setPadding(new Insets(20));
         aside.setPadding(new Insets(0, 20, 0, 20));
         aside.setPrefWidth(250);
-        btnTop.getStyleClass().add("btn-directions");
+        btnTop.getStyleClass().addAll("btn-directions", "padding-20", "round");
         center.setId("tutorial-center-body");
         scroll.setId("tutorial-scroll");
         body.setId("tutorial-body");
@@ -167,7 +167,6 @@ public class Tutorial extends Presentation<Tutorial> {
         List<TreeTitle> children =
                 data.stream().filter(child -> child.getRelated() != null
                                               && child.getRelated().getText().equals(item.getText()))
-                        .peek(e -> e.getStyleClass().add("h5"))
                         .toList();
 
         if (!children.isEmpty()) {

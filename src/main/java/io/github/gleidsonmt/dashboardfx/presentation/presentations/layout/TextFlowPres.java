@@ -23,6 +23,7 @@ public class TextFlowPres extends StackPane {
                                 due to wrapping, and the visual location of the Text node can differ from the logical location due to bidi reordering.
                                 Any Node other than Text will be treated as an embedded object in the text layout. It will be inserted in the content using its preferred width, height, and baseline offset
                                 """)
+                        .legend("javafx.scene.text.TextFlow")
                         .node(createDemo("""
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
                                 Vestibulum quis velit ut dolor vestibulum aliquet in non sem. 

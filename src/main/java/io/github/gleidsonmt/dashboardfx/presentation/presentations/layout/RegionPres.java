@@ -18,6 +18,7 @@ public class RegionPres extends StackPane {
                         .h3("Region")
                         .text("Region is the base class for all JavaFX Node-based UI Controls, and all layout containers. It is a resizable Parent node which can be styled from CSS. It can have multiple backgrounds and borders. It is designed to support as much of the CSS3 specification for backgrounds and borders as is relevant to JavaFX. The full specification is available at the W3C  .")
                         .text("\nRegion doesn't fit by default, if you do not apply some color and set the sizes, it continues hided")
+                        .legend("javafx.scene.layout.Region")
                         .legend("\nEvery control descends by Region so every style in region is applicable to all controls.")
                         .h3("Installing", "Region")
                         .code("ThemeProvider.install(scene, \n\tCss.COLORS, \n\tCss.PROPERTIES);", "java")
@@ -27,13 +28,16 @@ public class RegionPres extends StackPane {
                         .h3("Size", "Region")
                         .table(
                                 new Row("w-2", "-fx-pref-width: 2px; ;"),
-                                new Row("h-2", "-fx-pref-height: 2px;"),
-                                new Row("size-2", "-fx-pref-width: 2px; -fx-pref-height: 2px;"),
                                 new Row("w-5", "-fx-pref-width: 5px;"),
-                                new Row("h-5", "-fx-pref-height: 5px;"),
-                                new Row("size-5", "-fx-pref-width: 5px; -fx-pref-height: 5px;"),
                                 new Row("w-10","-fx-pref-width: 10px;"),
+                                new Row("w-100","-fx-pref-width: 100px;"),
+
+                                new Row("h-2", "-fx-pref-height: 2px;"),
+                                new Row("h-5", "-fx-pref-height: 5px;"),
                                 new Row("h-10","-fx-pref-height: 10px;"),
+
+                                new Row("size-2", "-fx-pref-width: 2px; -fx-pref-height: 2px;"),
+                                new Row("size-5", "-fx-pref-width: 5px; -fx-pref-height: 5px;"),
                                 new Row("size-20", "-fx-pref-width: 20px; -fx-pref-height: 20px;"),
                                 new Row("size-30", "-fx-pref-width: 30px; -fx-pref-height: 30px;"),
                                 new Row("size-50", "-fx-pref-width: 50px; -fx-pref-height: 50px;"),
@@ -147,14 +151,32 @@ public class RegionPres extends StackPane {
                                 region.getStyleClass().add("border-[primary|info...]");
                                 """)
                         .h4("Radius", "Region")
+                        .table(
+                                new Row("radius-2", "-fx-background-radius: 2px; -fx-border-radius: 2px;"),
+                                new Row("radius-5", "-fx-background-radius: 5px; -fx-border-radius: 5px;"),
+                                new Row("radius-6", "-fx-background-radius: 6px; -fx-border-radius: 6px;"),
+                                new Row("radius-7", "-fx-background-radius: 7px; -fx-border-radius: 7px;"),
+                                new Row("radius-8", "-fx-background-radius: 8px; -fx-border-radius: 8px;"),
+                                new Row("radius-10", "-fx-background-radius: 10px; -fx-border-radius: 10px;")
+                        )
                         .demo(
                                 createDemo("min-size-50", "border-bottom-1", "border-primary", "bg-primary", "radius-2"),
-                                createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-5")
+                                createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-5"),
+                                createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-6"),
+                                createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-7"),
+                                createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-8"),
+                                createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-10")
                         )
                         .code("""
-                                region.getStyleClass().add("radius-[2|5]");
+                                region.getStyleClass().add("radius-[2|5...]");
                                 """)
                         .h4("Padding", "Region")
+                        .table(
+                                new Row("padding-2", "-fx-padding: 2px;"),
+                                new Row("padding-5", "-fx-padding: 5px;"),
+                                new Row("padding-10", "-fx-padding: 10px;"),
+                                new Row("padding-20", "-fx-padding: 20px;")
+                        )
                         .demo(
                                 createPadding("min-size-50", "size-10", "bg-primary", "padding-2"),
                                 createPadding("min-size-50", "size-10", "bg-primary", "padding-5"),
@@ -162,7 +184,7 @@ public class RegionPres extends StackPane {
                                 createPadding("min-size-50", "size-10", "bg-primary", "padding-20")
                         )
                         .code("""
-                                region.getStyleClass().add("radius-[2|5|10|20]");
+                                region.getStyleClass().add("padding-[2|5|10|20]");
                                 """)
                         .h4("Insets", "Region")
                         .text("The insets doesn't affect its children.")
@@ -200,6 +222,51 @@ public class RegionPres extends StackPane {
                                 new Row("semi-leaf", "  -fx-background-radius : 20px 0px 20px 0px;"),
                                 new Row("leaf", "-fx-background-radius: 100px 0px 100px 0px;"),
                                 new Row("mountain", "-fx-background-radius: 100px 100px 0px 0px;")
+                        )
+                        .h3("Cursors", "Region")
+                        .table(
+                                new Row("cursor-default", "-fx-cursor: default;"),
+                                new Row("cursor-close-hand", "-fx-cursor: close_hand;"),
+                                new Row("cursor-open-hand", "-fx-cursor: open_hand;"),
+                                new Row("cursor-hand", "-fx-cursor: hand;"),
+                                new Row("cursor-move", "-fx-cursor: move;"),
+                                new Row("cursor-wait", "-fx-cursor: wait;"),
+                                new Row("cursor-text", "-fx-cursor: text;"),
+                                new Row("cursor-v-resize", "-fx-cursor: v_resize;"),
+                                new Row("cursor-h-resize", "-fx-cursor: h_resize;"),
+                                new Row("cursor-n-resize", "-fx-cursor: n_resize;"),
+                                new Row("cursor-ne-resize", "-fx-cursor: ne_resize;"),
+                                new Row("cursor-e-resize", "-fx-cursor: e_resize;"),
+                                new Row("cursor-se-resize", "-fx-cursor: se_resize;"),
+                                new Row("cursor-s-resize", "-fx-cursor: s_resize;"),
+                                new Row("cursor-sw-resize", "-fx-cursor: sw_resize;"),
+                                new Row("cursor-w-resize", "-fx-cursor: w_resize;"),
+                                new Row("cursor-nw-resize", "-fx-cursor: nw_resize;"),
+                                new Row("cursor-crosshair", "-fx-cursor: crosshair;"),
+                                new Row("cursor-none", "-fx-cursor: none;"),
+                                new Row("cursor-disappear", "-fx-cursor: disappear;")
+                        )
+                        .demo(
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-default"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-close-hand"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-open-hand"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-hand"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-move"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-wait"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-text"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-v-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-h-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-n-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-ne-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-e-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-se-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-s-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-sw-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-w-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-nw-resize"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-crosshair"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-none"),
+                                createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-disappear")
                         )
                         .h3("Demo", "Shapes")
                         .demo(

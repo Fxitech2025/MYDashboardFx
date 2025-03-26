@@ -28,7 +28,7 @@ public class ListViewPres extends StackPane {
                         .code("""
                                 ListView<String> listView = new ListView<>();
                                 listView.setItems(FXCollections.observableArrayList(
-                                        "Item 01", "Item 02"
+                                      "Item 01", "Item 02", "Item 03", "Item 04"
                                 ));
                                 """)
                         .build().getRoot()
@@ -38,7 +38,7 @@ public class ListViewPres extends StackPane {
     private Node createDemo() {
         ListView<String> listView = new ListView<>();
         listView.setItems(FXCollections.observableArrayList(
-                "Item 01", "Item 02"
+                "Item 01", "Item 02", "Item 03", "Item 04"
         ));
         return listView;
     }
