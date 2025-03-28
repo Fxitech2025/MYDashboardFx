@@ -6,10 +6,15 @@
     -fx-border-color: -medium-gray;
     -fx-border-width: 0px 1px 0px 0px;
     -fx-background-color: -fx-background;
+
 }
+
+
 
 #drawer .drawer-item {
     -fx-background-radius: 6px;
+    -text-color: -dark-gray;
+
 }
 
 #drawer .drawer-item:hover {
@@ -113,9 +118,7 @@
     -fx-background-color: transparent;
 }
 
-#drawer .drawer-menu  .drawer-item .text {
-    -fx-fill: -text-color;
-}
+
 
 #drawer .drawer-menu .drawer-item:hover:selected,
 #drawer .drawer-menu .drawer-item:selected:hover,

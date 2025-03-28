@@ -40,9 +40,12 @@ Text, .text {
 .menu .overview-item {
      -fx-background-color: transparent;
      -fx-cursor: hand;
+     -text-color: -dark-gray;
 }
 
-
+.pattern-circle {
+    -fx-background-image: url('../img/circles_10.png');
+}
 
 
 /** @ BreadCrumb **/

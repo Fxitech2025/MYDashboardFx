@@ -54,23 +54,23 @@ public class LabelPres extends StackPane {
                                 new Row("display-graphic", "-fx-content-display: graphic_only;"),
                                 new Row("display-text", " -fx-content-display: text_only;")
                         )
-                        .demo(
-                                createDemo(new SVGIcon(Icon.ADD),"Label", "display-top", "border-2", "border-light-gray-2", "padding-5"),
-                                createDemo(new SVGIcon(Icon.ADD),"Label", "display-right", "border-2","border-light-gray-2", "padding-5"),
-                                createDemo(new SVGIcon(Icon.ADD),"Label", "display-bottom", "border-2", "border-light-gray-2", "padding-5"),
-                                createDemo(new SVGIcon(Icon.ADD),"Label", "display-left", "border-2","border-light-gray-2", "padding-5"),
-                                createDemo(new SVGIcon(Icon.ADD),"Label", "display-center", "border-2", "border-light-gray-2", "padding-5"),
-                                createDemo(new SVGIcon(Icon.ADD),"Label", "display-graphic", "border-2", "border-light-gray-2", "padding-5"),
-                                createDemo(new SVGIcon(Icon.ADD),"Label", "display-text","border-2", "border-light-gray-2", "padding-5")
-                        )
+                        .demo(new Node[]{
+                                createDemo(new SVGIcon(Icon.ADD), "Label", "display-top", "border-2", "border-light-gray-2", "padding-5"),
+                                createDemo(new SVGIcon(Icon.ADD), "Label", "display-right", "border-2", "border-light-gray-2", "padding-5"),
+                                createDemo(new SVGIcon(Icon.ADD), "Label", "display-bottom", "border-2", "border-light-gray-2", "padding-5"),
+                                createDemo(new SVGIcon(Icon.ADD), "Label", "display-left", "border-2", "border-light-gray-2", "padding-5"),
+                                createDemo(new SVGIcon(Icon.ADD), "Label", "display-center", "border-2", "border-light-gray-2", "padding-5"),
+                                createDemo(new SVGIcon(Icon.ADD), "Label", "display-graphic", "border-2", "border-light-gray-2", "padding-5"),
+                                createDemo(new SVGIcon(Icon.ADD), "Label", "display-text", "border-2", "border-light-gray-2", "padding-5")
+                        })
                         .code("label.setGraphic(new SVGIcon(Icon.MENU));")
                         .h3("Customizing", "Label")
-                        .demo(
+                        .demo(new Node[]{
                                 createCustom("Danger", "danger"),
                                 createCustom("Warning", "warning"),
                                 createCustom("success", "success"),
                                 createCustom("info", "info")
-                        )
+                        })
                         .code("""
                                 Region region = new Region();
                                 region.setMinSize(20, 20);
@@ -83,26 +83,26 @@ public class LabelPres extends StackPane {
                                 label.setGraphic(region);
                                 """)
 
-                        .demo(
+                        .demo(new Node[]{
                                 createCustom2("Danger", "danger"),
                                 createCustom2("Warning", "warning"),
                                 createCustom2("success", "success"),
                                 createCustom2("info", "info")
-                        )
+                        })
                         .code("""
                                 Label label = new Label(text);
                                 label.getStyleClass().addAll( "bg-primary", "text-white", "padding-5", "rounded", "min-size-20", "align-center");
                                 """)
 
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("", "min-size-20", "size-20", "bg-danger", "heart", "padding-5"),
-                                createDemo("", "min-size-20", "size-20",  "bg-danger", "star", "padding-5"),
-                                createDemo("", "min-size-20", "size-20",  "bg-danger", "star-2", "padding-5"),
-                                createDemo("", "min-size-20", "size-20",  "bg-danger", "pac", "padding-5"),
-                                createDemo("", "min-size-20", "size-20",  "bg-danger", "leaf", "padding-5"),
-                                createDemo("", "min-size-20", "size-20",  "bg-danger", "jelly", "padding-5"),
-                                createDemo("", "min-size-20", "size-20",  "bg-danger", "lbl", "padding-5")
-                        )
+                                createDemo("", "min-size-20", "size-20", "bg-danger", "star", "padding-5"),
+                                createDemo("", "min-size-20", "size-20", "bg-danger", "star-2", "padding-5"),
+                                createDemo("", "min-size-20", "size-20", "bg-danger", "pac", "padding-5"),
+                                createDemo("", "min-size-20", "size-20", "bg-danger", "leaf", "padding-5"),
+                                createDemo("", "min-size-20", "size-20", "bg-danger", "jelly", "padding-5"),
+                                createDemo("", "min-size-20", "size-20", "bg-danger", "lbl", "padding-5")
+                        })
                         .code("""
                                 label.getStyleClass().addAll("min-size-20", "size-20",  "bg-danger", "heart", "padding-5");
                                 label.getStyleClass().addAll("min-size-20", "size-20",  "bg-danger", "star", "padding-5");

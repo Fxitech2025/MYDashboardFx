@@ -2,6 +2,7 @@ package io.github.gleidsonmt.dashboardfx;
 
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
+import io.github.gleidsonmt.dashboardfx.dashboard.GridBarView;
 import io.github.gleidsonmt.dashboardfx.drawer.*;
 import io.github.gleidsonmt.dashboardfx.drawer.Module;
 import io.github.gleidsonmt.dashboardfx.model.User;
@@ -9,12 +10,12 @@ import io.github.gleidsonmt.dashboardfx.presentation.core.Behavior;
 import io.github.gleidsonmt.dashboardfx.presentation.core.FlowPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Introduction;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Wrapper;
-import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.HomePage;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.CardsPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.RegionPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.TextFlowPres;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.HomePage;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.shapes.TextPres;
 import io.github.gleidsonmt.dashboardfx.presentation.util.ColorsPres;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
@@ -25,12 +26,15 @@ import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import io.github.gleidsonmt.glad.responsive.Break;
+import javafx.event.ActionEvent;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
@@ -41,8 +45,9 @@ import javafx.scene.layout.VBox;
 public class Main extends Root {
 
     private Drawer drawer;
-    private HBox navBar;
+    private GridPane navBar;
     private BreadCrumbBar crumb;
+    private CardUserOptions card;
     private VBox wrapper;
     private ScrollPane body;
     private Button hamb;
@@ -60,7 +65,18 @@ public class Main extends Root {
         navBar.setAlignment(Pos.CENTER_LEFT);
 
         crumb = new BreadCrumbBar();
-        navBar.getChildren().add(crumb);
+
+        navBar.add(crumb, 0, 0);
+         card = new CardUserOptions(new User(
+                Assets.getImage("default_avatar.jpg", 80),
+                "johndoe54@gmail.com", "Jhon Doe")
+        );
+        navBar.add(card,1, 0);
+//        navBar.setGridLinesVisible(true);
+
+        GridPane.setValignment(crumb, VPos.CENTER);
+        GridPane.setHalignment(card, HPos.RIGHT);
+        GridPane.setHgrow(crumb, Priority.ALWAYS);
 
         hamb = new Button("");
         hamb.setCancelButton(true);
@@ -73,6 +89,13 @@ public class Main extends Root {
 
         drawer = new Drawer(
                 new View("Home", new Dashboard()),
+                new View("Grid System",
+                        onEnter -> {
+                            getContainer().setTop(new GridBarView());
+                        }, onExit -> {
+                    getContainer().setTop(null);
+
+                }),
                 new Module("Core",
                         new View("Introduction", new Introduction()),
                         new View("Wrapper", new Wrapper()),
@@ -95,6 +118,7 @@ public class Main extends Root {
                         new View("Toggle Button", new ToggleButtonPres()),
                         new View("Hyperlink", new HyperlinkPres()),
                         new View("Progress Bar", new ProgressBarPres()),
+                        new View("Text Field", new TextFieldPres()),
                         new View("Table View", new TableViewPres()),
                         new View("List View", new ListViewPres())
                 ),
@@ -129,13 +153,22 @@ public class Main extends Root {
         );
 
         drawer.setHeader(new DrawerHeader());
-        drawer.setFooter(new DrawerFooter(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe")));
+        drawer.setFooter(new DrawerFooter());
+//        drawer.setFooter(new CardUserOptions(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe")));
 
-        drawer.currentModuleProperty().addListener((observableValue, module, newValue) -> {
-            if (newValue instanceof View view && view.getContent() != null) {
-                body.setContent(view.getContent());
+        drawer.currentModuleProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue instanceof View view) {
+                if (view.getContent() != null) body.setContent(view.getContent());
+                if (view.getOnEnter() != null) view.getOnEnter().handle(new ActionEvent());
             } else {
                 body.setContent(new ErrorPage(newValue.getName()));
+            }
+
+            if (oldValue != null) {
+                if (oldValue instanceof View view) {
+                    if (view.getOnExit() != null) view.getOnExit().handle(new ActionEvent());
+                }
+
             }
         });
 
@@ -155,7 +188,7 @@ public class Main extends Root {
 
     private void configLayout() {
         this.wrapper = new VBox();
-        this.navBar = new HBox();
+        this.navBar = new GridPane();
         this.body = new ScrollPane();
         VBox.setVgrow(this.body, Priority.ALWAYS);
         body.setFitToWidth(true);
@@ -168,11 +201,15 @@ public class Main extends Root {
         getContainer().addPoint(_ -> {
             getContainer().setLeft(null);
             navBar.getChildren().add(0, hamb);
+            GridPane.setColumnIndex(crumb, 1);
+            GridPane.setColumnIndex(card, 2);
         }, Break.SM);
 
         getContainer().addPoint(_ -> {
             getContainer().setLeft(drawer);
             navBar.getChildren().remove(hamb);
+            GridPane.setColumnIndex(crumb, 0);
+            GridPane.setColumnIndex(card, 1);
             wrapper().close();
         }, Break.values());
     }

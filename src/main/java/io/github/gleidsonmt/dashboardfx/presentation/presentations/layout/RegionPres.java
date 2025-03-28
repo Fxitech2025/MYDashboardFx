@@ -83,7 +83,7 @@ public class RegionPres extends StackPane {
                                 new Row("bg-dark-gray-2", "-fx-background-color: -dark-gray-2;"),
                                 new Row("bg-accent", "-fx-background-color: -fx-accent;")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("size-50", "bg-insets-1", "bg-primary", "border-2", "border-white", "depth-1", "radius-5"),
                                 createDemo("size-50", "bg-insets-1", "bg-info", "border-2", "border-white", "depth-1", "radius-5"),
                                 createDemo("size-50", "bg-insets-1", "bg-success", "border-2", "border-white", "depth-1", "radius-5"),
@@ -100,7 +100,7 @@ public class RegionPres extends StackPane {
                                 createDemo("size-50", "bg-insets-1", "bg-dark-gray-2", "border-2", "border-white", "depth-1", "radius-5"),
                                 createDemo("size-50", "bg-insets-1", "bg-dark-gray-2", "border-2", "border-white", "depth-1", "radius-5"),
                                 createDemo("size-50", "bg-insets-1", "bg-accent", "border-2", "border-white", "depth-1", "radius-5")
-                        )
+                        })
                         .code("""
                                 region.getStyleClass().add("bg-[primary|info...]");
                                 """)
@@ -113,13 +113,13 @@ public class RegionPres extends StackPane {
                                 new Row("border-4", "-fx-border-width: 4px;"),
                                 new Row("border-5", "-fx-border-width: 5px;")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("size-50", "border-1", "border-medium-gray", "radius-5"),
                                 createDemo("size-50", "border-2", "border-medium-gray", "radius-5"),
                                 createDemo("size-50", "border-3", "border-medium-gray", "radius-5"),
                                 createDemo("size-50", "border-4", "border-medium-gray", "radius-5"),
                                 createDemo("size-50", "border-5", "border-medium-gray", "radius-5")
-                        )
+                        })
                         .code("""
                                 region.getStyleClass().add("border-[1|2...5]");
                                 """)
@@ -133,21 +133,21 @@ public class RegionPres extends StackPane {
                                 new Row("border-l-3", "-fx-border-width : 0px 0px 0px 3px; "),
                                 new Row("border-l-4", "-fx-border-width : 0px 0px 0px 4px; ")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("size-50", "border-t-1", "border-dark-gray", "bg-light-gray"),
                                 createDemo("size-50", "border-r-1", "border-dark-gray", "bg-light-gray"),
                                 createDemo("size-50", "border-b-1", "border-dark-gray", "bg-light-gray"),
                                 createDemo("size-50", "border-l-1", "border-dark-gray", "bg-light-gray")
-                        )
+                        })
                         .code("""
                                 region.getStyleClass().add("border-[t|l|b|r]-[1|2..]");
                                 """)
                         .h4("Color", "Border")
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("size-50", "border-2", "border-primary", "bg-light-gray"),
                                 createDemo("size-50", "border-2", "border-info", "bg-light-gray"),
                                 createDemo("size-50", "border-2", "border-success", "bg-light-gray")
-                        )
+                        })
                         .code("""
                                 region.getStyleClass().add("border-[primary|info...]");
                                 """)
@@ -160,14 +160,14 @@ public class RegionPres extends StackPane {
                                 new Row("radius-8", "-fx-background-radius: 8px; -fx-border-radius: 8px;"),
                                 new Row("radius-10", "-fx-background-radius: 10px; -fx-border-radius: 10px;")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("min-size-50", "border-bottom-1", "border-primary", "bg-primary", "radius-2"),
                                 createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-5"),
                                 createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-6"),
                                 createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-7"),
                                 createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-8"),
                                 createDemo("min-size-50", "border-top-1", "border-primary", "bg-primary", "radius-10")
-                        )
+                        })
                         .code("""
                                 region.getStyleClass().add("radius-[2|5...]");
                                 """)
@@ -178,12 +178,12 @@ public class RegionPres extends StackPane {
                                 new Row("padding-10", "-fx-padding: 10px;"),
                                 new Row("padding-20", "-fx-padding: 20px;")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createPadding("min-size-50", "size-10", "bg-primary", "padding-2"),
                                 createPadding("min-size-50", "size-10", "bg-primary", "padding-5"),
                                 createPadding("min-size-50", "size-10", "bg-primary", "padding-10"),
                                 createPadding("min-size-50", "size-10", "bg-primary", "padding-20")
-                        )
+                        })
                         .code("""
                                 region.getStyleClass().add("padding-[2|5|10|20]");
                                 """)
@@ -195,22 +195,22 @@ public class RegionPres extends StackPane {
                                 new Row("bg-insets-5", "-fx-background-insets: 5px;"),
                                 new Row("bg-insets-10", "-fx-background-insets: 10px;")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("min-size-50", "size-10", "border-2", "border-primary", "bg-medium-gray", "bg-insets-1"),
                                 createDemo("min-size-50", "size-10", "border-2", "border-primary", "bg-medium-gray", "bg-insets-5"),
                                 createDemo("min-size-50", "size-10", "border-2", "border-primary", "bg-medium-gray", "bg-insets-10")
-                        )
+                        })
                         .h4("Insets Border", "Insets")
                         .table(
                                 new Row("border-insets-1", "-fx-border-insets: 1px;"),
                                 new Row("border-insets-5", "-fx-border-insets: 5px;"),
                                 new Row("border-insets-10", "-fx-border-insets: 10px;")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1"),
                                 createDemo("min-size-50", "size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-5"),
                                 createDemo("min-size-50", "size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-10")
-                        )
+                        })
                         .h4("Shapes", "Region")
                         .h5("Installing", "Shapes")
                         .code("ThemeProvider.install(scene, \n\tCss.COLORS, \n\tCss.PROPERTIES, \n\tCss.SHAPES);", "java")
@@ -247,7 +247,7 @@ public class RegionPres extends StackPane {
                                 new Row("cursor-none", "-fx-cursor: none;"),
                                 new Row("cursor-disappear", "-fx-cursor: disappear;")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-default"),
                                 createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-close-hand"),
                                 createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-open-hand"),
@@ -268,9 +268,9 @@ public class RegionPres extends StackPane {
                                 createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-crosshair"),
                                 createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-none"),
                                 createDemo("min-size-50", "border-2", "border-primary", "bg-medium-gray", "border-insets-1", "cursor-disappear")
-                        )
+                        })
                         .h3("Demo", "Shapes")
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("min-size-50", "bg-primary", "rectangle"),
                                 createDemo("min-size-50", "bg-primary", "rounded"),
                                 createDemo("min-size-50", "bg-primary", "round"),
@@ -302,7 +302,7 @@ public class RegionPres extends StackPane {
                                 createDemo("min-size-50", "bg-primary", "heart"),
                                 createDemo("min-size-50", "bg-primary", "tool-tip"),
                                 createDemo("min-size-50", "bg-primary", "lbl")
-                        )
+                        })
                         .code("""
                                 region.getStyleClass().add("radius-[rectangle|rounded...]");
                                 """)
