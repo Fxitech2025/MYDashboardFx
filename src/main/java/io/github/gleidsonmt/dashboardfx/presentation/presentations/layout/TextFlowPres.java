@@ -21,13 +21,10 @@ public class TextFlowPres extends StackPane {
                                 TextFlow uses the text and the font of each Text node inside of it, plus its own width and text 
                                 alignment to determine the location for each child. A single Text node can span over several lines 
                                 due to wrapping, and the visual location of the Text node can differ from the logical location due to bidi reordering.
-                                Any Node other than Text will be treated as an embedded object in the text layout. It will be inserted in the content using its preferred width, height, and baseline offset
-                                """)
+                                Any Node other than Text will be treated as an embedded object in the text layout. It will be inserted in the content using its preferred width, height, and baseline offset""")
                         .legend("javafx.scene.text.TextFlow")
-                        .node(createDemo("""
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                Vestibulum quis velit ut dolor vestibulum aliquet in non sem. 
-                                """))
+                        .legend("Try to resize the pane.")
+                        .node(createDemo())
                         .h3("Customizing", "Text Flow")
                         .nodes(
                                 createDemo("""
@@ -66,8 +63,11 @@ public class TextFlowPres extends StackPane {
         );
     }
 
-    private Node createDemo(String text) {
-        return createDemo(text, "", "");
+    private Node createDemo() {
+        return createDemo("""
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Vestibulum quis velit ut dolor vestibulum aliquet in non sem. 
+                """, "", "");
     }
 
     private Node createDemo(String text, String style, String... classes) {
