@@ -45,6 +45,7 @@ public class TutorialUtils {
 
     public static @NotNull Hyperlink createLink(String placeholder, String moduleName) {
         Hyperlink hyperlink = new Hyperlink(placeholder);
+        hyperlink.getStyleClass().addAll("h5");
         hyperlink.setOnAction(_ -> {
             Drawer drawer = (Drawer) hyperlink.getScene().lookup("#drawer");
             drawer.navigate(moduleName);
