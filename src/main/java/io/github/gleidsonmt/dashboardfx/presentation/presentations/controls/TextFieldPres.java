@@ -2,6 +2,7 @@ package io.github.gleidsonmt.dashboardfx.presentation.presentations.controls;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
@@ -11,11 +12,11 @@ import javafx.scene.layout.StackPane;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  21/03/2025
  */
-public class ToggleButtonPres extends StackPane {
-    public ToggleButtonPres() {
+public class TextFieldPres extends StackPane {
+    public TextFieldPres() {
         getChildren().setAll(
                 new Tutorial()
-                        .h3("Toggle Button")
+                        .h3("Text Field")
                         .text("""
                                  ToggleButton is a specialized control which has the ability to be selected.
                                  Typically a ToggleButton is rendered similarly to a Button. 
@@ -25,7 +26,7 @@ public class ToggleButtonPres extends StackPane {
                         .text("All classes in (Text) works in the text inside button.")
                         .text("All classes in (Region, Label, Button) can by apply.")
                         .demo(
-                                new ToggleButton("Toggle")
+                                new TextField("Placeholder")
                         )
                         .code("""
                                 ToggleButton btn = new ToggleButton("Button");

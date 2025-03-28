@@ -25,21 +25,22 @@ public class HyperlinkPres extends StackPane {
                                 A Hyperlink behaves just like a Button.
                                 When a hyperlink is pressed and released a ActionEvent is sent, and your application can perform some action based on this event.
                                 """)
+                        .legend("javafx.scene.control.Hyperlink")
                         .legend("All classes in (Text) works in the text inside hyperlink.")
-                        .legend("All classes in (Region) can by apply in hyperlink.")
+                        .text("All classes in (Region, Label) can by apply.")
 //                        .legend("(The base font here is set to Poppins, by default is not apply, but it's better to add all fonts before the app load. At the end you can see the code to add.)")
                         // .link([link to explanation]) ir para temas
 
                         .demo(createDemo("Hyperlink"))
-                        .code("Hyperlink hyperlink = new Hyperlink(\"Lorem ipsum dolor color\");")
+                        .code("Hyperlink hyperlink = new Hyperlink(\"google.com\");")
                         .h3("Graphic", "Hyperlink")
                         .text("An optional icon for the Labeled.")
                         .node(TutorialUtils.createLink("See more icons in SVGIcon", "SVGIcon"))
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo(new SVGIcon(Icon.MENU), "Menu"),
                                 createDemo(new SVGIcon(Icon.ARROW_BACK), "Arrow"),
                                 createDemo(new SVGIcon(Icon.LOCATION_ON), "Location")
-                        )
+                        })
                         .code("hyperlink.setGraphic(new SVGICon(Icon.MENU));")
 
                         .h3("Content Display", "Button")

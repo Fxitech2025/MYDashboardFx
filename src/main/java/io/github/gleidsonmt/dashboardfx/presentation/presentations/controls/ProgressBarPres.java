@@ -1,6 +1,7 @@
 package io.github.gleidsonmt.dashboardfx.presentation.presentations.controls;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
@@ -19,18 +20,21 @@ public class ProgressBarPres extends StackPane {
                               "ProgressBar sets focusTraversable to false.")
                         .h4("Default", "Progress Bar")
                         .demo(createDemo())
+                        .code("ProgressBar progressBar = new ProgressBar();")
                         .h4("Indeterminate", "Progress Bar")
+                        .code("progressBar.setProgress(-1);")
                         .demo(createDemo(-1))
                         .h4("Customizing", "Progress Bar")
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("bg-danger"),
                                 createDemo("bg-success"),
                                 createDemo("bg-warning"),
                                 createDemo("bg-secondary")
-                        )
+                        })
                         .code("""
                                 progressBar.getStyleClass().addAll("bg-[success|..]");
                                 """)
+                        .node(TutorialUtils.createLink("See all color options", "Palette Color"))
                         .build()
                         .getRoot()
         );

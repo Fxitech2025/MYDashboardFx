@@ -2,6 +2,7 @@ package io.github.gleidsonmt.dashboardfx.presentation.presentations.shapes;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.presentation.Row;
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -31,12 +32,14 @@ public class TextPres extends StackPane {
                         .h3("Typographic", "Text")
                         .code("ThemeProvider.install(root, \n\tCss.COLORS, \n\tCss.TYPOGRAPHIC);", "java")
 
-                        .demo(createDemo("h1", "h1"),
+                        .demo(new Node[]{
+                                createDemo("h1", "h1"),
                                 createDemo("h2", "h2"),
                                 createDemo("h3", "h3"),
                                 createDemo("h4", "h4"),
                                 createDemo("h5", "h5"),
-                                createDemo("h6", "h6"))
+                                createDemo("h6", "h6")
+                        })
                         .table(
                                 new Row("h1", "-fx-font-size: 36px;"),
                                 new Row("h2", "-fx-font-size: 30px;"),
@@ -47,7 +50,7 @@ public class TextPres extends StackPane {
                         )
                         .code(" text.getStyleClass().add(\"h-[1|2|3|4|5|6]\"")
                         .h3("Colors", "Text")
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("Text Accent", "text-accent"),
                                 createDemo("Text Info", "text-info"),
                                 createDemo("Text Success", "text-success"),
@@ -57,7 +60,7 @@ public class TextPres extends StackPane {
                                 createDemo("Text Unique", "text-unique"),
                                 createDemo("Text Elegant", "text-elegant")
 
-                        )
+                        })
                         .table(
                                 new Row("text-accent", "-text-color: -fx-accent;"),
                                 new Row("text-info", "-text-color: -info;"),
@@ -66,7 +69,7 @@ public class TextPres extends StackPane {
                         .code("text.getStyleClass().add(\"text-[info|elegant|...]\");")
 
                         .h3("Sizes", "Text")
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("text-10", "text-10"),
                                 createDemo("text-12", "text-12"),
                                 createDemo("text-14", "text-14"),
@@ -78,14 +81,14 @@ public class TextPres extends StackPane {
                                 createDemo("text-34", "text-34"),
                                 createDemo("text-36", "text-36"),
                                 createDemo("text-48", "text-48")
-                        )
+                        })
 
                         .code("text.getStyleClass().add(\"text-[*number*]\");")
                         .h3("Fonts", "Text")
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("Normal"),
-                                createDemo("Instagram","font-instagram", "h5")
-                        )
+                                createDemo("Instagram", "font-instagram", "h5")
+                        })
                         .code("ThemeProvider.install(root, Css.POPPINS, Css.INSTAGRAM);")
 //
                         .build()

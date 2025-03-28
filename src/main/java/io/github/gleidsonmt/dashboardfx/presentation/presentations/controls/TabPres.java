@@ -33,12 +33,12 @@ public class TabPres extends StackPane {
                                 tabPane.getTabs().addAll(one, two);
                                 """)
                         .h3("Sides")
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo(Side.TOP),
                                 createDemo(Side.BOTTOM),
                                 createDemo(Side.LEFT),
                                 createDemo(Side.RIGHT)
-                        )
+                        })
                         .code("""
                                 tabPane.setSide(Side.TOP) // default;
                                 tabPane.setSide(Side.BOTTOM);

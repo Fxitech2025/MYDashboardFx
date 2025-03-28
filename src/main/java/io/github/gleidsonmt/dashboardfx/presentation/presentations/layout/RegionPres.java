@@ -3,6 +3,7 @@ package io.github.gleidsonmt.dashboardfx.presentation.presentations.layout;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
 import io.github.gleidsonmt.presentation.Row;
+import javafx.scene.Node;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
@@ -56,11 +57,11 @@ public class RegionPres extends StackPane {
                                 new Row("max-size-50", "-fx-max-width: 50px; -fx-max-height: 50px;"),
                                 new Row("max-size-100", "-fx-max-width: 100px; -fx-max-height: 100px;")
                         )
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo("size-10", "max-size-10", "bg-white", "depth-1", "radius-5"),
                                 createDemo("size-50", "max-size-50", "bg-white", "depth-1", "radius-5"),
                                 createDemo("size-100", "max-size-100", "bg-white", "depth-1", "radius-5")
-                        )
+                        })
                         .h4("Background", "Region")
                         .node(TutorialUtils.createLink("See all the color options here", "Pallet Color"))
 

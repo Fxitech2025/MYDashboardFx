@@ -1,7 +1,7 @@
 package io.github.gleidsonmt.dashboardfx.presentation.presentations.charts;
 
-import io.github.gleidsonmt.dashboardfx.dashboard.CurvedChart;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import io.github.gleidsonmt.glad.charts.CurvedChart;
 import javafx.scene.Node;
 import javafx.scene.chart.*;
 import javafx.scene.layout.StackPane;
@@ -44,7 +44,7 @@ public class AreaChartPres extends StackPane {
                         .text("""
                                 Descendant of area chart with curves.
                                 """)
-                        .legend("io.github.gleidsonmt.glad.controls.charts.CurvedChart")
+                        .legend("io.github.gleidsonmt.glad.charts.CurvedChart")
                         .demo(createCurved())
                         .code("""
                                 NumberAxis xAxis = new NumberAxis();

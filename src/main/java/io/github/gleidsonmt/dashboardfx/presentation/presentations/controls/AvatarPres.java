@@ -19,30 +19,33 @@ public class AvatarPres extends StackPane {
                 new Tutorial()
                         .h3("Avatar View")
                         .text("A simple shape using ImagePattern, to build a shape with an image.")
+                        .legend("io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView")
                         .legend("All classes in (Shapes) can by apply in avatar.")
                         .h4("Creating", "Avatar View")
                         .text("There's basic two types of creating.")
-                        .h5("Circle","Creating")
-                        .demo(
-                                new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 20),
-                                new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 40),
-                                new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 60)
+                        .h5("Circle", "Creating")
+                        .demo(new Node[]{
+                                        new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 20),
+                                        new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 40),
+                                        new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 60)
+                                }
                         )
                         .code("""
-                               AvatarCircleView avatar = new AvatarCircleView();
-                               avatar.setImage(Assets.getImage("default_avatar.jpg")); // Can be pass in constructor
-                               avatar.setRadius(20); // First 
-                               avatar.setRadius(40); // Second
-                               avatar.setRadius(60); // Third
+                                AvatarCircleView avatar = new AvatarCircleView();
+                                avatar.setImage(Assets.getImage("default_avatar.jpg")); // Can be pass in constructor
+                                avatar.setRadius(20); // First 
+                                avatar.setRadius(40); // Second
+                                avatar.setRadius(60); // Third
                                 """)
-                        .h5("Rectangle","Creating")
+                        .h5("Rectangle", "Creating")
                         .code("""
-                               AvatarRectView avatar = new AvatarRectView() // Constructor
-                               avatar.setImage(Assets.getImage("default_avatar.jpg"); // Can passed in constructor
-                               avatar.setSize(40); // First 
-                               avatar.setSize(60); // Second
-                               avatar.setSize(80); // Third
+                                AvatarRectView avatar = new AvatarRectView() // Constructor
+                                avatar.setImage(Assets.getImage("default_avatar.jpg"); // Can passed in constructor
+                                avatar.setSize(40); // First 
+                                avatar.setSize(60); // Second
+                                avatar.setSize(80); // Third
                                 """)
+                        .legend("io.github.gleidsonmt.glad.controls.avatar.AvatarRectView")
                         .demo(
                                 createRectDemo(40, ""),
                                 createRectDemo(60, ""),
@@ -50,9 +53,9 @@ public class AvatarPres extends StackPane {
                         )
                         .h5("Arc", "Rectangle")
                         .demo(
-                                createRectDemo(40, 10,""),
+                                createRectDemo(40, 10, ""),
                                 createRectDemo(60, 20, ""),
-                                createRectDemo(80, 30,"")
+                                createRectDemo(80, 30, "")
                         )
                         .code("""
                                 avatar.setArc(10); // First
@@ -91,7 +94,7 @@ public class AvatarPres extends StackPane {
                         .legend("Click on it.")
                         .demo(
                                 createDemo("raised"),
-                                createRectDemo(80, "stroke-2", "depth-2","raised"),
+                                createRectDemo(80, "stroke-2", "depth-2", "raised"),
                                 createRectDemo(80, 20, "stroke-2", "depth-2", "raised")
                         )
                         .code("avatar.getStyleClass().add(\"depth-[1|2]\");")

@@ -74,7 +74,7 @@ public class TextFlowPres extends StackPane {
         TextFlow flow = new TextFlow(new Text(text));
         flow.setStyle(style);
         flow.getStyleClass().addAll(classes);
-        return flow;
+        return new ResizablePane(flow);
     }
 
 }

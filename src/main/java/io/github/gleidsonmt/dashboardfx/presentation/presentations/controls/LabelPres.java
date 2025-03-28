@@ -20,13 +20,11 @@ public class LabelPres extends StackPane {
         getChildren().setAll(
                 new Tutorial()
                         .indicators()
-                        .h2("Label", null)
-
+                        .h3("Label", null)
                         .text("""
                                 Label is a non-editable text control. 
                                 A Label is useful for displaying text that is required to fit within a specific space, and thus may need to use an ellipsis or truncation to size the string to fit. 
-                                Labels also are useful in that they can have mnemonics which, if used, will send focus to the Control listed as the target of the labelFor property.
-                                """)
+                                Labels also are useful in that they can have mnemonics which, if used, will send focus to the Control listed as the target of the labelFor property.""")
                         .legend("javafx.scene.control.Label")
                         .legend("All classes in (Text) works in the text inside label.")
                         .legend("All classes in (Region) can by apply in label.")
@@ -41,11 +39,11 @@ public class LabelPres extends StackPane {
                         .text("An optional icon for the Labeled.")
                         .legend("Every node object can be an icon.")
                         .node(TutorialUtils.createLink("See more icons in SVGIcon", "SVGIcon"))
-                        .demo(
+                        .demo(new Node[]{
                                 createDemo(new SVGIcon(Icon.MENU), "Menu"),
                                 createDemo(new SVGIcon(Icon.ARROW_BACK), "Arrow"),
                                 createDemo(new SVGIcon(Icon.LOCATION_ON), "Location")
-                        )
+                        })
                         .h3("Display", "Label")
                         .table(
                                 new Row("display-top", " -fx-content-display: top;"),

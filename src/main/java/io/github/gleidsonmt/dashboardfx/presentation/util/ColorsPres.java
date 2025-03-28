@@ -38,7 +38,7 @@ import java.util.regex.Pattern;
  * Create on  25/03/2025
  */
 public class ColorsPres extends StackPane {
-    public ColorsPres()  {
+    public ColorsPres() {
         try {
             getChildren().setAll(
                     new Tutorial()
@@ -46,7 +46,7 @@ public class ColorsPres extends StackPane {
                             .h4("Grid Color Palette", "Colors")
                             .h4("Bootstrap", "Colors")
                             .text("Common colors.")
-                            .demo(
+                            .demo(new Node[]{
                                     createDemo("-primary"),
                                     createDemo("-info"),
                                     createDemo("-success"),
@@ -55,10 +55,10 @@ public class ColorsPres extends StackPane {
                                     createDemo("-secondary"),
                                     createDemo("-unique"),
                                     createDemo("-elegant")
-                            )
+                            })
                             .h4("Theme", "Colors")
                             .text("Named colors")
-                            .demo(
+                            .demo(new Node[]{
                                     createDemo("-brown"),
                                     createDemo("-red"),
                                     createDemo("-grapefruit"),
@@ -103,11 +103,11 @@ public class ColorsPres extends StackPane {
                                     createDemo("-gray"),
                                     createDemo("-white"),
                                     createDemo("-black")
-                            )
+                            })
 
                             .h4("Grid Colors", "Colors")
-    //                        .link("Original","https://github.com/HanSolo/Colors")
-    //                        .node(createCard())
+                            //                        .link("Original","https://github.com/HanSolo/Colors")
+                            //                        .node(createCard())
                             .node(TutorialUtils.createCardLink("Original", new URI("https://github.com/HanSolo/Colors")))
                             .node(createGrid())
                             .build()
@@ -153,7 +153,7 @@ public class ColorsPres extends StackPane {
                     columns.getLast().addColor(new MaterialItem(color));
                     actual = temp;
                 } else {
-                        columns.getLast().addColor(new MaterialItem(color));
+                    columns.getLast().addColor(new MaterialItem(color));
                 }
             }
         }

@@ -16,15 +16,19 @@ public class ButtonPres extends StackPane {
     public ButtonPres() {
         getChildren().setAll(
                 new Tutorial()
-                        .h3("Button")
+                        .h3("Button", null)
                         .text("A simple button control. The button control can contain text and/or a graphic.")
                         .legend("javafx.scene.control.Button")
                         .text("All classes in (Text) works in the text inside button.")
-                        .text("All classes in (Region) can by apply in button.")
+                        .text("All classes in (Region, Label) can by apply.")
+                        .h4("Install", "Button")
+                        .code("ThemeProvider.install(scene, \n\tCss.BUTTON);", "java")
+                        .h4("Demo", "Button")
                         .demo(createDemo())
                         .code("""
                                 Button btn = new Button("Button");
                                 """)
+
                         .h4("Cancel", "Button")
                         .demo(createDemo("Cancel", false, true))
                         .code("btn.setCancelButton(true);")
@@ -43,6 +47,11 @@ public class ButtonPres extends StackPane {
                         .code("""
                                 Button btn = new Button("Button");
                                 btn.getStyleClass().addAll("display-bottom");
+                                """)
+                        .h3("Flat", "Button")
+                        .demo(createDemo("Button", new SVGIcon(Icon.HOME), "flat"))
+                        .code("""
+                                btn.getStyleClass().addAll("flat");
                                 """)
                         .h3("Customizing")
                         .demo(
