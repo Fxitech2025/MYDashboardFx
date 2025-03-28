@@ -4,6 +4,7 @@ import io.github.gleidsonmt.dashboardfx.Main;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
+import io.github.gleidsonmt.presentation.Code;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,6 +12,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+
+import java.util.List;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -29,15 +32,17 @@ public class FlowPres extends StackPane {
                         .legend("io.github.gleidsonmt.glad.base.Flow")
                         .legend("Create a floating button to see different sides.")
                         .demo(
-                                createDemo(Pos.TOP_LEFT, new Insets(20)),
-                                createDemo(Pos.TOP_CENTER, new Insets(20)),
-                                createDemo(Pos.TOP_RIGHT, new Insets(20)),
-                                createDemo(Pos.CENTER_RIGHT, new Insets(20)),
-                                createDemo(Pos.CENTER, new Insets(20)),
-                                createDemo(Pos.CENTER_LEFT, new Insets(20)),
-                                createDemo(Pos.BOTTOM_RIGHT, new Insets(20)),
-                                createDemo(Pos.BOTTOM_CENTER, new Insets(20)),
-                                createDemo(Pos.BOTTOM_LEFT, new Insets(20))
+                               new Node[]{
+                                       createDemo(Pos.TOP_LEFT, new Insets(20)),
+                                       createDemo(Pos.TOP_CENTER, new Insets(20)),
+                                       createDemo(Pos.TOP_RIGHT, new Insets(20)),
+                                       createDemo(Pos.CENTER_RIGHT, new Insets(20)),
+                                       createDemo(Pos.CENTER, new Insets(20)),
+                                       createDemo(Pos.CENTER_LEFT, new Insets(20)),
+                                       createDemo(Pos.BOTTOM_RIGHT, new Insets(20)),
+                                       createDemo(Pos.BOTTOM_CENTER, new Insets(20)),
+                                       createDemo(Pos.BOTTOM_LEFT, new Insets(20))
+                               }
                         )
                         .code("""
                                     Main main = (Main) getScene().getRoot();
@@ -48,11 +53,13 @@ public class FlowPres extends StackPane {
                                     main.flow().openAbsolute(btn, Pos.BOTTOM_RIGHT, new Insets(20));
                                 """)
                         .h3("Closing", "Flow")
-                        .demo(createDemo(e -> {
-                            Main main = (Main) getScene().getRoot();
-                            main.flow().clear();
+                        .demo(new Button())
 
-                        }))
+//                        .demo(createDemo(e -> {
+//                            Main main = (Main) getScene().getRoot();
+//                            main.flow().clear();
+//
+//                        }))
                         .code("""
                                 Main main = (Main) getScene().getRoot();
                                 main.flow().clear();

@@ -50,7 +50,9 @@ public class App extends Application {
                 Css.LIST_VIEW,
                 Css.CONTEXT_MENU,
                 Css.BUTTON,
-                Css.PROGRESS_BAR
+                Css.PROGRESS_BAR,
+                Css.TEXT_FIELD,
+                Css.TOGGLE_BUTTON
         );
 
         scene.getStylesheets().addAll(
@@ -59,7 +61,7 @@ public class App extends Application {
         );
 
         stage.setScene(scene);
-
+        stage.setMaximized(true);
         stage.show();
 
         ScenicView.show(stage.getScene());

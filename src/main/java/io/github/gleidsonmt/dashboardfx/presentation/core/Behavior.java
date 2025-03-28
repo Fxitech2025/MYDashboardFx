@@ -1,11 +1,11 @@
 package io.github.gleidsonmt.dashboardfx.presentation.core;
 
 import io.github.gleidsonmt.dashboardfx.Main;
+import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
 import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.base.WrapperEffect;
 import io.github.gleidsonmt.glad.dialog.alert.AlertType;
-import io.github.gleidsonmt.presentation.Tutorial;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -62,27 +62,28 @@ public class Behavior extends StackPane {
                                 """)
                         /*   */
                         .h4("Opening", "Behavior")
-                        .demo(
-                                createDemo(e -> {
-                                            Root root = (Root) this.getScene().getRoot();
-                                            root.behavior().alert().open("About", new Text("Press escape to close."), AlertType.ERROR);
-                                        }
-                                ),
-                                createDemo(e -> {
-                                            Root root = (Root) this.getScene().getRoot();
-                                            root.behavior().alert().open("About", new Text("Press  to close."), AlertType.INFO);
-                                        }
-                                ),
-                                createDemo(e -> {
-                                            Root root = (Root) this.getScene().getRoot();
-                                            root.behavior().alert().open("About", new Text("Press  to close."), AlertType.WARNING);
-                                        }
-                                ),
-                                createDemo(e -> {
-                                            Root root = (Root) this.getScene().getRoot();
-                                            root.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS);
-                                        }
-                                )
+                        .demo(new Node[]{
+                                        createDemo(e -> {
+                                                    Root root = (Root) this.getScene().getRoot();
+                                                    root.behavior().alert().open("About", new Text("Press escape to close."), AlertType.ERROR);
+                                                }
+                                        ),
+                                        createDemo(e -> {
+                                                    Root root = (Root) this.getScene().getRoot();
+                                                    root.behavior().alert().open("About", new Text("Press  to close."), AlertType.INFO);
+                                                }
+                                        ),
+                                        createDemo(e -> {
+                                                    Root root = (Root) this.getScene().getRoot();
+                                                    root.behavior().alert().open("About", new Text("Press  to close."), AlertType.WARNING);
+                                                }
+                                        ),
+                                        createDemo(e -> {
+                                                    Root root = (Root) this.getScene().getRoot();
+                                                    root.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS);
+                                                }
+                                        )
+                                }
                         )
                         .code("""
                                  root.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.INFO);

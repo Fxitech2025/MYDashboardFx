@@ -1,9 +1,9 @@
 package io.github.gleidsonmt.dashboardfx.presentation.core;
 
+import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
 import io.github.gleidsonmt.presentation.Presentation;
-import io.github.gleidsonmt.presentation.Tutorial;
 import javafx.scene.layout.StackPane;
 
 /**
