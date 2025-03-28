@@ -61,7 +61,6 @@ public class Tutorial extends Presentation<Tutorial> {
     private List<TreeTitle> data;
     private final ToggleGroup group = new ToggleGroup();
     private final Button btnTop = createButton();
-    private final Card card = new Card();
     private final List<TreeTitle> breaks = new ArrayList<>();
     private boolean rolling = true;
     int count = 1;
@@ -81,12 +80,6 @@ public class Tutorial extends Presentation<Tutorial> {
         body.addPoint(_ -> {
             body.getChildren().remove(aside);
             body.setTop(aside);
-            aside.getChildren().remove(card);
-            if (!center.getChildren().contains(card)) {
-                center.getChildren().add(card);
-                BorderPane.setMargin(aside, new Insets(0,0,30,0));
-
-            }
             StackPane.setMargin(btnTop, new Insets(10, 40, 10, 10));
             aside.setPadding(new Insets(0));
 
@@ -97,9 +90,7 @@ public class Tutorial extends Presentation<Tutorial> {
             if (body.getChildren().contains(aside)) {
                 body.getChildren().remove(aside);
                 body.setRight(aside);
-                if (!aside.getChildren().contains(card)) {
-                    aside.getChildren().add(card);
-                }
+
             } else {
                 body.setRight(aside);
             }
@@ -355,8 +346,6 @@ public class Tutorial extends Presentation<Tutorial> {
 
         });
 
-        aside.getChildren().add(card);
-
         return this;
     }
 
@@ -388,4 +377,8 @@ public class Tutorial extends Presentation<Tutorial> {
     }
 
 
+    public Tutorial load() {
+
+        return this;
+    }
 }
