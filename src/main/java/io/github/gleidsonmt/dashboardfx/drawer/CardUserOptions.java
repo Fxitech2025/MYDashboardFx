@@ -1,6 +1,9 @@
 package io.github.gleidsonmt.dashboardfx.drawer;
 
+import io.github.gleidsonmt.dashboardfx.Main;
+import io.github.gleidsonmt.dashboardfx.dashboard.Aside;
 import io.github.gleidsonmt.dashboardfx.model.User;
+import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
@@ -102,10 +105,11 @@ public class CardUserOptions extends GridPane  {
         menuSettings.getStyleClass().add("menu-item-first");
         menuSettings.setGraphic(new SVGIcon(Icon.SETTINGS));
         
-//        menuSettings.setOnAction(e -> {
-//            Root root = (Root) this.getScene().getRoot();
-//            root.setLayout(new SettingsView(user));
-//        });
+        menuSettings.setOnAction(e -> {
+            Main root = (Main) this.getScene().getRoot();
+            root.wrapper().show();
+            root.flow().openRight(new Aside(), Insets.EMPTY);
+        });
         
         MenuItem menuManageAccount = new MenuItem("Manage Account");
         menuManageAccount.getStyleClass().add("menu-item-last");

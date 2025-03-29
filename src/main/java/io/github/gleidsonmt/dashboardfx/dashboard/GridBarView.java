@@ -41,14 +41,16 @@ public class GridBarView extends Pane {
         Text title = new Text(br.name());
         Text size = new Text(String.valueOf(br.getMax() ));
 
+        grid.setVgap(5);
+
         title.getStyleClass().addAll("h6", "bold");
         size.getStyleClass().addAll("h6", "bold");
         SVGIcon icon = new SVGIcon(Icon.ARROW_RIGHT_ALT);
-        title.setRotate(45);
-        size.setRotate(45);
+        title.setRotate(25);
+        size.setRotate(25);
         icon.setRotate(90);
 
-        grid.setLayoutX(br.getMax() - 10);
+        grid.setLayoutX(br.getMax() );
 
         grid.add(title, 0,0);
         grid.add(size, 1,0);

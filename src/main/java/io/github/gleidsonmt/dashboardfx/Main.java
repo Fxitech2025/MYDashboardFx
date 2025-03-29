@@ -203,14 +203,16 @@ public class Main extends Root {
             navBar.getChildren().add(0, hamb);
             GridPane.setColumnIndex(crumb, 1);
             GridPane.setColumnIndex(card, 2);
-        }, Break.SM);
+        }, Break.MOBILE);
 
         getContainer().addPoint(_ -> {
+            if (behavior().isDrawerAbsolute()) {
+                wrapper().close();
+            }
             getContainer().setLeft(drawer);
             navBar.getChildren().remove(hamb);
             GridPane.setColumnIndex(crumb, 0);
             GridPane.setColumnIndex(card, 1);
-            wrapper().close();
         }, Break.values());
     }
 
