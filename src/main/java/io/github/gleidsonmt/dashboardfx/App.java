@@ -51,6 +51,7 @@ public class App extends Application {
                 Css.CONTEXT_MENU,
                 Css.BUTTON,
                 Css.PROGRESS_BAR,
+                Css.COMBO_BOX,
                 Css.TEXT_FIELD,
                 Css.TOGGLE_BUTTON
         );

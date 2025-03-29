@@ -28,6 +28,7 @@ import java.util.List;
 public class Dashboard extends ResponsiveGrid {
 
     public Dashboard() {
+        super(true);
         setPadding(new Insets(20));
 
         TileBlock one = new TileBlock(Icon.CHAT, "39", "Messages", "-info");
@@ -59,37 +60,37 @@ public class Dashboard extends ResponsiveGrid {
                 new Activity(
                         new Company(Assets.getImage("google_logo.jpeg", 80), "Offices West", "Chicago/Midwest"),
                         Type.CORPORATE, Status.BUSY, new BigDecimal(225132),
-                        new User(  Assets.getImage("avatar1.png"), "Username", "Name"),
-                        new User(  Assets.getImage("avatar3.png"), "Username", "Name"),
-                        new User(  Assets.getImage("avatar4.png"), "Username", "Name"),
-                        new User(  Assets.getImage("avatar2.jpg"), "Username", "Name"),
-                        new User(  Assets.getImage("default_avatar.jpg"), "Username", "Name"),
-                        new User(  Assets.getImage("default_avatar.jpg"), "Username", "Name"),
-                        new User(  Assets.getImage("default_avatar.jpg"), "Username", "Name"),
-                        new User(  Assets.getImage("default_avatar.jpg"), "Username", "Name"),
-                        new User(  Assets.getImage("default_avatar.jpg"), "Username", "Name"),
-                        new User(  Assets.getImage("default_avatar.jpg"), "Username", "Name")
+                        new User(Assets.getImage("avatar1.png"), "Username", "Name"),
+                        new User(Assets.getImage("avatar3.png"), "Username", "Name"),
+                        new User(Assets.getImage("avatar4.png"), "Username", "Name"),
+                        new User(Assets.getImage("avatar2.jpg"), "Username", "Name"),
+                        new User(Assets.getImage("default_avatar.jpg"), "Username", "Name"),
+                        new User(Assets.getImage("default_avatar.jpg"), "Username", "Name"),
+                        new User(Assets.getImage("default_avatar.jpg"), "Username", "Name"),
+                        new User(Assets.getImage("default_avatar.jpg"), "Username", "Name"),
+                        new User(Assets.getImage("default_avatar.jpg"), "Username", "Name"),
+                        new User(Assets.getImage("default_avatar.jpg"), "Username", "Name")
                 ),
                 new Activity(
                         new Company(Assets.getImage("amazon_logo.jpeg", 70), "South Space", "Sukabumi/Jabar"),
                         Type.CONVENTIONAL, Status.FREE, new BigDecimal(35154),
-                        new User(  Assets.getImage("avatar1.png"), "Username", "Name"),
-                        new User(  Assets.getImage("avatar2.jpg"), "Username", "Name"),
-                        new User(  Assets.getImage("avatar4.png"), "Username", "Name")
+                        new User(Assets.getImage("avatar1.png"), "Username", "Name"),
+                        new User(Assets.getImage("avatar2.jpg"), "Username", "Name"),
+                        new User(Assets.getImage("avatar4.png"), "Username", "Name")
                 ),
                 new Activity(
                         new Company(Assets.getImage("microsoft_logo.jpeg", 90), "South Space", "Sukabumi/Jabar"),
                         Type.CONVENTIONAL, Status.FREE, new BigDecimal(35154),
-                        new User(  Assets.getImage("avatar1.png"),"Username", "Name")
+                        new User(Assets.getImage("avatar1.png"), "Username", "Name")
                 ),
                 new Activity(
                         new Company(Assets.getImage("meta_logo.JPG", 80), "Offices West", "Chicago/Midwest"),
                         Type.CORPORATE, Status.BUSY, new BigDecimal(225132),
-                        new User(  Assets.getImage("avatar1.png"), "Username", "Name"),
-                        new User(  Assets.getImage("avatar3.png"), "Username", "Name"),
-                        new User(  Assets.getImage("avatar4.png"), "Username", "Name"),
-                        new User(  Assets.getImage("avatar2.jpg"), "Username", "Name"),
-                        new User(  Assets.getImage("default_avatar.jpg"), "Username", "Name")
+                        new User(Assets.getImage("avatar1.png"), "Username", "Name"),
+                        new User(Assets.getImage("avatar3.png"), "Username", "Name"),
+                        new User(Assets.getImage("avatar4.png"), "Username", "Name"),
+                        new User(Assets.getImage("avatar2.jpg"), "Username", "Name"),
+                        new User(Assets.getImage("default_avatar.jpg"), "Username", "Name")
                 )
         );
 
@@ -122,7 +123,6 @@ public class Dashboard extends ResponsiveGrid {
 
         Node boxLineChart = createBox("Sales", createLineChart());
 
-//        setGridLinesVisible(true);
         this.getChildren().addAll(title, one, two, three, four, barChart, donutChart, boxAudience, boxTable, boxLineChart);
 
         for (Node node : getChildren()) {
@@ -130,70 +130,85 @@ public class Dashboard extends ResponsiveGrid {
             GridPane.setVgrow(node, Priority.ALWAYS);
         }
 
-        addPoint(_ -> {
-            this.getColumnConstraints().clear();
-//            this.getRowConstraints().clear();
-//            RowConstraints rowOne = new RowConstraints();
-//            rowOne.setMinHeight(40);
-//            getRowConstraints().add(rowOne);
-            GridPane.setConstraints(title, 0, 0);
-            GridPane.setConstraints(one, 0, 1);
-            GridPane.setConstraints(two, 0, 2);
-            GridPane.setConstraints(three, 0, 3);
-            GridPane.setConstraints(four, 0, 4);
-            GridPane.setConstraints(barChart,0,5);
-
-            GridPane.setConstraints(donutChart,0,6);
-            GridPane.setConstraints(boxAudience,0,7);
-            GridPane.setConstraints(boxTable,0,8);
-            GridPane.setConstraints(boxLineChart,0,9);
-            this.setVgap(10);
-        }, Break.SM);
-
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setPercentWidth(25);
+        ColumnConstraints col2 = new ColumnConstraints();
+        col2.setPercentWidth(25);
+        ColumnConstraints col3 = new ColumnConstraints();
+        col3.setPercentWidth(25);
+        ColumnConstraints col4 = new ColumnConstraints();
+        col4.setPercentWidth(25);
+        this.getColumnConstraints().setAll(col1, col2, col3, col4);
+        this.getColumnConstraints().forEach(el -> el.setMinWidth(0));
+        RowConstraints rowOne = new RowConstraints();
+        rowOne.setMaxHeight(60);
+        this.getRowConstraints().add(rowOne);
 
         addPoint(_ -> {
-            this.getColumnConstraints().clear();
-            GridPane.setConstraints(title, 0, 0);
-            GridPane.setConstraints(one, 0, 1);
-            GridPane.setConstraints(two, 1, 1);
-            GridPane.setConstraints(three, 0, 2);
-            GridPane.setConstraints(four, 1, 2);
+//            getRowConstraints().clear();
+            GridPane.setConstraints(title, 0, 0, REMAINING,1);
+            GridPane.setConstraints(one, 0, 1, 4,1);
+            GridPane.setConstraints(two, 0, 2,4,1);
+            GridPane.setConstraints(three, 0, 3,4,1);
+            GridPane.setConstraints(four, 0, 4,4,1);
 
-            GridPane.setConstraints(barChart,0,3, REMAINING,1);
-            GridPane.setConstraints(donutChart,0,4, REMAINING,1);
-            GridPane.setConstraints(boxAudience,0,5, REMAINING,1);
-            GridPane.setConstraints(boxTable,0,6, REMAINING,1);
-            GridPane.setConstraints(boxLineChart,0,7, REMAINING,1);
-        }, Break.MD, Break.LG, Break.XL);
+            GridPane.setConstraints(barChart, 0, 5,4,1);
+            GridPane.setConstraints(donutChart, 0, 6, 4,1);
+
+            GridPane.setConstraints(boxAudience, 0, 7, 4,1);
+            GridPane.setConstraints(boxTable, 0, 8,4,1);
+            GridPane.setConstraints(boxLineChart, 0, 9,4,1);
+        }, Break.MOBILE, Break.SM);
 
         addPoint(_ -> {
-            this.getColumnConstraints().clear();
-            GridPane.setConstraints(title, 0, 0);
-            GridPane.setConstraints(one, 0, 1);
-            GridPane.setConstraints(two, 1, 1);
-            GridPane.setConstraints(three, 2, 1);
-            GridPane.setConstraints(four, 3, 1);
+//            getRowConstraints().clear();
+            GridPane.setConstraints(title, 0, 0, 1,1);
+            GridPane.setConstraints(one, 0, 1, 2,1);
+            GridPane.setConstraints(two, 2, 1,2,1);
+            GridPane.setConstraints(three, 0, 2,2,1);
+            GridPane.setConstraints(four, 2, 2,2,1);
 
-            GridPane.setConstraints(barChart,0,2,3,1);
-            GridPane.setConstraints(donutChart,3,2,1,1);
+            GridPane.setConstraints(barChart, 0, 3,4,1);
+            GridPane.setConstraints(donutChart, 0, 4, 4,1);
 
-            GridPane.setConstraints(boxAudience,0,3, 1,1);
-            GridPane.setConstraints(boxTable,1,3, 2,1);
+//            GridPane.setConstraints(boxLineChart, 0, 9,4,1);
+        },  Break.MD);
 
-            GridPane.setConstraints(boxLineChart,3,3,1,1);
+        addPoint(_ -> {
+//            getRowConstraints().clear();
+            GridPane.setConstraints(title, 0, 0, 1,1);
+            GridPane.setConstraints(one, 0, 1, 2,1);
+            GridPane.setConstraints(two, 2, 1,2,1);
+            GridPane.setConstraints(three, 0, 2,2,1);
+            GridPane.setConstraints(four, 2, 2,2,1);
+
+            GridPane.setConstraints(barChart, 0, 3,4,1);
+            GridPane.setConstraints(donutChart, 0, 4, 4,1);
+
+            GridPane.setConstraints(boxAudience, 0, 5, 4,1);
+            GridPane.setConstraints(boxTable, 0, 6,4,1);
+            GridPane.setConstraints(boxLineChart, 0, 7,4,1);
 
 
-            ColumnConstraints col1 = new ColumnConstraints();
-            col1.setPercentWidth(25);
-            ColumnConstraints col2 = new ColumnConstraints();
-            col2.setPercentWidth(25);
-            ColumnConstraints col3 = new ColumnConstraints();
-            col3.setPercentWidth(25);
-            ColumnConstraints col4 = new ColumnConstraints();
-            col4.setPercentWidth(25);
-            this.getColumnConstraints().setAll(col1, col2, col3, col4);
+//            GridPane.setConstraints(boxLineChart, 0, 9,4,1);
+        },  Break.LG);
+
+        addPoint(_ -> {
+//            getRowConstraints().clear();
+            GridPane.setConstraints(title, 0, 0, 1,1);
+            GridPane.setConstraints(one, 0, 1, 1,1);
+            GridPane.setConstraints(two, 1, 1,1,1);
+            GridPane.setConstraints(three, 2, 1,1,1);
+            GridPane.setConstraints(four, 3, 1,1,1);
+
+            GridPane.setConstraints(barChart, 0, 2,3,1);
+            GridPane.setConstraints(donutChart, 3, 2, 1,1);
+
+            GridPane.setConstraints(boxAudience, 0, 3, 1,1);
+            GridPane.setConstraints(boxTable, 1, 3,2,1);
+            GridPane.setConstraints(boxLineChart, 3, 3,2,1);
+
         }, Break.values());
-
     }
 
     private Node createLineChart() {
@@ -208,8 +223,8 @@ public class Dashboard extends ResponsiveGrid {
         XYChart.Series<Number, Number> dataSeries1 = new XYChart.Series<>();
         dataSeries1.setName("2014");
 
-        dataSeries1.getData().add(new XYChart.Data<>( 1, 200));
-        dataSeries1.getData().add(new XYChart.Data<>( 5, 300));
+        dataSeries1.getData().add(new XYChart.Data<>(1, 200));
+        dataSeries1.getData().add(new XYChart.Data<>(5, 300));
         dataSeries1.getData().add(new XYChart.Data<>(10, 150));
         dataSeries1.getData().add(new XYChart.Data<>(20, 245));
         dataSeries1.getData().add(new XYChart.Data<>(40, 123));
@@ -220,8 +235,8 @@ public class Dashboard extends ResponsiveGrid {
         XYChart.Series<Number, Number> dataSeries2 = new XYChart.Series<>();
         dataSeries2.setName("2014");
 
-        dataSeries2.getData().add(new XYChart.Data<>( 1, 425));
-        dataSeries2.getData().add(new XYChart.Data<>( 5, 523));
+        dataSeries2.getData().add(new XYChart.Data<>(1, 425));
+        dataSeries2.getData().add(new XYChart.Data<>(5, 523));
         dataSeries2.getData().add(new XYChart.Data<>(10, 756));
         dataSeries2.getData().add(new XYChart.Data<>(20, 664));
         dataSeries2.getData().add(new XYChart.Data<>(40, 786));
@@ -235,7 +250,7 @@ public class Dashboard extends ResponsiveGrid {
     public BarChart<String, Number> createBarchart() {
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.observableArrayList(
-                Arrays.asList("10", "20", "30", "40", "50", "60", "70" )));
+                Arrays.asList("10", "20", "30", "40", "50", "60", "70")));
 
         NumberAxis yAxis = new NumberAxis(0, 1000, 100);
         yAxis.setLabel("Population in Millions");
@@ -287,6 +302,7 @@ public class Dashboard extends ResponsiveGrid {
         donutChart.setData(data);
         return donutChart;
     }
+
     private int count = 0;
 
     private Node createBox(String _title, Node node) {
@@ -317,7 +333,7 @@ public class Dashboard extends ResponsiveGrid {
         count = 0;
         List<String> colors = List.of("accent", "danger", "success");
         listView.setCellFactory(_ -> new ListCell<>() {
-            
+
             @Override
             protected void updateItem(CountryBox item, boolean empty) {
                 if (item != null) {
@@ -337,12 +353,12 @@ public class Dashboard extends ResponsiveGrid {
                     progressBar.getStyleClass().addAll("bg-" + colors.get(getIndex()));
                     progressBar.progressProperty().bind(item.percentageProperty());
 
-                    Text legend = new Text( (item.getPercentage()  * 100) + "%");
+                    Text legend = new Text((item.getPercentage() * 100) + "%");
                     legend.getStyleClass().addAll("bold", "h5");
 
-                    grid.add(text, 0,0);
-                    grid.add(progressBar, 0,1);
-                    grid.add(legend, 1,0);
+                    grid.add(text, 0, 0);
+                    grid.add(progressBar, 0, 1);
+                    grid.add(legend, 1, 0);
 
                     GridPane.setHgrow(text, Priority.ALWAYS);
                     GridPane.setHgrow(progressBar, Priority.ALWAYS);
