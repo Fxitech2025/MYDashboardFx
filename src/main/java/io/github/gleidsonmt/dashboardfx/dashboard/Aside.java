@@ -49,10 +49,12 @@ public class Aside extends VBox {
         legend.getStyleClass().addAll("h6");
 
         GridPane grid = new GridPane();
+        Separator separator = new Separator();
 //        grid.setGridLinesVisible(true);
         grid.add(title, 0,0);
         grid.add(legend, 0,1);
-        grid.add(new Separator(), 0,2);
+        grid.add(separator, 0,2, GridPane.REMAINING,1);
+
 
         if (node != null) {
            grid.add(node, 1,1);
