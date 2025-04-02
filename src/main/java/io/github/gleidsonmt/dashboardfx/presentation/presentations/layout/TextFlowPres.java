@@ -24,7 +24,9 @@ public class TextFlowPres extends StackPane {
                                 Any Node other than Text will be treated as an embedded object in the text layout. It will be inserted in the content using its preferred width, height, and baseline offset""")
                         .legend("javafx.scene.text.TextFlow")
                         .legend("Try to resize the pane.")
+                        .h4("Demo", "Text Flow")
                         .node(createDemo())
+                        .code("TextFlow flow = new TextFlow(new Text(text));")
                         .h3("Customizing", "Text Flow")
                         .nodes(
                                 createDemo("""
@@ -54,7 +56,7 @@ public class TextFlowPres extends StackPane {
                         )
 
                         .code("""
-                                TextFlow flow = new TextFlow(new Text(text));
+                                // Example
                                 flow.getStyleClass().addAll("border-l-2", "border-warning", "padding-5");
                                 flow.setStyle("-fx-background-color: derive(-warning, 96%);");
                                 """)

@@ -77,20 +77,24 @@ public class Tutorial extends Presentation<Tutorial> {
         scroll.setId("tutorial-scroll");
         body.setId("tutorial-body");
 
+        scroll.setMinHeight(500);
+
         body.addPoint(_ -> {
             body.getChildren().remove(aside);
             body.setTop(aside);
             StackPane.setMargin(btnTop, new Insets(10, 40, 10, 10));
             aside.setPadding(new Insets(0));
 
-        }, Break.SM, Break.MD);
+            aside.setMaxHeight(100);
+            aside.setPrefHeight(100);
+
+        }, Break.MOBILE, Break.SM, Break.MD);
 
         body.addPoint(_ -> {
-
+            menu.setMaxHeight(-1);
             if (body.getChildren().contains(aside)) {
                 body.getChildren().remove(aside);
                 body.setRight(aside);
-
             } else {
                 body.setRight(aside);
             }
@@ -99,9 +103,6 @@ public class Tutorial extends Presentation<Tutorial> {
         }, Break.values());
 
         StackPane.setAlignment(btnTop, Pos.BOTTOM_RIGHT);
-
-
-
     }
 
     /**
@@ -127,6 +128,10 @@ public class Tutorial extends Presentation<Tutorial> {
         List<VBox> firstList = firstLevel.stream().map(this::buildTree).toList();
 
         firstList.forEach(c -> menu.getChildren().add(c));
+//        ScrollPane pane = new ScrollPane(menu);
+//        pane.setFitToWidth(true);
+//        pane.setFitToHeight(true);
+//        nav.getChildren().add(pane);
         nav.getChildren().add(menu);
         menu.getStyleClass().add("menu-content");
         VBox.setVgrow(menu, Priority.ALWAYS);
@@ -202,7 +207,8 @@ public class Tutorial extends Presentation<Tutorial> {
 //        ToggleButton toggle = createToggle(label);
 //        root.getChildren().add(toggle);
         GridPane grid = createItem(label);
-        grid.getStyleClass().addAll("grid-item", "h5");
+        grid.setMaxHeight(30);
+        grid.getStyleClass().addAll("grid-item", "h6");
         root.getChildren().add(grid);
         return root;
     }
@@ -230,8 +236,6 @@ public class Tutorial extends Presentation<Tutorial> {
                 optional.get().requestFocus();
             }
         });
-
-//        group.selectToggle(toggle);
     }
 
     private ToggleButton createToggle(TreeTitle label) {
@@ -249,15 +253,11 @@ public class Tutorial extends Presentation<Tutorial> {
                         .setOnFinished(e -> rolling = true);
             }
         });
-        toggle.setOnMousePressed(e -> {
-            rolling = false;
-        });
+
+        toggle.setOnMousePressed(e -> rolling = false);
 
         label.setLabelFor(toggle);
         breaks.add(label);
-
-//        Platform.runLater(() ->
-//                label.setPosition(Scroll.getY(scroll, label)));
 
         toggle.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
             if (toggle.isSelected()) {
@@ -279,7 +279,7 @@ public class Tutorial extends Presentation<Tutorial> {
 
         aside.getStyleClass().add("nav");
 
-        // pegando todos os items q são labelposition e titulos
+        // pegando todos os items q são label position e titulos
 
         data = items.stream()
                 .filter(filter -> filter instanceof TreeTitle
@@ -303,8 +303,6 @@ public class Tutorial extends Presentation<Tutorial> {
         root.getChildren().add(btnTop);
         root.setAlignment(Pos.BOTTOM_RIGHT);
 
-//        StackPane.setMargin(btnTop, new Insets(10, 40 + 250, 10, 10));
-
         aside.setMinWidth(250);
 //        body.setSpacing(10);
         aside.setStyle("-fx-background-color: -fx-background;");
@@ -313,8 +311,6 @@ public class Tutorial extends Presentation<Tutorial> {
         scroll.setFitToWidth(true);
 
         HBox.setHgrow(scroll, Priority.ALWAYS);
-
-//        Platform.runLater(() -> {
 
         for (Node node : items) {
             center.getChildren().add(node);
@@ -343,9 +339,7 @@ public class Tutorial extends Presentation<Tutorial> {
                     f.getParent().requestFocus();
                 }
             }
-
         });
-
         return this;
     }
 
@@ -372,13 +366,6 @@ public class Tutorial extends Presentation<Tutorial> {
 
             timeline.play();
         });
-
         return button;
-    }
-
-
-    public Tutorial load() {
-
-        return this;
     }
 }

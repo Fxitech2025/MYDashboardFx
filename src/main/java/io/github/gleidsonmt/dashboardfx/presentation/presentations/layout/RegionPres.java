@@ -17,7 +17,13 @@ public class RegionPres extends StackPane {
         getChildren().setAll(
                 new Tutorial()
                         .h3("Region")
-                        .text("Region is the base class for all JavaFX Node-based UI Controls, and all layout containers. It is a resizable Parent node which can be styled from CSS. It can have multiple backgrounds and borders. It is designed to support as much of the CSS3 specification for backgrounds and borders as is relevant to JavaFX. The full specification is available at the W3C  .")
+                        .text("""
+                                Region is the base class for all JavaFX Node-based UI Controls, and all layout containers. 
+                                It is a resizable Parent node which can be styled from CSS. It can have multiple backgrounds and borders. 
+                                It is designed to support as much of the CSS3 specification for backgrounds and borders as is relevant to JavaFX. 
+                                The full specification is available at the W3C.
+                                """)
+
                         .text("\nRegion doesn't fit by default, if you do not apply some color and set the sizes, it continues hided")
                         .legend("javafx.scene.layout.Region")
                         .legend("\nEvery control descends by Region so every style in region is applicable to all controls.")
@@ -30,12 +36,12 @@ public class RegionPres extends StackPane {
                         .table(
                                 new Row("w-2", "-fx-pref-width: 2px; ;"),
                                 new Row("w-5", "-fx-pref-width: 5px;"),
-                                new Row("w-10","-fx-pref-width: 10px;"),
-                                new Row("w-100","-fx-pref-width: 100px;"),
+                                new Row("w-10", "-fx-pref-width: 10px;"),
+                                new Row("w-100", "-fx-pref-width: 100px;"),
 
                                 new Row("h-2", "-fx-pref-height: 2px;"),
                                 new Row("h-5", "-fx-pref-height: 5px;"),
-                                new Row("h-10","-fx-pref-height: 10px;"),
+                                new Row("h-10", "-fx-pref-height: 10px;"),
 
                                 new Row("size-2", "-fx-pref-width: 2px; -fx-pref-height: 2px;"),
                                 new Row("size-5", "-fx-pref-width: 5px; -fx-pref-height: 5px;"),

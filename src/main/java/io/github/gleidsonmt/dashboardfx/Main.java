@@ -34,6 +34,7 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -52,6 +53,7 @@ public class Main extends Root {
     private ScrollPane body;
     private Button hamb;
 
+
     public Main() {
         super(new Layout());
         configLayout();
@@ -67,11 +69,12 @@ public class Main extends Root {
         crumb = new BreadCrumbBar();
 
         navBar.add(crumb, 0, 0);
-         card = new CardUserOptions(new User(
+
+        card = new CardUserOptions(new User(
                 Assets.getImage("default_avatar.jpg", 80),
                 "johndoe54@gmail.com", "Jhon Doe")
         );
-        navBar.add(card,1, 0);
+        navBar.add(card, 2, 0);
 //        navBar.setGridLinesVisible(true);
 
         GridPane.setValignment(crumb, VPos.CENTER);
@@ -89,13 +92,6 @@ public class Main extends Root {
 
         drawer = new Drawer(
                 new View("Home", new Dashboard()),
-                new View("Grid System",
-                        onEnter -> {
-                            getContainer().setTop(new GridBarView());
-                        }, onExit -> {
-                    getContainer().setTop(null);
-
-                }),
                 new Module("Core",
                         new View("Introduction", new Introduction()),
                         new View("Wrapper", new Wrapper()),
@@ -133,7 +129,6 @@ public class Main extends Root {
                         new View("Stacked Bar Chart", new StackedBarChartPres()),
                         new View("Pie Chart", new DonutChartPres()),
                         new View("Line Chart", new LineChartPres())
-
                 ),
                 new Module("Components",
                         new View("Drawer", new BuildingPage()),
@@ -168,18 +163,14 @@ public class Main extends Root {
                 if (oldValue instanceof View view) {
                     if (view.getOnExit() != null) view.getOnExit().handle(new ActionEvent());
                 }
-
             }
         });
-
 
         crumb.currentModuleProperty().bind(drawer.currentModuleProperty());
 
         if (drawer.getCurrentModule() instanceof View view) {
             body.setContent(view.getContent());
         }
-
-
     }
 
     public Layout getContainer() {
@@ -215,5 +206,4 @@ public class Main extends Root {
             GridPane.setColumnIndex(card, 1);
         }, Break.values());
     }
-
 }

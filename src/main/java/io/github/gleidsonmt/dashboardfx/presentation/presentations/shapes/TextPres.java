@@ -29,8 +29,8 @@ public class TextPres extends StackPane {
 //                                new Text("Lorem ipsum dolor color")
 //                        ), "Text text = new Text(\"Lorem ipsum dolor color\");", "")
 
-                        .h3("Typographic", "Text")
-                        .code("ThemeProvider.install(root, \n\tCss.COLORS, \n\tCss.TYPOGRAPHIC);", "java")
+                        .h3("Install", "Text")
+                        .code("ThemeProvider.install(root, \n\t... \n\tCss.TYPOGRAPHIC);", "java")
 
                         .demo(new Node[]{
                                 createDemo("h1", "h1"),

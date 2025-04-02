@@ -53,13 +53,10 @@ public class FlowPres extends StackPane {
                                     main.flow().openAbsolute(btn, Pos.BOTTOM_RIGHT, new Insets(20));
                                 """)
                         .h3("Closing", "Flow")
-                        .demo(new Button())
-
-//                        .demo(createDemo(e -> {
-//                            Main main = (Main) getScene().getRoot();
-//                            main.flow().clear();
-//
-//                        }))
+                        .demo(createDemo(e -> {
+                            Main main = (Main) getScene().getRoot();
+                            main.flow().clear();
+                        }))
                         .code("""
                                 Main main = (Main) getScene().getRoot();
                                 main.flow().clear();

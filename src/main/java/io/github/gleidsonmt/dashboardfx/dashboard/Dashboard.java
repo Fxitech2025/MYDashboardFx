@@ -28,7 +28,6 @@ import java.util.List;
 public class Dashboard extends ResponsiveGrid {
 
     public Dashboard() {
-        super(true);
         setPadding(new Insets(20));
 
         TileBlock one = new TileBlock(Icon.CHAT, "39", "Messages", "-info");
@@ -44,12 +43,8 @@ public class Dashboard extends ResponsiveGrid {
         this.setHgap(10);
         this.setVgap(10);
 
-
         Text title = new Text("Welcome, Jhon Doe!");
         title.getStyleClass().addAll("h3", "font-instagram");
-
-
-//        add(title, 0,0);
 
         TableView<Activity> tableView = new TableView<>();
         tableView.getStyleClass().addAll("transparent-table");
@@ -188,9 +183,6 @@ public class Dashboard extends ResponsiveGrid {
             GridPane.setConstraints(boxAudience, 0, 5, 4,1);
             GridPane.setConstraints(boxTable, 0, 6,4,1);
             GridPane.setConstraints(boxLineChart, 0, 7,4,1);
-
-
-//            GridPane.setConstraints(boxLineChart, 0, 9,4,1);
         },  Break.LG);
 
         addPoint(_ -> {

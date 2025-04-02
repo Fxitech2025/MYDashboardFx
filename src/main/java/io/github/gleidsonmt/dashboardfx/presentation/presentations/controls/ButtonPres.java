@@ -21,8 +21,9 @@ public class ButtonPres extends StackPane {
                         .legend("javafx.scene.control.Button")
                         .text("All classes in (Text) works in the text inside button.")
                         .text("All classes in (Region, Label) can by apply.")
-                        .h4("Install", "Button")
-                        .code("ThemeProvider.install(scene, \n\tCss.BUTTON);", "java")
+                        .h3("Theme", "Button")
+                        .h4("Install", "Theme")
+                        .code("ThemeProvider.install(scene, ... \n\tCss.BUTTON);", "java")
                         .h4("Demo", "Button")
                         .demo(createDemo())
                         .code("""
