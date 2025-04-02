@@ -17,7 +17,7 @@ public class DrawerContainer extends ScrollPane {
         this.container = new VBox();
         this.setContent(container);
         this.setFitToWidth(true);
-        this.setFitToHeight(true);
+//        this.setFitToHeight(true);
     }
 
 //    @Override

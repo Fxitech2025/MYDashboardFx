@@ -5,6 +5,7 @@ import io.github.gleidsonmt.presentation.TreeTitle;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -15,11 +16,10 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -35,6 +35,10 @@ public class Drawer extends VBox {
     private DrawerContainer drawerContainer;
     private ToggleGroup group = new ToggleGroup();
 
+    private TextField search = new TextField();
+    private VBox searchBox = new VBox();
+    private ScrollPane searchContainer = new ScrollPane(searchBox);
+
     public Drawer(Module... _modules) {
         this(List.of(_modules));
     }
@@ -43,7 +47,9 @@ public class Drawer extends VBox {
         this.modules = _modules;
         this.setId("drawer");
         this.drawerContainer = new DrawerContainer();
-        this.getChildren().add(drawerContainer);
+        this.getChildren().addAll(search, drawerContainer);
+        search.setPromptText("Search");
+        VBox.setMargin(search, new Insets(10, 0, 10, 0));
         VBox.setVgrow(drawerContainer, Priority.ALWAYS);
 
         _modules.forEach(this::makeFirstLevel);
@@ -83,9 +89,93 @@ public class Drawer extends VBox {
             currentModule.setValue((Module) group.getToggles().get(0).getUserData());
         }
 
+        VBox old = (VBox) drawerContainer.getContent();
+        searchContainer.setFitToWidth(true);
+
+
+        VBox.setVgrow(old, Priority.ALWAYS);
+        VBox.setVgrow(searchContainer, Priority.ALWAYS);
+
+        drawerContainer.maxHeightProperty().bind(drawerContainer.prefHeightProperty());
+
+        search.textProperty().addListener((_, _, newVal) -> {
+
+            if (!newVal.isEmpty()) {
+                getChildren().set(2, searchContainer);
+
+                searchBox.getChildren().clear();
+                find(name -> name.contains(newVal))
+                        .forEach(e -> {
+                            Optional<BoxModule> opt = findModuleInSearchBox(e); // verify if box has e
+                            if (opt.isEmpty() && e.getParent() != null) { // if box doesn't have a module and module has a parent
+                                // add a new BoxModule with module
+                                searchBox.getChildren().add(new BoxModule(e.getParent().getName(), createToggle(e)));
+                            } else if (e.getParent() != null) { // if module already in search box and module has a parent
+                                // find, and add to a BoxModule already in search box.
+                                getBoxModule(e).get().getChildren().add(createToggle(e));
+                            } else { // eh um module sem pai
+                                searchBox.getChildren().add(createToggle(e));
+                            }
+                        });
+            } else {
+                getChildren().set(2, old);
+                VBox.setVgrow(old, Priority.ALWAYS);
+            }
+            VBox.setVgrow(old, Priority.ALWAYS);
+            VBox.setVgrow(searchContainer, Priority.ALWAYS);
+        });
     }
 
-    private Module find(List<Module> modules, String name) {
+    /**
+     * If drawer is in mode of search, find a module.
+     *
+     * @param module The module in SearchBox.
+     * @return The BoxModule (VBox) that is equal to module name.
+     */
+    private Optional<BoxModule> findModuleInSearchBox(Module module) {
+        return searchBox
+                .getChildren()
+                .stream()
+                .filter(el -> el instanceof BoxModule)
+                .map(el -> (BoxModule) el)
+                .filter(el -> module.getParent() != null)
+                .filter(el -> el.getName().equals(module.getParent().getName()))
+                .findAny();
+    }
+
+    private Optional<BoxModule> getBoxModule(Module e) {
+        return searchBox.getChildren()
+                .stream()
+                .filter(el -> el instanceof BoxModule)
+                .map(el -> (BoxModule) el)
+                .filter(el -> e.getParent().getName().equals(el.getName()))
+                .findAny();
+    }
+
+
+    private List<Module> find(Predicate<String> predicate) {
+        List<Module> findedList = new ArrayList<>();
+        _find(modules, findedList, predicate);
+        return findedList;
+    }
+
+    private Module _find(@NotNull List<Module> modules, List<Module> findedList, Predicate<String> predicate) {
+        for (Module mod : modules) {
+            if (predicate.test(mod.getName())) {
+                findedList.add(mod);
+            } else {
+                if (!mod.getModules().isEmpty()) {
+                    Module module = _find(mod.getModules(), findedList, predicate);
+                    if (module != null) {
+                        findedList.add(module);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    private @Nullable Module find(@NotNull List<Module> modules, String name) {
         for (Module mod : modules) {
             if (!mod.getName().equals(name)) {
                 if (!mod.getModules().isEmpty()) {
@@ -121,15 +211,11 @@ public class Drawer extends VBox {
                     Tutorial tutorial = (Tutorial) border.getUserData();
                     tutorial.select(topic);
                 }
-
-
             }
         };
 
         Timer timer = new Timer();
         timer.schedule(timerTask, 50);
-
-
     }
 
     public void navigate(String name) {
@@ -175,7 +261,7 @@ public class Drawer extends VBox {
         }
     }
 
-    private ToggleButton createToggle(Module module) {
+    public ToggleButton createToggle(Module module) {
         ToggleButton b = new ToggleButton(module.getName());
         b.setUserData(module);
         b.getStyleClass().add("drawer-item");
@@ -190,7 +276,6 @@ public class Drawer extends VBox {
     }
 
     public void makeFirstLevel(Module module) {
-
         if (module.getModules().isEmpty()) {
 //            this.getChildren().add(createToggle(module));
             ((VBox) this.drawerContainer.getContent()).getChildren().add(createToggle(module));
@@ -201,7 +286,7 @@ public class Drawer extends VBox {
 //            this.getChildren().add(container);
             ((VBox) this.drawerContainer.getContent()).getChildren().add(container);
             if (!module.getModules().isEmpty()) {
-////            VBox.setMargin(b, new Insets(0, 0, 0, 10));
+//            VBox.setMargin(b, new Insets(0, 0, 0, 10));
                 module.getModules().forEach(el -> {
 //                    if (el instanceof View view) {
                     if (!el.getModules().isEmpty()) {
