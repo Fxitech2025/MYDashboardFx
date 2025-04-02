@@ -43,7 +43,8 @@ public class ColorsPres extends StackPane {
             getChildren().setAll(
                     new Tutorial()
                             .h3("Colors")
-                            .h4("Grid Color Palette", "Colors")
+                            .h4("Install", "Colors")
+                            .code("ThemeProvider.install(scene, \n\t... \n\tCss.COLORS);", "java")
                             .h4("Bootstrap", "Colors")
                             .text("Common colors.")
                             .demo(new Node[]{
