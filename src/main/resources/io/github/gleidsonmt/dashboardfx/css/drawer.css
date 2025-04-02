@@ -1,23 +1,14 @@
-
-
 #drawer {
     -fx-padding: 5px;
     -fx-effect: none;
     -fx-border-color: -medium-gray;
     -fx-border-width: 0px 1px 0px 0px;
     -fx-background-color: -fx-background;
-
 }
-
-
 
 #drawer .drawer-item {
     -fx-background-radius: 6px;
     -text-color: -dark-gray;
-
-}
-
-#drawer .drawer-item:hover {
 }
 
 #drawer .drawer-item:selected {
@@ -50,6 +41,12 @@
     -fx-text-fill: -text-color;
     -fx-font-weight: bold;
 }
+
+#drawer .titled-pane .title {
+    -fx-padding: 10px 5px 0px 10px;
+}
+
+
 
 #drawer .titled-pane .title .text {
     -fx-fill: -text-color;
@@ -103,22 +100,20 @@
     -fx-focus-color : transparent;
 }
 
- .drawer-menu:expanded .title  .arrow-button .arrow {
+.drawer-menu:expanded .title  .arrow-button .arrow {
   -fx-shape : "M5 13v-2h14v2Z";
   -fx-max-height : 1px;
   -fx-min-height : 2px;
 }
 
 #drawer > .module-selected:focused:expanded > .title .arrow {
-      -fx-max-height : 1px;
-      -fx-min-height : 1px;
+    -fx-max-height: 1px;
+    -fx-min-height: 1px;
 }
 
 #drawer .drawer-menu  .drawer-item {
     -fx-background-color: transparent;
 }
-
-
 
 #drawer .drawer-menu .drawer-item:hover:selected,
 #drawer .drawer-menu .drawer-item:selected:hover,
@@ -141,8 +136,3 @@
 #drawer .drawer-menu .drawer-item:selected .text {
     -fx-fill: -fx-accent;
 }
-
-.module-item > .title {
-    -fx-background-color: red;
-}
-
