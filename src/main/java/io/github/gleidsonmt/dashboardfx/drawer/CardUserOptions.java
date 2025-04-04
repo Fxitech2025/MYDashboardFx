@@ -46,7 +46,7 @@ public class CardUserOptions extends GridPane  {
     public void init() {
         this.setPadding(new Insets(5, 5,0,5));
         this.getChildren().setAll(avatarView, email, name);
-        avatarView.setRadius(23);
+        avatarView.setRadius(20);
         GridPane.setRowSpan(avatarView, 2);
 
         GridPane.setColumnIndex(avatarView, 0);

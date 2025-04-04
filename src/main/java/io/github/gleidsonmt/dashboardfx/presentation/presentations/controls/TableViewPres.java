@@ -21,12 +21,11 @@ public class TableViewPres extends StackPane {
                 new Tutorial()
                         .h3("Table View")
                         .text("""
-                                The TableView control is designed to visualize an unlimited number of rows of data, broken out into columns. 
-                                A TableView is therefore very similar to the ListView control, with the addition of support for columns.
-                                """)
+                                The TableView control is designed to visualize an unlimited number of rows of data, broken out into columns.
+                                A TableView is therefore very similar to the ListView control, with the addition of support for columns.""")
                         .legend("javafx.scene.control.TableView")
                         .demo(createDemo())
-                        .h5("Default")
+                        .h5("Demo", "Table View")
                         .code("""
                                 public class Person {
                                     private String firstName = null;

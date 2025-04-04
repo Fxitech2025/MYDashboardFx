@@ -43,9 +43,42 @@ public class Introduction extends StackPane {
                                 example dashboards with drawer, aside, navs, footers.. and so on.
                                 """)
                         .h3("Global Methods")
+                        .text("""
+                                These global methods are called when application needs to update the root.
+                                Calling notifications and custom alerts.
+                                """)
                         .node(TutorialUtils.createLink("Wrapper", "Wrapper"))
                         .node(TutorialUtils.createLink("Flow", "Flow"))
                         .node(TutorialUtils.createLink("Behavior", "Behavior"))
+                        .h3("Start an App")
+                        .code("""
+                                /**
+                                 * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
+                                 * Create on  20/02/2025
+                                 */
+                                public class App extends Application {
+                                    @Override
+                                    public void start(Stage stage) {
+                                        Root root = new Root(new Layout(new Button("Welcome")));
+                                        Scene scene = new Scene(root, 800, 600);
+                                        stage.setScene(scene);
+                                        stage.show();
+                                    }
+                                }
+                                """)
+                        .h3("Installing Themes")
+                        .text("Theme provider can install font and css, using enum with their names.")
+                        .code("""
+                                ...
+                                ThemeProvider.install(scene, Font.POPPINS, Font.INSTAGRAM); // fonts
+                                ThemeProvider.install(scene,
+                                        Css.COLORS,
+                                        Css.PROPERTIES,
+                                        Css.TYPOGRAPHIC
+                                        ...
+                                );
+                                ...
+                                """)
                         .build()
                         .getRoot()
         );

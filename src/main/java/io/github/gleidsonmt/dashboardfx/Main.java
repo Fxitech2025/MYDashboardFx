@@ -2,10 +2,10 @@ package io.github.gleidsonmt.dashboardfx;
 
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
-import io.github.gleidsonmt.dashboardfx.dashboard.GridBarView;
 import io.github.gleidsonmt.dashboardfx.drawer.*;
 import io.github.gleidsonmt.dashboardfx.drawer.Module;
 import io.github.gleidsonmt.dashboardfx.model.User;
+import io.github.gleidsonmt.dashboardfx.presentation.about.AboutPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Behavior;
 import io.github.gleidsonmt.dashboardfx.presentation.core.FlowPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Introduction;
@@ -34,7 +34,6 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -112,10 +111,14 @@ public class Main extends Root {
                         new View("Label", new LabelPres()),
                         new View("Button", new ButtonPres()),
                         new View("Toggle Button", new ToggleButtonPres()),
+                        new View("Toggle Switch", new ToggleSwitchPres()),
+                        new View("Radio Button", new RadioButtonPres()),
+                        new View("Check Box", new CheckBoxPres()),
                         new View("Hyperlink", new HyperlinkPres()),
                         new View("Progress Bar", new ProgressBarPres()),
                         new View("Text Field", new TextFieldPres()),
                         new View("Table View", new TableViewPres()),
+                        new View("Tree View", new TreeViewPres()),
                         new View("List View", new ListViewPres())
                 ),
                 new Module("Containers",
@@ -144,7 +147,7 @@ public class Main extends Root {
                         new View("Pallet Color", new ColorsPres()),
                         new View("Alignment", new BuildingPage())
                 ),
-                new View("About", new BuildingPage())
+                new View("About", new AboutPres())
         );
 
         drawer.setHeader(new DrawerHeader());

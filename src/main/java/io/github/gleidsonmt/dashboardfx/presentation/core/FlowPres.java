@@ -30,6 +30,7 @@ public class FlowPres extends StackPane {
                                 nodes using insets.
                                 """)
                         .legend("io.github.gleidsonmt.glad.base.Flow")
+                        .h4("Open", "Flow")
                         .legend("Create a floating button to see different sides.")
                         .demo(
                                new Node[]{
@@ -52,7 +53,7 @@ public class FlowPres extends StackPane {
                                     // Change the pos
                                     main.flow().openAbsolute(btn, Pos.BOTTOM_RIGHT, new Insets(20));
                                 """)
-                        .h3("Closing", "Flow")
+                        .h4("Close", "Flow")
                         .demo(createDemo(e -> {
                             Main main = (Main) getScene().getRoot();
                             main.flow().clear();

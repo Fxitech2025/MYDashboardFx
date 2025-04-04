@@ -5,6 +5,7 @@ import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
 import javafx.scene.Node;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.StackPane;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -22,8 +23,8 @@ public class ProgressBarPres extends StackPane {
                         .demo(createDemo())
                         .code("ProgressBar progressBar = new ProgressBar();")
                         .h4("Indeterminate", "Progress Bar")
-                        .code("progressBar.setProgress(-1);")
                         .demo(createDemo(-1))
+                        .code("progressBar.setProgress(-1);")
                         .h4("Customizing", "Progress Bar")
                         .demo(new Node[]{
                                 createDemo("bg-danger"),
@@ -40,11 +41,11 @@ public class ProgressBarPres extends StackPane {
         );
     }
 
-    private Node createDemo(String... classes) {
+    private @NotNull Node createDemo(String... classes) {
         return createDemo(0.5, classes);
     }
 
-    private ProgressBar createDemo(double progress, String... classes) {
+    private @NotNull ProgressBar createDemo(double progress, String... classes) {
         ProgressBar progressBar = new ProgressBar();
         progressBar.setProgress(progress);
         progressBar.getStyleClass().addAll(classes);
