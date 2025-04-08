@@ -1,6 +1,9 @@
 package io.github.gleidsonmt.dashboardfx.drawer;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import io.github.gleidsonmt.glad.controls.TextBoxOld;
+import io.github.gleidsonmt.glad.controls.icon.Icon;
+import io.github.gleidsonmt.glad.controls.text_box.TextBox;
 import io.github.gleidsonmt.presentation.TreeTitle;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
@@ -35,7 +38,8 @@ public class Drawer extends VBox {
     private DrawerContainer drawerContainer;
     private ToggleGroup group = new ToggleGroup();
 
-    private TextField search = new TextField();
+    private TextBox search = new TextBox(Icon.SEARCH, "Search", true);
+//    String text, Icon _icon, boolean animated, boolean mask
     private VBox searchBox = new VBox();
     private ScrollPane searchContainer = new ScrollPane(searchBox);
 
@@ -51,6 +55,8 @@ public class Drawer extends VBox {
         search.setPromptText("Search");
         VBox.setMargin(search, new Insets(10, 0, 10, 0));
         VBox.setVgrow(drawerContainer, Priority.ALWAYS);
+
+        search.setMinHeight(40);
 
         _modules.forEach(this::makeFirstLevel);
         this.setPrefWidth(250);

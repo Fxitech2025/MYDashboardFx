@@ -61,6 +61,7 @@ public class App extends Application {
                 Css.RADIO_BUTTON,
                 Css.CHECK_BOX,
                 Css.TREE_VIEW,
+                Css.TEXT_BOX,
                 Css.TOGGLE_BUTTON
         );
 

@@ -52,7 +52,6 @@ public class Main extends Root {
     private ScrollPane body;
     private Button hamb;
 
-
     public Main() {
         super(new Layout());
         configLayout();
