@@ -151,7 +151,6 @@ public class Main extends Root {
 
         drawer.setHeader(new DrawerHeader());
         drawer.setFooter(new DrawerFooter());
-//        drawer.setFooter(new CardUserOptions(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe")));
 
         drawer.currentModuleProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue instanceof View view) {
