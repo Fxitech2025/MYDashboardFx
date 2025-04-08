@@ -28,6 +28,8 @@ import java.util.List;
 public class Dashboard extends ResponsiveGrid {
 
     public Dashboard() {
+        super(true);
+
         setPadding(new Insets(20));
 
         TileBlock one = new TileBlock(Icon.CHAT, "39", "Messages", "-info");
@@ -156,7 +158,8 @@ public class Dashboard extends ResponsiveGrid {
         }, Break.MOBILE, Break.SM);
 
         addPoint(_ -> {
-//            getRowConstraints().clear();
+//            getColumnConstraints().clear();
+//            System.out.println("rowOne = " + rowOne);
             GridPane.setConstraints(title, 0, 0, 1,1);
             GridPane.setConstraints(one, 0, 1, 2,1);
             GridPane.setConstraints(two, 2, 1,2,1);
@@ -165,6 +168,10 @@ public class Dashboard extends ResponsiveGrid {
 
             GridPane.setConstraints(barChart, 0, 3,4,1);
             GridPane.setConstraints(donutChart, 0, 4, 4,1);
+
+            GridPane.setConstraints(boxAudience, 0, 5, 4,1);
+            GridPane.setConstraints(boxTable, 0, 6,4,1);
+            GridPane.setConstraints(boxLineChart, 0, 7,4,1);
 
 //            GridPane.setConstraints(boxLineChart, 0, 9,4,1);
         },  Break.MD);
