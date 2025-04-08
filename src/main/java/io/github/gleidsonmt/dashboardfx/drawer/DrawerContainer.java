@@ -13,14 +13,18 @@ public class DrawerContainer extends ScrollPane {
 
     private VBox container;
 
-    public DrawerContainer() {
-        this.container = new VBox();
+    public DrawerContainer(VBox container) {
         this.setContent(container);
         this.setFitToWidth(true);
-//        this.setFitToHeight(true);
+        this.setFitToHeight(true);
+        container.setStyle("-fx-background-color: red;");
     }
 
-//    @Override
+    public void setContainer(VBox container) {
+        this.setContent(container);
+    }
+
+    //    @Override
 //    protected ObservableList<Node> getChildren() {
 //        return container.getChildren();
 //    }

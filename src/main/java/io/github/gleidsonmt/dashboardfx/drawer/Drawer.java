@@ -40,8 +40,9 @@ public class Drawer extends VBox {
 
     private TextBox search = new TextBox(Icon.SEARCH, "Search", true);
 //    String text, Icon _icon, boolean animated, boolean mask
+
     private VBox searchBox = new VBox();
-    private ScrollPane searchContainer = new ScrollPane(searchBox);
+    private VBox defaultBox = new VBox();
 
     public Drawer(Module... _modules) {
         this(List.of(_modules));
@@ -50,12 +51,12 @@ public class Drawer extends VBox {
     public Drawer(List<Module> _modules) {
         this.modules = _modules;
         this.setId("drawer");
-        this.drawerContainer = new DrawerContainer();
+        this.drawerContainer = new DrawerContainer(defaultBox);
         this.getChildren().addAll(search, drawerContainer);
         search.setPromptText("Search");
         VBox.setMargin(search, new Insets(10, 0, 10, 0));
-        VBox.setVgrow(drawerContainer, Priority.ALWAYS);
 
+        VBox.setVgrow(drawerContainer, Priority.ALWAYS);
         search.setMinHeight(40);
 
         _modules.forEach(this::makeFirstLevel);
@@ -95,21 +96,12 @@ public class Drawer extends VBox {
             currentModule.setValue((Module) group.getToggles().get(0).getUserData());
         }
 
-        VBox old = (VBox) drawerContainer.getContent();
-        searchContainer.setFitToWidth(true);
-
-
-        VBox.setVgrow(old, Priority.ALWAYS);
-        VBox.setVgrow(searchContainer, Priority.ALWAYS);
-
-        drawerContainer.maxHeightProperty().bind(drawerContainer.prefHeightProperty());
-
         search.textProperty().addListener((_, _, newVal) -> {
 
             if (!newVal.isEmpty()) {
-                getChildren().set(2, searchContainer);
-
+                drawerContainer.setContainer(searchBox);
                 searchBox.getChildren().clear();
+//
                 find(name -> name.contains(newVal))
                         .forEach(e -> {
                             Optional<BoxModule> opt = findModuleInSearchBox(e); // verify if box has e
@@ -124,19 +116,17 @@ public class Drawer extends VBox {
                             }
                         });
             } else {
-                getChildren().set(2, old);
-                VBox.setVgrow(old, Priority.ALWAYS);
+                drawerContainer.setContainer(defaultBox);
+                VBox.setVgrow(drawerContainer, Priority.ALWAYS);
             }
-            VBox.setVgrow(old, Priority.ALWAYS);
-            VBox.setVgrow(searchContainer, Priority.ALWAYS);
         });
     }
 
     /**
      * If drawer is in mode of search, find a module.
      *
-     * @param module The module in SearchBox.
-     * @return The BoxModule (VBox) that is equal to module name.
+     * @param module The module in the SearchBox.
+     * @return The BoxModule (VBox) that is equal to the module name.
      */
     private Optional<BoxModule> findModuleInSearchBox(Module module) {
         return searchBox
@@ -244,7 +234,6 @@ public class Drawer extends VBox {
     }
 
     public void setFooter(Node node) {
-        this.setAlignment(Pos.BOTTOM_CENTER);
         this.getChildren().add(node);
     }
 

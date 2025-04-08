@@ -8,6 +8,8 @@ module io.github.gleidsonmt.dashboardfx {
     requires fr.brouillard.oss.cssfx;
     requires java.net.http;
 
+    exports io.github.gleidsonmt.dashboardfx.drawer;
+
     requires eu.hansolo.colors;
 
     opens io.github.gleidsonmt.dashboardfx to javafx.fxml;
