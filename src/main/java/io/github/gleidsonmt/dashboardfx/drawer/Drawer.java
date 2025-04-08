@@ -56,6 +56,7 @@ public class Drawer extends VBox {
         search.setPromptText("Search");
         VBox.setMargin(search, new Insets(10, 0, 10, 0));
 
+        setAlignment(Pos.TOP_CENTER);
         VBox.setVgrow(drawerContainer, Priority.ALWAYS);
         search.setMinHeight(40);
 
