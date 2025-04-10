@@ -106,7 +106,8 @@ public class Main extends Root {
         });
 
         drawer = new Drawer(
-                new View("Home", new Dashboard()),
+                new View("Dashboard", new Dashboard()),
+                new View("Introduction", new Dashboard()),
                 new Module("Core",
                         new View("Introduction", new Introduction()),
                         new View("Wrapper", new Wrapper()),

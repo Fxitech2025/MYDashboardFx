@@ -23,23 +23,6 @@ import javafx.scene.web.WebView;
 public class LabelPres extends StackPane {
 
     public LabelPres() {
-        new Text("");
-        new Label();
-        new Button();
-        new ListView<>();
-        new TextField();
-        new HTMLEditor();
-        new ToggleButton();
-        new CheckBox();
-        new ImageView();
-        new ChoiceBox<>();
-        new ComboBox<>();
-        new ListView<>();
-        new MediaView();
-
-
-        new DialogPane();
-
         getChildren().setAll(
                 new Tutorial()
                         .indicators()
