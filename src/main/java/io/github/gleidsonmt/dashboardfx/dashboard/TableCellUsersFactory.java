@@ -30,9 +30,10 @@ public class TableCellUsersFactory implements Callback<TableColumn<Activity, Obs
                     for (int i = 0; i < item.size(); i++) {
                         imgs[i] = item.get(i).getAvatar();
                     }
-                    AvatarStackedCircle avatar = new AvatarStackedCircle(3, imgs);
+                    AvatarStackedCircle avatar = new AvatarStackedCircle(3, 20, imgs);
                     setGraphic(avatar);
                     setText(null);
+
                 } else {
                     setItem(null);
                     setText(null);
