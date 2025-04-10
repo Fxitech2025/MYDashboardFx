@@ -3,7 +3,7 @@ package io.github.gleidsonmt.dashboardfx;
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
 import io.github.gleidsonmt.dashboardfx.drawer.*;
-import io.github.gleidsonmt.dashboardfx.drawer.Module;
+import io.github.gleidsonmt.dashboardfx.drawer.ModuleImpl;
 import io.github.gleidsonmt.dashboardfx.model.User;
 import io.github.gleidsonmt.dashboardfx.presentation.about.AboutPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Behavior;
@@ -12,8 +12,10 @@ import io.github.gleidsonmt.dashboardfx.presentation.core.Introduction;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Wrapper;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.CardsPres;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.LabelExample;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.ToggleSwitchPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.*;
-import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.RegionPres;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.RegionPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.TextFlowPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.HomePage;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.shapes.TextPres;
@@ -108,41 +110,37 @@ public class Main extends Root {
         drawer = new Drawer(
                 new View("Dashboard", new Dashboard()),
                 new View("Introduction", new Dashboard()),
-                new Module("Core",
+                new ModuleImpl("Core",
                         new View("Introduction", new Introduction()),
                         new View("Wrapper", new Wrapper()),
                         new View("Flow", new FlowPres()),
                         new View("Behavior", new Behavior())
                 ),
-                new Module("Container",
-                        new View("Region", new RegionPres()),
+                new ModuleSeparator("Theme"),
+                new ModuleImpl("Container",
                         new View("Text Flow", new TextFlowPres())
                 ),
-                new Module("Shapes",
+                new ModuleImpl("Shapes",
                         new View("Text", new TextPres()),
                         new View("Circle", new BuildingPage())
                 ),
-                new Module("Controls",
-                        new View("SVGIcon", new SVGIconPres()),
-                        new View("Avatar View", new AvatarPres()),
-                        new View("Label", new LabelPres()),
-                        new View("Button", new ButtonPres()),
-                        new View("Toggle Button", new ToggleButtonPres()),
-                        new View("Toggle Switch", new ToggleSwitchPres()),
-                        new View("Radio Button", new RadioButtonPres()),
-                        new View("Check Box", new CheckBoxPres()),
-                        new View("Hyperlink", new HyperlinkPres()),
+                new ModuleImpl("Controls",
+                        new View("Region", new RegionPres()),
+
+                        new View("Labeled", new LabeledPres()),
                         new View("Progress Bar", new ProgressBarPres()),
                         new View("Text Field", new TextFieldPres()),
                         new View("Table View", new TableViewPres()),
                         new View("Tree View", new TreeViewPres()),
                         new View("List View", new ListViewPres())
+
+
                 ),
-                new Module("Containers",
+                new ModuleImpl("Containers",
                         new View("TitledPane", new BuildingPage()),
                         new View("TabPane", new TabPres())
                 ),
-                new Module("Charts",
+                new ModuleImpl("Charts",
                         new View("Bar Chart", new BarChartPres()),
                         new View("Area Chart", new AreaChartPres()),
                         new View("Stacked Area Chart", new StackedAreaChartPres()),
@@ -150,17 +148,22 @@ public class Main extends Root {
                         new View("Pie Chart", new DonutChartPres()),
                         new View("Line Chart", new LineChartPres())
                 ),
-                new Module("Components",
+                new ModuleSeparator("Components"),
+                new ModuleImpl("Components",
+                        new View("SVGIcon", new SVGIconPres()),
+                        new View("Avatar View", new AvatarPres()),
+                        new View("Label", new LabelExample()),
+                        new View("Toggle Switch", new ToggleSwitchPres()),
                         new View("Drawer", new BuildingPage()),
                         new View("BreadCrumb", new BuildingPage()),
                         new View("Cards", new CardsPres())
                 ),
-                new Module("Pages",
+                new ModuleImpl("Pages",
                         new View("Home Page", new HomePage()),
                         new View("Login", new BuildingPage()),
                         new View("Error Page 404")
                 ),
-                new Module("Utils",
+                new ModuleImpl("Utils",
                         new View("Pallet Color", new ColorsPres()),
                         new View("Alignment", new BuildingPage())
                 ),

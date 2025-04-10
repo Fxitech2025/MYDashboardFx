@@ -1,9 +1,8 @@
-package io.github.gleidsonmt.dashboardfx.presentation.presentations.controls;
+package io.github.gleidsonmt.dashboardfx.presentation.presentations.components;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.glad.controls.toggle_switch.ToggleSwitch;
 import io.github.gleidsonmt.presentation.Row;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
 /**

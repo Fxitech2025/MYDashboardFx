@@ -1,4 +1,4 @@
-package io.github.gleidsonmt.dashboardfx.presentation.presentations.layout;
+package io.github.gleidsonmt.dashboardfx.presentation.presentations.controls;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
@@ -22,6 +22,9 @@ public class RegionPres extends StackPane {
                                 It is a resizable Parent node which can be styled from CSS. It can have multiple backgrounds and borders. 
                                 It is designed to support as much of the CSS3 specification for backgrounds and borders as is relevant to JavaFX. 
                                 The full specification is available at the W3C.
+                                By default a Region inherits the layout behavior of its superclass, Parent, which means that it will resize any resizable child nodes to their preferred size, but will not reposition them. 
+                                If an application needs more specific layout behavior, then it should use one of the Region subclasses: 
+                                StackPane, HBox, VBox, TilePane, FlowPane, BorderPane, GridPane, or AnchorPane.
                                 """)
 
                         .text("\nRegion doesn't fit by default, if you do not apply some color and set the sizes, it continues hided")
