@@ -4,9 +4,8 @@ import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import javafx.geometry.Insets;
 import javafx.geometry.Side;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -15,30 +14,28 @@ import javafx.scene.layout.StackPane;
  */
 public class TabPres extends StackPane {
     public TabPres() {
+        TabPane demo = createDemo();
         getChildren().setAll(
                 new Tutorial()
                         .indicators()
                         .h2("TabPane", null)
                         .text("A control that allows switching between a group of Tabs. Only one tab is visible at a time. Tabs are added to the TabPane by using the getTabs.")
 
-                        .h3("Install")
+                        .h3("Install", "TabPane")
                         .code("ThemeProvider.install(root, \n\tCss.COLORS, \n\tCss.TAB_PANE);", "java")
                         // .link([link to explanation]) ir para temas
                         .separator()
-                        .demo(createDemo(Side.TOP))
+                        .demo(demo)
                         .code("""
                                 TabPane tabPane = new TabPane();
                                 Tab one = new Tab("Example 01", new Label("Tab Content 01"));
                                 Tab two = new Tab("Example 02", new Label("Tab Content 02"));
                                 tabPane.getTabs().addAll(one, two);
                                 """)
-                        .h3("Sides")
-                        .demo(new Node[]{
-                                createDemo(Side.TOP),
-                                createDemo(Side.BOTTOM),
-                                createDemo(Side.LEFT),
-                                createDemo(Side.RIGHT)
-                        })
+                        .h3("Sides", "TabPane")
+                        .demo(
+                                createGroupRadio(demo)
+                        )
                         .code("""
                                 tabPane.setSide(Side.TOP) // default;
                                 tabPane.setSide(Side.BOTTOM);
@@ -49,14 +46,35 @@ public class TabPres extends StackPane {
         );
     }
 
-    private TabPane createDemo(Side side) {
+    private Node createGroupRadio(TabPane pane) {
+        ToggleGroup group = new ToggleGroup();
+        RadioButton top = new RadioButton(Side.TOP.name());
+        RadioButton right = new RadioButton(Side.RIGHT.name());
+        RadioButton bottom = new RadioButton(Side.BOTTOM.name());
+        RadioButton left = new RadioButton(Side.LEFT.name());
+        HBox box = new HBox(top, right, bottom, left);
+        box.setSpacing(10);
+        group.getToggles().addAll(top, right, bottom, left);
+        group.selectedToggleProperty().addListener((_, _, newVal) -> {
+            if (newVal != null) {
+                if (newVal instanceof RadioButton radio) {
+                    pane.setSide(Side.valueOf(radio.getText()));
+                }
+            }
+        });
+        group.selectToggle(group.getToggles().getFirst());
+        return box;
+    }
+
+    private TabPane createDemo() {
         TabPane tabPane = new TabPane();
-        tabPane.setSide(side);
-        Tab one = new Tab("Example 01" );
-        Tab two =new Tab("Example 02");
+        tabPane.setSide(Side.TOP);
+        Tab one = new Tab("Example 01");
+        Tab two = new Tab("Example 02");
         one.setContent(container(new Label("Tab Content 01")));
         two.setContent(container(new Label("Tab Content 02")));
         tabPane.getTabs().addAll(one, two);
+        tabPane.setMinHeight(300);
         return tabPane;
     }
 
