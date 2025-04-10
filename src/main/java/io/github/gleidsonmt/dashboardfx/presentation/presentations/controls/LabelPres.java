@@ -1,14 +1,20 @@
 package io.github.gleidsonmt.dashboardfx.presentation.presentations.controls;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.StackedAreaChartPres;
 import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import io.github.gleidsonmt.presentation.Row;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaView;
+import javafx.scene.text.Text;
+import javafx.scene.web.HTMLEditor;
+import javafx.scene.web.WebView;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -17,12 +23,29 @@ import javafx.scene.layout.StackPane;
 public class LabelPres extends StackPane {
 
     public LabelPres() {
+        new Text("");
+        new Label();
+        new Button();
+        new ListView<>();
+        new TextField();
+        new HTMLEditor();
+        new ToggleButton();
+        new CheckBox();
+        new ImageView();
+        new ChoiceBox<>();
+        new ComboBox<>();
+        new ListView<>();
+        new MediaView();
+
+
+        new DialogPane();
+
         getChildren().setAll(
                 new Tutorial()
                         .indicators()
                         .h3("Label", null)
                         .text("""
-                                Label is a non-editable text control. 
+                                Label is a non-editable text control.
                                 A Label is useful for displaying text that is required to fit within a specific space, and thus may need to use an ellipsis or truncation to size the string to fit. 
                                 Labels also are useful in that they can have mnemonics which, if used, will send focus to the Control listed as the target of the labelFor property.""")
                         .legend("javafx.scene.control.Label")

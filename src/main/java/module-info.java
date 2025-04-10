@@ -11,6 +11,7 @@ module io.github.gleidsonmt.dashboardfx {
     exports io.github.gleidsonmt.dashboardfx.drawer;
 
     requires eu.hansolo.colors;
+    requires javafx.media;
 
     opens io.github.gleidsonmt.dashboardfx to javafx.fxml;
     exports io.github.gleidsonmt.dashboardfx;
