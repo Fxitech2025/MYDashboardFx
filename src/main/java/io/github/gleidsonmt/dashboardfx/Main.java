@@ -23,6 +23,7 @@ import io.github.gleidsonmt.dashboardfx.utils.pages.BuildingPage;
 import io.github.gleidsonmt.dashboardfx.utils.pages.ErrorPage;
 import io.github.gleidsonmt.glad.base.Layout;
 import io.github.gleidsonmt.glad.base.Root;
+import io.github.gleidsonmt.glad.controls.badge.Badge;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import io.github.gleidsonmt.glad.responsive.Break;
@@ -61,7 +62,7 @@ public class Main extends Root {
         this.flow();
 
         navBar.setPadding(new Insets(10));
-        navBar.setMinHeight(40);
+        navBar.setMinHeight(60);
         navBar.setAlignment(Pos.CENTER_LEFT);
 
         crumb = new BreadCrumbBar();
@@ -72,12 +73,25 @@ public class Main extends Root {
                 Assets.getImage("default_avatar.jpg", 80),
                 "johndoe54@gmail.com", "Jhon Doe")
         );
-        navBar.add(card, 2, 0);
-//        navBar.setGridLinesVisible(true);
+
+        Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5);
+        Badge badgeMessage = new Badge(Icon.CHAT, 8);
+
+        navBar.add(badgeNotification, 2, 0);
+        navBar.add(badgeMessage, 1, 0);
+        navBar.add(card, 3, 0);
+
 
         GridPane.setValignment(crumb, VPos.CENTER);
+        GridPane.setValignment(badgeNotification, VPos.CENTER);
+        GridPane.setValignment(badgeMessage, VPos.CENTER);
         GridPane.setHalignment(card, HPos.RIGHT);
+        GridPane.setValignment(card, VPos.CENTER);
         GridPane.setHgrow(crumb, Priority.ALWAYS);
+
+        navBar.setHgap(10);
+        navBar.getStyleClass().addAll("border-light-gray-2");
+        navBar.setStyle("-fx-border-width: 0px 0px 2px 0px;");
 
         hamb = new Button("");
         hamb.setCancelButton(true);
@@ -159,7 +173,6 @@ public class Main extends Root {
             } else {
                 body.setContent(new ErrorPage(newValue.getName()));
             }
-
             if (oldValue != null) {
                 if (oldValue instanceof View view) {
                     if (view.getOnExit() != null) view.getOnExit().handle(new ActionEvent());
@@ -194,7 +207,7 @@ public class Main extends Root {
             getContainer().setLeft(null);
             navBar.getChildren().add(0, hamb);
             GridPane.setColumnIndex(crumb, 1);
-            GridPane.setColumnIndex(card, 2);
+            GridPane.setColumnIndex(card, 4);
         }, Break.MOBILE);
 
         getContainer().addPoint(_ -> {
@@ -204,7 +217,7 @@ public class Main extends Root {
             getContainer().setLeft(drawer);
             navBar.getChildren().remove(hamb);
             GridPane.setColumnIndex(crumb, 0);
-            GridPane.setColumnIndex(card, 1);
+            GridPane.setColumnIndex(card, 3);
         }, Break.values());
     }
 }

@@ -1,7 +1,6 @@
 package io.github.gleidsonmt.dashboardfx.drawer;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
-import io.github.gleidsonmt.glad.controls.TextBoxOld;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.text_box.TextBox;
 import io.github.gleidsonmt.presentation.TreeTitle;
