@@ -37,7 +37,7 @@ public class Drawer extends VBox {
     private DrawerContainer drawerContainer;
     private ToggleGroup group = new ToggleGroup();
 
-    private TextBox search = new TextBox(Icon.SEARCH, "Search", true);
+    private TextBox search = new TextBox(Icon.SEARCH);
 //    String text, Icon _icon, boolean animated, boolean mask
 
     private VBox searchBox = new VBox();
@@ -53,6 +53,7 @@ public class Drawer extends VBox {
         this.drawerContainer = new DrawerContainer(defaultBox);
         this.getChildren().addAll(search, drawerContainer);
         search.setPromptText("Search");
+        search.setAction(true);
         VBox.setMargin(search, new Insets(10, 0, 10, 0));
 
         setAlignment(Pos.TOP_CENTER);
