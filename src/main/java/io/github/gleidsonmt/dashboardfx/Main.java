@@ -75,7 +75,10 @@ public class Main extends Root {
         );
 
         Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5);
+        badgeNotification.setStyle("-fx-box-color: -info;");
         Badge badgeMessage = new Badge(Icon.CHAT, 8);
+        badgeMessage.setStyle("-fx-box-color: -red-500;;");
+
 
         navBar.add(badgeNotification, 2, 0);
         navBar.add(badgeMessage, 1, 0);
