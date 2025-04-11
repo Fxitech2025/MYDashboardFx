@@ -11,6 +11,7 @@ import io.github.gleidsonmt.dashboardfx.presentation.core.FlowPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Introduction;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Wrapper;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.*;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.ButtonExample;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.CardsPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.LabelExample;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.ToggleSwitchPres;
@@ -76,9 +77,9 @@ public class Main extends Root {
                 "johndoe54@gmail.com", "Jhon Doe")
         );
 
-        Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5);
+        Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5, 10);
         badgeNotification.setStyle("-fx-box-color: -info;");
-        Badge badgeMessage = new Badge(Icon.CHAT, 8);
+        Badge badgeMessage = new Badge(Icon.CHAT, 8,10);
         badgeMessage.setStyle("-fx-box-color: -red-500;;");
 
 
@@ -109,7 +110,6 @@ public class Main extends Root {
 
         drawer = new Drawer(
                 new View("Dashboard", new Dashboard()),
-                new View("Introduction", new Dashboard()),
                 new ModuleImpl("Core",
                         new View("Introduction", new Introduction()),
                         new View("Wrapper", new Wrapper()),
@@ -146,6 +146,7 @@ public class Main extends Root {
                 new ModuleSeparator("Components"),
                 new ModuleImpl("Components",
                         new View("SVGIcon", new SVGIconPres()),
+                        new View("Button", new ButtonExample()),
                         new View("Avatar View", new AvatarPres()),
                         new View("Label", new LabelExample()),
                         new View("Toggle Switch", new ToggleSwitchPres()),

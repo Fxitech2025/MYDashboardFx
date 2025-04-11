@@ -20,6 +20,7 @@
 package io.github.gleidsonmt.dashboardfx.presentation.internal;
 
 
+import io.github.gleidsonmt.blockcode.BlockCode;
 import io.github.gleidsonmt.dashboardfx.presentation.Scroll;
 import io.github.gleidsonmt.glad.base.Layout;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
@@ -135,7 +136,7 @@ public class Tutorial extends Presentation<Tutorial> {
         nav.getChildren().add(menu);
         menu.getStyleClass().add("menu-content");
         VBox.setVgrow(menu, Priority.ALWAYS);
-        menu.setPadding(new Insets(0,0,20,0));
+        menu.setPadding(new Insets(0, 0, 20, 0));
 
         this.getRoot().sceneProperty().addListener((_, _, newValue) -> {
             if (newValue != null) {
@@ -287,6 +288,20 @@ public class Tutorial extends Presentation<Tutorial> {
                 .map(mapped -> (TreeTitle) mapped)
 //
                 .toList();
+
+//                .peek(el -> VBox.setVgrow(el, Priority.ALWAYS))
+        items
+                .stream().filter(el -> el instanceof BlockCode)
+                .map(el -> (BlockCode) el)
+                .forEach(e -> {
+                    VBox.setVgrow(e, Priority.ALWAYS);
+
+                    double height = e.getContent().lines().count() * 10;
+                    e.setMinHeight(e.getMinHeight() + height);
+
+
+//                    e.setMinHeight(500);
+                });
 
         // Criando a tree
         createTree(data, aside);

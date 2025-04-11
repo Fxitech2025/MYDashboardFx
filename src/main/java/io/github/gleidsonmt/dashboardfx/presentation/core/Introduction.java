@@ -23,13 +23,13 @@ public class Introduction extends StackPane {
                                 This projects expects to add some layers to production by using known patterns.  
                                 
                                 """)
-                        .h4("Root")
+                        .h4("Root", "Introduction")
                         .text("""
                                 The Root class is an ideia to have stacked components, actual apps has flow components, 
                                 usually stacked, like snacks, alerts etc. So the root class is wrapper to StackPane.     
                                 """)
                         .legend("io.gleidsonmt.glad.base.Root")
-                        .h4("Layout")
+                        .h4("Layout", "Introduction")
                         .text("""
                                 The Layout class is the global parts of the application.
                                 The combinations of these two layouts, creates an empty region with five separating blocks.
@@ -42,7 +42,7 @@ public class Introduction extends StackPane {
                                 complex layout can be combined with putting things without modifying the actual view,
                                 example dashboards with drawer, aside, navs, footers.. and so on.
                                 """)
-                        .h3("Global Methods")
+                        .h3("Global Methods", "Introduction")
                         .text("""
                                 These global methods are called when application needs to update the root.
                                 Calling notifications and custom alerts.
@@ -50,7 +50,7 @@ public class Introduction extends StackPane {
                         .node(TutorialUtils.createLink("Wrapper", "Wrapper"))
                         .node(TutorialUtils.createLink("Flow", "Flow"))
                         .node(TutorialUtils.createLink("Behavior", "Behavior"))
-                        .h3("Start an App")
+                        .h3("Start an App", "Introduction")
                         .code("""
                                 /**
                                  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -66,7 +66,7 @@ public class Introduction extends StackPane {
                                     }
                                 }
                                 """)
-                        .h3("Installing Themes")
+                        .h3("Installing Themes", "Introduction")
                         .text("Theme provider can install font and css, using enum with their names.")
                         .code("""
                                 ...
