@@ -117,28 +117,23 @@ public class Main extends Root {
                         new View("Behavior", new Behavior())
                 ),
                 new ModuleSeparator("Theme"),
-                new ModuleImpl("Container",
-                        new View("Text Flow", new TextFlowPres())
-                ),
                 new ModuleImpl("Shapes",
                         new View("Text", new TextPres()),
                         new View("Circle", new BuildingPage())
                 ),
                 new ModuleImpl("Controls",
                         new View("Region", new RegionPres()),
-
                         new View("Labeled", new LabeledPres()),
                         new View("Progress Bar", new ProgressBarPres()),
                         new View("Text Field", new TextFieldPres()),
                         new View("Table View", new TableViewPres()),
                         new View("Tree View", new TreeViewPres()),
                         new View("List View", new ListViewPres())
-
-
                 ),
                 new ModuleImpl("Containers",
                         new View("TitledPane", new BuildingPage()),
-                        new View("TabPane", new TabPres())
+                        new View("TabPane", new TabPres()),
+                        new View("Text Flow", new TextFlowPres())
                 ),
                 new ModuleImpl("Charts",
                         new View("Bar Chart", new BarChartPres()),
