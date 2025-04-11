@@ -1,8 +1,10 @@
 package io.github.gleidsonmt.dashboardfx.presentation.presentations.components;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import io.github.gleidsonmt.glad.controls.button.IconButton;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,31 +20,43 @@ import javafx.scene.layout.StackPane;
 public class ButtonExample extends StackPane {
 
     public ButtonExample() {
-        new Group();
         getChildren().setAll(
                 new Tutorial()
-                        .h3("Style")
+                        .h3("Button")
                         .text("Button style examples.")
                         .h3("Flat", "Button")
-                        .demo(createButtonDemo("Button", new SVGIcon(Icon.HOME), "flat"))
+                        .demo(createButtonDemo("Button", true,"flat"))
                         .code("""
                                 btn.getStyleClass().addAll("flat");
                                 """)
-                        .demo(
-                                createButtonDemo("Round Button", new SVGIcon(Icon.ADD), "size-50", "round", "display-graphic", "raised")
-                        )
+                        .h3("IconButton", "Button")
+                        .text("Icon Button is specialized button with display graphic_only")
+                        .demo(createIconButton(Icon.APPS))
                         .code("""
-                                // Floating button
-                                Button btn = new Button(text);
-                                btn.setGraphic(new SVGIcon(Icon.ADD));
-                                btn.getStyleClass().addAll("size-50", "round", "display-graphic", "raised");
+                                // Constructor
+                                // Pass a node in the constructor
+                               IconButton button = new IconButton(new SVGIcon(Icon.APPS));
+                                """)
+                        .h3("Fab Button", "IconButton")
+                        .demo(createIconButton(Icon.ADD,"raised", "size-50", "round"))
+                        .code("""
+                                // Constructor
+                               IconButton button = new IconButton(new SVGIcon(Icon.APPS));
+                               button.getStyleClass().add("raised");
                                 """)
                         .build()
                         .getRoot()
         );
     }
 
-    private Node createButtonDemo(String... classes) {
+    private IconButton createIconButton(Icon icon, String... classes) {
+        IconButton button = new IconButton(new SVGIcon(icon));
+        button.setPadding(new Insets(10));
+        button.getStyleClass().addAll(classes);
+        return button;
+    }
+
+    private Button createButtonDemo(String... classes) {
         return createButtonDemo("Button", false, false, classes);
     }
 
