@@ -70,44 +70,12 @@ public class LabelExample extends StackPane {
                                 label.getStyleClass().addAll("min-size-20", "size-20",  "bg-success", "lbl", "padding-5");
                                 """)
 
-                        .h3("Badge", "Label")
-                        .text("Label style examples.")
-                        .legend("io.github.gleidsonmt.glad.controls.badge.Badge")
 
-                        .demo(new Node[]{
-                                createBadge(Icon.NOTIFICATION_IMPORTANT, "-fx-box-color: -info;", ""),
-                                createBadge(Icon.CHAT, "-fx-box-color: -red-500;", ""),
-                                createBadge(Icon.CALENDAR_MONTH, "-fx-box-color: -warning;", ""),
-                        })
-                        .code("""
-                                // Constructors
-                                SVGIcon node = new SVGIcon(Icon.TODAY);
-                                Badge badge = new Badge(node);
-                                """)
-                        .table(
-                                new Row("-fx-box-color", "[<paint>]"),
-                                new Row("-fx-type", "[<round> | <rect> | <rounded>]")
-                        )
-                        .code("""
-                                // Set the number of notifications
-                                badge.setNumberOfNotifications(9); 
-                                // Set the icon
-                                badge.setIcon(new SVGIcon(Icon.APP));
-                                // set Max notifications
-                                badge.setMaxNotifications(10);
-                                """)
                         .build()
                         .getRoot()
         );
     }
 
-    private Badge createBadge(Icon icon, String style, String... _classes) {
-        Badge badge = new Badge(icon);
-        badge.setNumberOfNotifications(new Random().nextInt(9));
-        badge.setStyle(style);
-        badge.getStyleClass().addAll(_classes);
-        return badge;
-    }
 
     private Node createCustom2(String text, String color) {
         Label label = new Label(text);

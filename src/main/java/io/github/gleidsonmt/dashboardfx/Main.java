@@ -77,7 +77,7 @@ public class Main extends Root {
 
         Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5, 10);
         badgeNotification.setStyle("-fx-box-color: -info;");
-        Badge badgeMessage = new Badge(Icon.CHAT, 8,10);
+        Badge badgeMessage = new Badge(Icon.CHAT, 8, 10);
         badgeMessage.setStyle("-fx-box-color: -red-500;;");
 
 
@@ -108,14 +108,14 @@ public class Main extends Root {
 
         drawer = new Drawer(
                 new View("Dashboard", new Dashboard()),
-                new ModuleSeparator( new SVGIcon(Icon.HUB), "Project"),
+                new ModuleSeparator(new SVGIcon(Icon.HUB), "Project"),
                 new Module("Core",
                         new View("Introduction", new Introduction()),
                         new View("Wrapper", new Wrapper()),
                         new View("Flow", new FlowPres()),
                         new View("Behavior", new Behavior())
                 ),
-                new ModuleSeparator( new SVGIcon(Icon.DESIGN_SERVICES), "Theme"),
+                new ModuleSeparator(new SVGIcon(Icon.DESIGN_SERVICES), "Theme"),
                 new Module("Shapes",
                         new View("Text", new TextPres()),
                         new View("Circle", new BuildingPage())
@@ -142,16 +142,20 @@ public class Main extends Root {
                         new View("Pie Chart", new DonutChartPres()),
                         new View("Line Chart", new LineChartPres())
                 ),
-                new ModuleSeparator( new SVGIcon(Icon.STACK), "Components"),
+                new ModuleSeparator(new SVGIcon(Icon.STACK), "Examples"),
                 new Module("Components",
-                        new View("Tree View", new TreeViewExample()),
+
                         new View("SVGIcon", new SVGIconPres()),
                         new View("Button", new ButtonExample()),
+                        new View("Badge", new BadgeExample()),
                         new View("Avatar View", new AvatarPres()),
-                        new View("Label", new LabelExample()),
                         new View("Toggle Switch", new ToggleSwitchPres()),
                         new View("Drawer", new BuildingPage()),
-                        new View("BreadCrumb", new BuildingPage()),
+                        new View("BreadCrumb", new BuildingPage())
+                ),
+                new Module("Styled",
+                        new View("Tree View", new TreeViewExample()),
+                        new View("Label", new LabelExample()),
                         new View("Cards", new CardsPres())
                 ),
                 new Module("Pages",
@@ -159,7 +163,7 @@ public class Main extends Root {
                         new View("Login", new BuildingPage()),
                         new View("Error Page 404", new ErrorPage("ModuleCreator not found"))
                 ),
-                new ModuleSeparator( new SVGIcon(Icon.HELP), "Theme"),
+                new ModuleSeparator(new SVGIcon(Icon.HELP), "Theme"),
                 new Module("Utils",
                         new View("Pallet Color", new ColorsPres()),
                         new View("Alignment", new BuildingPage())

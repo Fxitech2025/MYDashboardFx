@@ -1,16 +1,12 @@
 package io.github.gleidsonmt.dashboardfx.presentation.presentations.components;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import io.github.gleidsonmt.glad.controls.button.Button;
 import io.github.gleidsonmt.glad.controls.button.IconButton;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import javafx.geometry.Insets;
-import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -24,6 +20,9 @@ public class ButtonExample extends StackPane {
                 new Tutorial()
                         .h3("Button")
                         .text("Button style examples.")
+                        .legend("io.github.gleidsonmt.glad.controls.button.Button")
+                        .demo(createButtonDemo("Button", true))
+
                         .h3("Flat", "Button")
                         .demo(createButtonDemo("Button", true,"flat"))
                         .code("""
