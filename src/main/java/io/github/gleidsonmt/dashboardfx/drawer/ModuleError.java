@@ -7,6 +7,6 @@ package io.github.gleidsonmt.dashboardfx.drawer;
 public class ModuleError extends Exception {
 
     public ModuleError() {
-        super("ModuleImpl Error: Invalid ");
+        super("Module Error: Invalid ");
     }
 }

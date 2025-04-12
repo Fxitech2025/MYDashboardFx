@@ -3,7 +3,7 @@ package io.github.gleidsonmt.dashboardfx;
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
 import io.github.gleidsonmt.dashboardfx.drawer.*;
-import io.github.gleidsonmt.dashboardfx.drawer.ModuleImpl;
+import io.github.gleidsonmt.dashboardfx.drawer.Module;
 import io.github.gleidsonmt.dashboardfx.model.User;
 import io.github.gleidsonmt.dashboardfx.presentation.about.AboutPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Behavior;
@@ -11,10 +11,7 @@ import io.github.gleidsonmt.dashboardfx.presentation.core.FlowPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Introduction;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Wrapper;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.*;
-import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.ButtonExample;
-import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.CardsPres;
-import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.LabelExample;
-import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.ToggleSwitchPres;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.RegionPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.TextFlowPres;
@@ -37,6 +34,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -110,32 +108,33 @@ public class Main extends Root {
 
         drawer = new Drawer(
                 new View("Dashboard", new Dashboard()),
-                new ModuleImpl("Core",
+                new ModuleSeparator( new SVGIcon(Icon.HUB), "Project"),
+                new Module("Core",
                         new View("Introduction", new Introduction()),
                         new View("Wrapper", new Wrapper()),
                         new View("Flow", new FlowPres()),
                         new View("Behavior", new Behavior())
                 ),
-                new ModuleSeparator("Theme"),
-                new ModuleImpl("Shapes",
+                new ModuleSeparator( new SVGIcon(Icon.DESIGN_SERVICES), "Theme"),
+                new Module("Shapes",
                         new View("Text", new TextPres()),
                         new View("Circle", new BuildingPage())
                 ),
-                new ModuleImpl("Controls",
+                new Module("Controls",
                         new View("Region", new RegionPres()),
                         new View("Labeled", new LabeledPres()),
+                        new View("Text Input", new TextInputPres()),
                         new View("Progress Bar", new ProgressBarPres()),
-                        new View("Text Field", new TextFieldPres()),
                         new View("Table View", new TableViewPres()),
                         new View("Tree View", new TreeViewPres()),
                         new View("List View", new ListViewPres())
                 ),
-                new ModuleImpl("Containers",
+                new Module("Containers",
                         new View("TitledPane", new BuildingPage()),
                         new View("TabPane", new TabPres()),
                         new View("Text Flow", new TextFlowPres())
                 ),
-                new ModuleImpl("Charts",
+                new Module("Charts",
                         new View("Bar Chart", new BarChartPres()),
                         new View("Area Chart", new AreaChartPres()),
                         new View("Stacked Area Chart", new StackedAreaChartPres()),
@@ -143,8 +142,9 @@ public class Main extends Root {
                         new View("Pie Chart", new DonutChartPres()),
                         new View("Line Chart", new LineChartPres())
                 ),
-                new ModuleSeparator("Components"),
-                new ModuleImpl("Components",
+                new ModuleSeparator( new SVGIcon(Icon.STACK), "Components"),
+                new Module("Components",
+                        new View("Tree View", new TreeViewExample()),
                         new View("SVGIcon", new SVGIconPres()),
                         new View("Button", new ButtonExample()),
                         new View("Avatar View", new AvatarPres()),
@@ -154,12 +154,13 @@ public class Main extends Root {
                         new View("BreadCrumb", new BuildingPage()),
                         new View("Cards", new CardsPres())
                 ),
-                new ModuleImpl("Pages",
+                new Module("Pages",
                         new View("Home Page", new HomePage()),
                         new View("Login", new BuildingPage()),
-                        new View("Error Page 404")
+                        new View("Error Page 404", new ErrorPage("ModuleCreator not found"))
                 ),
-                new ModuleImpl("Utils",
+                new ModuleSeparator( new SVGIcon(Icon.HELP), "Theme"),
+                new Module("Utils",
                         new View("Pallet Color", new ColorsPres()),
                         new View("Alignment", new BuildingPage())
                 ),

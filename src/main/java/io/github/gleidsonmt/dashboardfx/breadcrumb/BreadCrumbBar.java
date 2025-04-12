@@ -1,7 +1,7 @@
 package io.github.gleidsonmt.dashboardfx.breadcrumb;
 
+import io.github.gleidsonmt.dashboardfx.drawer.ModuleCreator;
 import io.github.gleidsonmt.dashboardfx.drawer.View;
-import io.github.gleidsonmt.dashboardfx.drawer.Module;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import javafx.beans.property.ObjectProperty;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.ApiStatus;
 @ApiStatus.Experimental
 public class BreadCrumbBar extends FlowPane {
 
-    private ObjectProperty<Module> currentModule;
+    private ObjectProperty<ModuleCreator> currentModule;
     private ObjectProperty<BreadSeparator> separator = new SimpleObjectProperty<>(BreadSeparator.BAR);
 
     public BreadCrumbBar() {
@@ -80,7 +80,7 @@ public class BreadCrumbBar extends FlowPane {
         this.separator.set(separator);
     }
 
-    public void recur(Module module) {
+    public void recur(ModuleCreator module) {
         if (module != null) {
 //            if (moduleImpl instanceof View view) {
 //                getChildren().add(0, createLink(moduleImpl));
@@ -97,7 +97,7 @@ public class BreadCrumbBar extends FlowPane {
         }
     }
 
-    private Hyperlink createLink(Module moduleImpl) {
+    private Hyperlink createLink(ModuleCreator moduleImpl) {
         Hyperlink text = new Hyperlink(moduleImpl.getName());
 
         if (moduleImpl.getGraphic() != null) {
@@ -112,7 +112,7 @@ public class BreadCrumbBar extends FlowPane {
         return text;
     }
 
-    private Hyperlink createText(Module moduleImpl) {
+    private Hyperlink createText(ModuleCreator moduleImpl) {
         Hyperlink text = new Hyperlink(moduleImpl.getName());
         text.getStyleClass().addAll("h5");
 
@@ -164,15 +164,15 @@ public class BreadCrumbBar extends FlowPane {
         return label;
     }
 
-    public Module getCurrentModule() {
+    public ModuleCreator getCurrentModule() {
         return currentModule.get();
     }
 
-    public ObjectProperty<Module> currentModuleProperty() {
+    public ObjectProperty<ModuleCreator> currentModuleProperty() {
         return currentModule;
     }
 
-    public void setCurrentModule(Module currentModuleImpl) {
+    public void setCurrentModule(ModuleCreator currentModuleImpl) {
         this.currentModule.set(currentModuleImpl);
     }
 }

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.ApiStatus;
  * Create on  19/07/2024
  */
 @ApiStatus.Experimental
-public class View extends ModuleImpl implements Module {
+public class View extends Module implements ModuleCreator {
 
     protected Node content;
     protected EventHandler<ActionEvent> onEnter;
@@ -60,7 +60,7 @@ public class View extends ModuleImpl implements Module {
         this.onExit = onExit;
     }
 
-    public View(String name, Node content, ModuleImpl... children ) {
+    public View(String name, Node content, Module... children ) {
         super(name, children);
         this.content = content;
     }

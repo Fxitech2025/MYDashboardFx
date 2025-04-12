@@ -1,8 +1,9 @@
 package io.github.gleidsonmt.dashboardfx.dashboard;
 
-import io.github.gleidsonmt.dashboardfx.components.AvatarStackedCircle;
 import io.github.gleidsonmt.dashboardfx.model.Activity;
 import io.github.gleidsonmt.dashboardfx.model.User;
+import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
+import io.github.gleidsonmt.glad.controls.avatar.StackedAvatar;
 import javafx.beans.property.ListProperty;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -26,11 +27,11 @@ public class TableCellUsersFactory implements Callback<TableColumn<Activity, Obs
             protected void updateItem(ObservableList<User> item, boolean empty) {
                 if (item != null) {
                     setAlignment(Pos.CENTER_LEFT);
-                    Image[] imgs = new Image[item.size()];
+                    AvatarView[] imgs = new AvatarView[item.size()];
                     for (int i = 0; i < item.size(); i++) {
-                        imgs[i] = item.get(i).getAvatar();
+                        imgs[i] = new AvatarView(item.get(i).getAvatar());
                     }
-                    AvatarStackedCircle avatar = new AvatarStackedCircle(3, 20, imgs);
+                    StackedAvatar avatar = new StackedAvatar(3, 40, imgs);
                     setGraphic(avatar);
                     setText(null);
 

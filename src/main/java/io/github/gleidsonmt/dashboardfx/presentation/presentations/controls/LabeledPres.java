@@ -25,8 +25,6 @@ public class LabeledPres extends StackPane {
                         .text("""
                                 A Labeled Control is one which has as part of its user interface a textual content associated with it.
                                 For example, a Button displays text, as does a Label, a Tooltip, and many other controls.""")
-                        .legend("Replace *Component* for the name of the Control Class, Like Button, Label..")
-                        .code("ThemeProvider.install(scene, \n\tCss.[*Component*]);", "java")
                         .h3("Label", "Labeled")
                         .text("""
                                 Label is a non-editable text control.

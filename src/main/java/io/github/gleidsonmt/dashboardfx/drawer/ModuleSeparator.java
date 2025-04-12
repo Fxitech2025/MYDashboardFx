@@ -8,12 +8,14 @@ import javafx.scene.layout.Pane;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  10/04/2025
  */
-public class ModuleSeparator implements Module {
+public class ModuleSeparator implements ModuleCreator {
 
     private String text;
+    private Node icon;
 
-    public ModuleSeparator(String text) {
+    public ModuleSeparator(Node icon, String text) {
         this.text = text;
+        this.icon = icon;
     }
 
     public String getText() {
@@ -24,8 +26,12 @@ public class ModuleSeparator implements Module {
         this.text = text;
     }
 
+    public Node getIcon() {
+        return icon;
+    }
+
     @Override
-    public ObservableList<Module> getModules() {
+    public ObservableList<ModuleCreator> getModules() {
         return null;
     }
 
@@ -40,12 +46,12 @@ public class ModuleSeparator implements Module {
     }
 
     @Override
-    public void setParent(Module parent) {
+    public void setParent(ModuleCreator parent) {
 
     }
 
     @Override
-    public Module getParent() {
+    public ModuleCreator getParent() {
         return null;
     }
 

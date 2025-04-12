@@ -2,6 +2,7 @@ package io.github.gleidsonmt.dashboardfx.drawer;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
+import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import io.github.gleidsonmt.glad.controls.text_box.TextBox;
 import io.github.gleidsonmt.presentation.TreeTitle;
 import javafx.application.Platform;
@@ -27,9 +28,9 @@ import java.util.function.Predicate;
 @ApiStatus.Experimental
 public class Drawer extends VBox {
 
-    private ObjectProperty<Module> currentModule = new SimpleObjectProperty<>();
+    private ObjectProperty<ModuleCreator> currentModule = new SimpleObjectProperty<>();
 
-    private List<Module> modules;
+    private List<ModuleCreator> modules;
 
     private DrawerContainer drawerContainer;
     private ToggleGroup group = new ToggleGroup();
@@ -40,11 +41,11 @@ public class Drawer extends VBox {
     private VBox searchBox = new VBox();
     private VBox defaultBox = new VBox();
 
-    public Drawer(Module... _modules) {
+    public Drawer(ModuleCreator... _modules) {
         this(List.of(_modules));
     }
 
-    public Drawer(@NotNull List<Module> _modules) {
+    public Drawer(@NotNull List<ModuleCreator> _modules) {
         this.modules = _modules;
         this.setId("drawer");
         this.drawerContainer = new DrawerContainer(defaultBox);
@@ -91,7 +92,7 @@ public class Drawer extends VBox {
 
         if (!group.getToggles().isEmpty()) {
             group.selectToggle(group.getToggles().get(0));
-            currentModule.setValue((ModuleImpl) group.getToggles().get(0).getUserData());
+            currentModule.setValue((Module) group.getToggles().get(0).getUserData());
         }
 
         search.textProperty().addListener((_, _, newVal) -> {
@@ -125,7 +126,7 @@ public class Drawer extends VBox {
      * @param module The moduleImpl in the SearchBox.
      * @return The BoxModule (VBox) that is equal to the moduleImpl name.
      */
-    private @NotNull Optional<BoxModule> findModuleInSearchBox(Module module) {
+    private @NotNull Optional<BoxModule> findModuleInSearchBox(ModuleCreator module) {
         return searchBox
                 .getChildren()
                 .stream()
@@ -136,7 +137,7 @@ public class Drawer extends VBox {
                 .findAny();
     }
 
-    private @NotNull Optional<BoxModule> getBoxModule(Module e) {
+    private @NotNull Optional<BoxModule> getBoxModule(ModuleCreator e) {
         return searchBox.getChildren()
                 .stream()
                 .filter(el -> el instanceof BoxModule)
@@ -146,19 +147,19 @@ public class Drawer extends VBox {
     }
 
 
-    private @NotNull List<Module> find(Predicate<String> predicate) {
-        List<Module> findedList = new ArrayList<>();
+    private @NotNull List<ModuleCreator> find(Predicate<String> predicate) {
+        List<ModuleCreator> findedList = new ArrayList<>();
         _find(modules, findedList, predicate);
         return findedList;
     }
 
-    private @Nullable Module _find(@NotNull List<Module> modules, List<Module> findedList, Predicate<String> predicate) {
-        for (Module mod : modules) {
+    private @Nullable ModuleCreator _find(@NotNull List<ModuleCreator> modules, List<ModuleCreator> findedList, Predicate<String> predicate) {
+        for (ModuleCreator mod : modules) {
             if (predicate.test(mod.getName())) {
                 findedList.add(mod);
             } else {
                 if (!(mod instanceof ModuleSeparator) && !mod.getModules().isEmpty()) {
-                    Module module = _find(mod.getModules(), findedList, predicate);
+                    ModuleCreator module = _find(mod.getModules(), findedList, predicate);
                     if (module != null) {
                         findedList.add(module);
                     }
@@ -168,11 +169,11 @@ public class Drawer extends VBox {
         return null;
     }
 
-    private @Nullable Module find(@NotNull List<Module> modules, String name) {
-        for (Module mod : modules) {
+    private @Nullable ModuleCreator find(@NotNull List<ModuleCreator> modules, String name) {
+        for (ModuleCreator mod : modules) {
             if (!mod.getName().equals(name)) {
                 if (!mod.getModules().isEmpty()) {
-                    Module moduleImpl = find(mod.getModules(), name);
+                    ModuleCreator moduleImpl = find(mod.getModules(), name);
                     if (moduleImpl != null) return moduleImpl;
                 }
             } else {
@@ -183,7 +184,7 @@ public class Drawer extends VBox {
     }
 
     public void navigate(String name, String topic) {
-        Module moduleImpl = find(this.modules, name);
+        ModuleCreator moduleImpl = find(this.modules, name);
         currentModule.set(moduleImpl);
 
         TimerTask timerTask = new TimerTask() {
@@ -212,7 +213,7 @@ public class Drawer extends VBox {
     }
 
     public void navigate(String name) {
-        Module moduleImpl = find(this.modules, name);
+        ModuleCreator moduleImpl = find(this.modules, name);
         currentModule.set(moduleImpl);
     }
 
@@ -235,7 +236,6 @@ public class Drawer extends VBox {
     }
 
     private Node getRoot(Node module) {
-
         if (module != null && module.getStyleClass().contains("module-first")) {
             return module;
         } else {
@@ -253,7 +253,7 @@ public class Drawer extends VBox {
         }
     }
 
-    public ToggleButton createToggle(Module moduleImpl) {
+    public ToggleButton createToggle(ModuleCreator moduleImpl) {
         ToggleButton b = new ToggleButton(moduleImpl.getName());
         b.setUserData(moduleImpl);
         b.getStyleClass().add("drawer-item");
@@ -268,11 +268,15 @@ public class Drawer extends VBox {
         return b;
     }
 
-    public void makeFirstLevel(Module module) {
+    public void makeFirstLevel(ModuleCreator module) {
         if (module instanceof ModuleSeparator) {
-            VBox box = new VBox(new Label(((ModuleSeparator) module).getText()), new Separator());
+            Label label = new Label(((ModuleSeparator) module).getText());
+            label.setGraphic(((ModuleSeparator) module).getIcon());
+            VBox box = new VBox(label, new Separator());
 //            box.setPadding(new Insets(0, 5,0,5));
             VBox.setMargin(box, new Insets(10, 5,0,5));
+            box.setSpacing(10);
+
             defaultBox.getChildren().addAll(box);
         }
 
@@ -310,7 +314,7 @@ public class Drawer extends VBox {
         }
     }
 
-    public void recurse(Module moduleImpl) {
+    public void recurse(ModuleCreator moduleImpl) {
         if (moduleImpl instanceof View) {
             ToggleButton b = createToggle(moduleImpl);
 
@@ -332,11 +336,11 @@ public class Drawer extends VBox {
         }
     }
 
-    private @NotNull TitledPane createPanel(Module module) {
+    private @NotNull TitledPane createPanel(ModuleCreator module) {
         return createPanel(module, false);
     }
 
-    private @NotNull TitledPane createPanel(@NotNull Module module, boolean first) {
+    private @NotNull TitledPane createPanel(@NotNull ModuleCreator module, boolean first) {
         VBox content = new VBox();
         content.getStyleClass().add("container");
         TitledPane titledPane = new TitledPane(module.getName(), content);
@@ -380,11 +384,11 @@ public class Drawer extends VBox {
         return titledPane;
     }
 
-    public Module getCurrentModule() {
+    public ModuleCreator getCurrentModule() {
         return currentModule.get();
     }
 
-    public ObjectProperty<Module> currentModuleProperty() {
+    public ObjectProperty<ModuleCreator> currentModuleProperty() {
         return currentModule;
     }
 

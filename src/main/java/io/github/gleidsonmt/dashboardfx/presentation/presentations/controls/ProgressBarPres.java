@@ -19,23 +19,13 @@ public class ProgressBarPres extends StackPane {
                         .h3("Progress Bar")
                         .text("A specialization of the ProgressIndicator which is represented as a horizontal bar.\n" +
                               "ProgressBar sets focusTraversable to false.")
+                        .legend("javafx.scene.control.ProgressBar")
                         .h4("Default", "Progress Bar")
                         .demo(createDemo())
                         .code("ProgressBar progressBar = new ProgressBar();")
                         .h4("Indeterminate", "Progress Bar")
                         .demo(createDemo(-1))
                         .code("progressBar.setProgress(-1);")
-                        .h4("Customizing", "Progress Bar")
-                        .demo(new Node[]{
-                                createDemo("bg-danger"),
-                                createDemo("bg-success"),
-                                createDemo("bg-warning"),
-                                createDemo("bg-secondary")
-                        })
-                        .code("""
-                                progressBar.getStyleClass().addAll("bg-[success|..]");
-                                """)
-                        .node(TutorialUtils.createLink("See all color options", "Palette Color"))
                         .build()
                         .getRoot()
         );

@@ -23,33 +23,7 @@ public class Introduction extends StackPane {
                                 This projects expects to add some layers to production by using known patterns.  
                                 
                                 """)
-                        .h4("Root", "Introduction")
-                        .text("""
-                                The Root class is an ideia to have stacked components, actual apps has flow components, 
-                                usually stacked, like snacks, alerts etc. So the root class is wrapper to StackPane.     
-                                """)
-                        .legend("io.gleidsonmt.glad.base.Root")
-                        .h4("Layout", "Introduction")
-                        .text("""
-                                The Layout class is the global parts of the application.
-                                The combinations of these two layouts, creates an empty region with five separating blocks.
-                                """)
-                        .legend("io.gleidsonmt.glad.base.Layout")
-                        .code("Root root = new Root(new Layout());")
-                        .image(Assets.getImage("part3.png"))
-                        .text("""
-                                As knowing to much nodes cause leaks of memory, using BorderPane or a
-                                complex layout can be combined with putting things without modifying the actual view,
-                                example dashboards with drawer, aside, navs, footers.. and so on.
-                                """)
-                        .h3("Global Methods", "Introduction")
-                        .text("""
-                                These global methods are called when application needs to update the root.
-                                Calling notifications and custom alerts.
-                                """)
-                        .node(TutorialUtils.createLink("Wrapper", "Wrapper"))
-                        .node(TutorialUtils.createLink("Flow", "Flow"))
-                        .node(TutorialUtils.createLink("Behavior", "Behavior"))
+
                         .h3("Start an App", "Introduction")
                         .code("""
                                 /**
@@ -66,11 +40,46 @@ public class Introduction extends StackPane {
                                     }
                                 }
                                 """)
+
+                        .h4("Root", "Introduction")
+                        .text("""
+                                The Root class is an ideia to have stacked components, actual apps has flow components, 
+                                usually stacked, like snacks, alerts etc. So the root class is wrapper to StackPane.     
+                                """)
+                        .legend("io.gleidsonmt.glad.base.Root")
+
+                        .h3("Global Methods", "Root")
+                        .text("""
+                                These global methods are called when application needs to update the root.
+                                Calling notifications and custom alerts.
+                                """)
+                        .node(TutorialUtils.createLink("Wrapper", "Wrapper"))
+                        .node(TutorialUtils.createLink("Flow", "Flow"))
+                        .node(TutorialUtils.createLink("Behavior", "Behavior"))
+
+                        .h4("Layout", "Introduction")
+                        .text("""
+                                The Layout class is the global parts of the application.
+                                The combinations of these two layouts, creates an empty region with five separating blocks.
+                                """)
+                        .legend("io.gleidsonmt.glad.base.Layout")
+                        .code("Root root = new Root(new Layout());")
+                        .image(Assets.getImage("part3.png"))
+                        .text("""
+                                As knowing to much nodes cause leaks of memory, using BorderPane or a
+                                complex layout can be combined with putting things without modifying the actual view,
+                                example dashboards with drawer, aside, navs, footers.. and so on.
+                                """)
+
+
                         .h3("Installing Themes", "Introduction")
                         .text("Theme provider can install font and css, using enum with their names.")
+                        .text("If it's a control replace with the name of the class.")
                         .code("""
                                 ...
-                                ThemeProvider.install(scene, Font.POPPINS, Font.INSTAGRAM); // fonts
+                                // fonts
+                                ThemeProvider.install(scene, Font.POPPINS, Font.INSTAGRAM); 
+                                // Css stylesheets
                                 ThemeProvider.install(scene,
                                         Css.COLORS,
                                         Css.PROPERTIES,

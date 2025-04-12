@@ -109,7 +109,7 @@ public class ColorsPres extends StackPane {
                             .h4("Grid Colors", "Colors")
                             //                        .link("Original","https://github.com/HanSolo/Colors")
                             //                        .node(createCard())
-                            .node(TutorialUtils.createCardLink("Original", new URI("https://github.com/HanSolo/Colors")))
+                            .node(TutorialUtils.createCardLink("https://github.com/HanSolo/Colors", new URI("https://github.com/HanSolo/Colors")))
                             .node(createGrid())
                             .build()
                             .getRoot()
