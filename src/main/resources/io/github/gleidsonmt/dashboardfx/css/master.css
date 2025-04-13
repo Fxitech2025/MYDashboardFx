@@ -116,3 +116,20 @@ Text, .text {
 .toggle-button:selected:focused {
     -fx-background-insets: 0px;
 }
+
+.button-bar .container {
+    -fx-alignment: center;
+    -fx-padding: 0px 10px 0px 0px;
+}
+
+.button-bar Region { /* Place elements wherever I want in a bar action */
+    -fx-max-width: 0px;
+    -fx-pref-width: 0px;
+    -fx-min-width: 0px;
+    -fx-min-height: 0px;
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+
+    -fx-padding: 10px;
+
+}

@@ -32,6 +32,7 @@ public class BadgeExample extends StackPane  {
                                 Badge badge = new Badge(node);
                                 """)
                         .table(
+                                "Property", "Value",
                                 new Row("-fx-box-color", "[<paint>]"),
                                 new Row("-fx-type", "[<round> | <rect> | <rounded>]")
                         )

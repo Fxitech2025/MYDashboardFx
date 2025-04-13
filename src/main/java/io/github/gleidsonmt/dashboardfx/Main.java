@@ -16,6 +16,7 @@ import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.RegionPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.TextFlowPres;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.HomePage;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.LoginPage;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.shapes.TextPres;
 import io.github.gleidsonmt.dashboardfx.presentation.util.ColorsPres;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
@@ -160,7 +161,7 @@ public class Main extends Root {
                 ),
                 new Module("Pages",
                         new View("Home Page", new HomePage()),
-                        new View("Login", new BuildingPage()),
+                        new View("Login", new LoginPage()),
                         new View("Error Page 404", new ErrorPage("ModuleCreator not found"))
                 ),
                 new ModuleSeparator(new SVGIcon(Icon.HELP), "Theme"),

@@ -11,6 +11,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
+import javafx.scene.CacheHint;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -272,6 +273,10 @@ public class Drawer extends VBox {
         if (module instanceof ModuleSeparator) {
             Label label = new Label(((ModuleSeparator) module).getText());
             label.setGraphic(((ModuleSeparator) module).getIcon());
+            label.getStyleClass().add("font-instagram-headline");
+//            label.setStyle("-fx-font-family: \"Instagram Sans\"; -fx-font-size: 12px;");
+//            label.setCache(true);
+//            label.setCacheHint(CacheHint.QUALITY);
             VBox box = new VBox(label, new Separator());
 //            box.setPadding(new Insets(0, 5,0,5));
             VBox.setMargin(box, new Insets(10, 5,0,5));

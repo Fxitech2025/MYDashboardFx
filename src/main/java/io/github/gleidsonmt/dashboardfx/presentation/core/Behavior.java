@@ -36,8 +36,7 @@ public class Behavior extends StackPane {
                 new Tutorial()
                         .h3("Behavior")
                         .text("""
-                                Behavior class has calling the actions on the root.
-                                """)
+                                Behavior class has calling the actions on the root.""")
                         .legend("io.github.gleidsonmt.glad.base.Behavior")
                         .h4("Dialogs", "Behavior")
                         .demo(
