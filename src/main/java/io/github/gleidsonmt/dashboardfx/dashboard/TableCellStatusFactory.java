@@ -25,7 +25,7 @@ public class TableCellStatusFactory implements Callback<TableColumn<Activity, St
             protected void updateItem(Status item, boolean empty) {
                 if (item != null) {
                     Label label = new Label(StringUtils.capitalize(item.name()));
-                    label.getStyleClass().addAll(item.equals(Status.BUSY) ? "bg-danger" : "bg-success", "text-white", "padding-5", "rounded");
+                    label.getStyleClass().addAll(item.equals(Status.BUSY) ? "bg-danger" : "bg-success", "text-white", "padding-5", "rounded", "bold");
 
                     setGraphic(label);
                     setText(null);

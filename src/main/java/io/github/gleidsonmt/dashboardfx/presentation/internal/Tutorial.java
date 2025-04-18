@@ -21,6 +21,8 @@ package io.github.gleidsonmt.dashboardfx.presentation.internal;
 
 
 import io.github.gleidsonmt.blockcode.BlockCode;
+import io.github.gleidsonmt.blockcode.CodeType;
+import io.github.gleidsonmt.blockcode.Theme;
 import io.github.gleidsonmt.dashboardfx.presentation.Scroll;
 import io.github.gleidsonmt.glad.base.Layout;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
@@ -41,10 +43,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.SVGPath;
 import javafx.util.Duration;
+import org.jetbrains.annotations.ApiStatus;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 /**
@@ -239,6 +240,38 @@ public class Tutorial extends Presentation<Tutorial> {
         });
     }
 
+    @ApiStatus.Internal
+    @Override
+    protected BlockCode createBlockCode(CodeType codeType, String content) {
+        return new BlockCode()
+                .theme(Theme.GITHUB)
+                .codeType(codeType)
+                .copy(createCopy())
+                .content(content)
+                .build();
+    }
+
+    private Button createCopy() {
+        Button button = new Button("Copy");
+        button.getStyleClass().addAll("min-size-40", "flat");
+        button.setGraphic(new SVGIcon(Icon.COPY));
+        button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        StackPane.setMargin(button, new Insets(10));
+        button.setOnMouseClicked(e -> {
+            button.setContentDisplay(ContentDisplay.TEXT_ONLY);
+            TimerTask timerTask = new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.runLater(() -> {
+                        button.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+                    });
+                }
+            };
+             new Timer().schedule(timerTask, 2000);
+        });
+        return button;
+    }
+
     private ToggleButton createToggle(TreeTitle label) {
         ToggleButton toggle = new ToggleButton(indicators ? label.getIndex() + ". " + label.getText() : label.getText());
         toggle.setUserData(label);
@@ -272,11 +305,16 @@ public class Tutorial extends Presentation<Tutorial> {
     @Override
     public Tutorial build() {
         Label title = new Label("Overview Content");
-        title.getStyleClass().addAll("h4");
+        title.getStyleClass().addAll("overview-title");
         title.setGraphic(new SVGIcon(Icon.STACK));
+//        title.setStyle("-fx-font-family: \"Instagram Sans Headline Bold\"; " +
+//                       "-fx-font-size: 14px; " +
+//                       "-fx-fill: -fx-accent; " +
+//                       "");
         aside.setPadding(new Insets(20));
         aside.getChildren().add(title);
         aside.setSpacing(20);
+        aside.setAlignment(Pos.TOP_CENTER);
 
         aside.getStyleClass().add("nav");
 

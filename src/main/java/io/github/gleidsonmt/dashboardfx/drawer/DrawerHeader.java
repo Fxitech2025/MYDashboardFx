@@ -2,13 +2,17 @@ package io.github.gleidsonmt.dashboardfx.drawer;
 
 import io.github.gleidsonmt.dashboardfx.App;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.util.Objects;
 
@@ -25,26 +29,44 @@ public class DrawerHeader extends GridPane {
 //        this.setGridLinesVisible(true);
         this.setHgap(10);
 
-        ImageView imageView = new ImageView();
-        imageView.setFitWidth(50);
-        imageView.setFitHeight(50);
-        imageView.setImage(new Image(Objects.requireNonNull(App.class.getResource("img/logo_128.png")).toExternalForm()));
+//        ImageView logoTest = new ImageView();
+//        logoTest.setFitWidth(50);
+//        logoTest.setFitHeight(50);
+//        logoTest.setImage(new Image(Objects.requireNonNull(App.class.getResource("img/logo_128.png")).toExternalForm()));
 
         Text title = new Text("Blue Galaxy");
 //        Font.loadFont(Objects.requireNonNull(App.class.getResource("fonts/Instagram-Sans-Bold.ttf")).toExternalForm(), 16);
 //        title.setFont(Font.loadFont(App.class.getResource("fonts/Instagram-Sans.ttf").toExternalForm(), 16));
         title.setStyle("-fx-font-family: \"Instagram Sans\"; -fx-font-size: 28px; -fx-fill: -fx-accent; -fx-font-weight: bold;");
-//        title.setFont(Font.font("Instagram Sans Bold", 22));
 
         Text legend = new Text("Gleidson, Inc. v0.7.223");
         legend.setStyle("-fx-text-weight: 14pt");
 
-        this.add(imageView, 0,0);
+        Text logoTest = new Text("G");
+        logoTest.setStroke(Color.WHITE);
+        logoTest.setRotate(180);
+        logoTest.setStyle("-fx-fill: -fx-accent; -fx-font-size: 62px; -fx-font-family: \"JetBrains Mono\"; -fx-font-weight: bold;");
+        logoTest.getStyleClass().addAll("depth-1", "font-instagram");
+        logoTest.setStrokeWidth(1);
+        logoTest.setUnderline(true);
+        logoTest.setWrappingWidth(50);
+        logoTest.setTextAlignment(TextAlignment.CENTER);
+
+
+        this.add(logoTest, 0,0);
         this.add(title, 1,0);
         this.add(legend, 1,1);
 
         GridPane.setHgrow(title, Priority.ALWAYS);
-        GridPane.setRowSpan(imageView, 2);
+        GridPane.setRowSpan(logoTest, REMAINING);
 
+        GridPane.setValignment(title, VPos.BOTTOM);
+        GridPane.setValignment(legend, VPos.TOP);
+
+        RowConstraints rowOne = new RowConstraints();
+        RowConstraints rowTwo = new RowConstraints();
+        rowOne.setPercentHeight(50);
+        rowTwo.setPercentHeight(50);
+        this.getRowConstraints().addAll(rowOne, rowTwo);
     }
 }

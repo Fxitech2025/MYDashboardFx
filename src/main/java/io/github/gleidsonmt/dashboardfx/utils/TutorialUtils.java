@@ -2,11 +2,13 @@ package io.github.gleidsonmt.dashboardfx.utils;
 
 import io.github.gleidsonmt.dashboardfx.drawer.Drawer;
 import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -52,6 +54,23 @@ public class TutorialUtils {
         });
         return hyperlink;
     }
+
+    public static Node createTextWithLink(String text, String placeholder, String moduleName) {
+        return createTextWithLink(text,placeholder, moduleName, null);
+    }
+
+    public static Node createTextWithLink(String _text, String placeholder, String moduleName, String topic) {
+        Text text = new Text(_text);
+        HBox box = new HBox(
+                text,
+                createLink(placeholder, moduleName, topic)
+        );
+        box.getStyleClass().add("h5");
+
+        box.setAlignment(Pos.CENTER_LEFT);
+        return box;
+    }
+
 
     public static @NotNull Hyperlink createLink(String placeholder, String moduleName, String topic) {
         Hyperlink hyperlink = new Hyperlink(placeholder);

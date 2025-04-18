@@ -12,7 +12,7 @@
 
 
 <p align="center">
-  <img src="./src/main/resources/io.github.gleidsonmt.dashboardfx/style/img/screen_dash.png"  />
+  <img src="./screen.png"  />
 </p>
 
 <!-- TOC -->

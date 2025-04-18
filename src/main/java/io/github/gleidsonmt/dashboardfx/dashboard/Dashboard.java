@@ -55,7 +55,7 @@ public class Dashboard extends ResponsiveGrid {
 
         tableView.getItems().addAll(
                 new Activity(
-                        new Company(Assets.getImage("google_logo.jpeg", 80), "Offices West", "Chicago/Midwest"),
+                        new Company(Assets.getImage("google_logo.jpeg", 80), "Google Office", "Mountain View, California"),
                         Type.CORPORATE, Status.BUSY, new BigDecimal(225132),
                         new User(Assets.getImage("avatar1.png"), "Username", "Name"),
                         new User(Assets.getImage("avatar3.png"), "Username", "Name"),
@@ -69,19 +69,19 @@ public class Dashboard extends ResponsiveGrid {
                         new User(Assets.getImage("default_avatar.jpg"), "Username", "Name")
                 ),
                 new Activity(
-                        new Company(Assets.getImage("amazon_logo.jpeg", 70), "South Space", "Sukabumi/Jabar"),
+                        new Company(Assets.getImage("amazon_logo.jpeg", 70), "Amazon", "Terry Avenue North/Seattle"),
                         Type.CONVENTIONAL, Status.FREE, new BigDecimal(35154),
                         new User(Assets.getImage("avatar1.png"), "Username", "Name"),
                         new User(Assets.getImage("avatar2.jpg"), "Username", "Name"),
                         new User(Assets.getImage("avatar4.png"), "Username", "Name")
                 ),
                 new Activity(
-                        new Company(Assets.getImage("microsoft_logo.jpeg", 90), "South Space", "Sukabumi/Jabar"),
+                        new Company(Assets.getImage("microsoft_logo.jpeg", 90), "Microsoft Office", "Microsoft Way/Redmond"),
                         Type.CONVENTIONAL, Status.FREE, new BigDecimal(35154),
                         new User(Assets.getImage("avatar1.png"), "Username", "Name")
                 ),
                 new Activity(
-                        new Company(Assets.getImage("meta_logo.JPG", 80), "Offices West", "Chicago/Midwest"),
+                        new Company(Assets.getImage("meta_logo.JPG", 80), "Meta Office", "Menlo Park, California"),
                         Type.CORPORATE, Status.BUSY, new BigDecimal(225132),
                         new User(Assets.getImage("avatar1.png"), "Username", "Name"),
                         new User(Assets.getImage("avatar3.png"), "Username", "Name"),

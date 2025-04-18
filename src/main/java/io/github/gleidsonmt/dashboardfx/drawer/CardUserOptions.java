@@ -3,11 +3,20 @@ package io.github.gleidsonmt.dashboardfx.drawer;
 import io.github.gleidsonmt.dashboardfx.Main;
 import io.github.gleidsonmt.dashboardfx.dashboard.Aside;
 import io.github.gleidsonmt.dashboardfx.model.User;
+import io.github.gleidsonmt.glad.Assets;
 import io.github.gleidsonmt.glad.base.Root;
+import io.github.gleidsonmt.glad.base.Wrapper;
+import io.github.gleidsonmt.glad.base.WrapperEffect;
+import io.github.gleidsonmt.glad.base.internal.animations.Anchor;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContextMenu;
@@ -18,17 +27,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  16/10/2024
  */
-public class CardUserOptions extends GridPane  {
+public class CardUserOptions extends GridPane {
 
-//    private final ObjectProperty<Image> avatar = new SimpleObjectProperty<>();
+    //    private final ObjectProperty<Image> avatar = new SimpleObjectProperty<>();
     private final AvatarCircleView avatarView = new AvatarCircleView();
     private final GridPane email;
-    private final Label name;
+    private final Text name;
     private final ContextMenu options;
 
 
@@ -38,7 +48,7 @@ public class CardUserOptions extends GridPane  {
         this.getChildren().add(avatarView);
         this.setId("header");
         this.email = createEmailComponent(user.getUsername());
-        this.name = createNameComponent(user.getName() );
+        this.name = createNameComponent(user.getName());
         this.options = createOptions(user);
         init();
     }
@@ -68,20 +78,18 @@ public class CardUserOptions extends GridPane  {
         this.setVgap(2);
 
 //        VBox.setMargin(this, new Insets(10));
-        VBox.setMargin(this, new Insets(0, 5,20,5));
-
+        VBox.setMargin(this, new Insets(0, 5, 20, 5));
     }
 
-    private Label createNameComponent(String _text) {
-        Label text = new Label(_text);
-        text.setWrapText(true);
-        text.getStyleClass().addAll("h5", "bold");
+    private Text createNameComponent(String _text) {
+        Text text = new Text(_text);
+        text.getStyleClass().addAll("h4", "font-instagram", "bold");
         return text;
     }
 
     private GridPane createEmailComponent(String _text) {
         Text text = new Text(_text);
-        text.getStyleClass().addAll( "h6");
+        text.getStyleClass().addAll("h6");
 
         SVGIcon svgIcon = new SVGIcon(Icon.EXPAND_ALL);
         svgIcon.setScale(0.8);
@@ -103,13 +111,28 @@ public class CardUserOptions extends GridPane  {
         MenuItem menuSettings = new MenuItem("Settings");
         menuSettings.getStyleClass().add("menu-item-first");
         menuSettings.setGraphic(new SVGIcon(Icon.SETTINGS));
-        
+
         menuSettings.setOnAction(e -> {
             Main root = (Main) this.getScene().getRoot();
-            root.wrapper().show();
-            root.flow().openRight(new Aside(), Insets.EMPTY);
+            Aside aside = new Aside();
+            aside.setPrefWidth(280);
+            root.flow()
+                    .anchor(Anchor.RIGHT)
+                    .content(aside)
+                    .pos(Pos.CENTER_RIGHT)
+                    .with(WrapperEffect.GRAY)
+                    .show();
+
+            new Timeline(
+                    new KeyFrame(Duration.ZERO, new KeyValue(
+                            aside.translateXProperty(), 350
+                    )),
+                    new KeyFrame(Duration.millis(200), new KeyValue(
+                            aside.translateXProperty(), 0
+                    ))
+            ).play();
         });
-        
+
         MenuItem menuManageAccount = new MenuItem("Manage Account");
         menuManageAccount.getStyleClass().add("menu-item-last");
         menuManageAccount.setGraphic(new SVGIcon(Icon.MANAGE_ACCOUNTS));
@@ -119,7 +142,7 @@ public class CardUserOptions extends GridPane  {
 
         this.setOnMouseClicked(e -> {
             if (options.isShowing()) return;
-            options.show(this, Side.BOTTOM, 0, e.getY() -20);
+            options.show(this, Side.BOTTOM, 0, e.getY() - 20);
         });
         return options;
     }

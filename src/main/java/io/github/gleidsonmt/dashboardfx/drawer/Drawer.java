@@ -1,5 +1,6 @@
 package io.github.gleidsonmt.dashboardfx.drawer;
 
+import io.github.gleidsonmt.dashboardfx.presentation.Scroll;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
@@ -173,9 +174,11 @@ public class Drawer extends VBox {
     private @Nullable ModuleCreator find(@NotNull List<ModuleCreator> modules, String name) {
         for (ModuleCreator mod : modules) {
             if (!mod.getName().equals(name)) {
-                if (!mod.getModules().isEmpty()) {
-                    ModuleCreator moduleImpl = find(mod.getModules(), name);
-                    if (moduleImpl != null) return moduleImpl;
+                if (!(mod instanceof ModuleSeparator)) {
+                    if (!mod.getModules().isEmpty()) {
+                        ModuleCreator moduleImpl = find(mod.getModules(), name);
+                        if (moduleImpl != null) return moduleImpl;
+                    }
                 }
             } else {
                 return mod;
@@ -200,7 +203,7 @@ public class Drawer extends VBox {
                             .map(el -> (TreeTitle) el)
                             .filter(el -> el.getText().equals(topic))
                             .findAny();
-//                    Scroll.scrollTo(scroll, opt.get());
+                    Scroll.scrollTo(scroll, opt.get());
 
                     BorderPane border = (BorderPane) getScene().getRoot().lookup("#tutorial-body");
                     Tutorial tutorial = (Tutorial) border.getUserData();
@@ -256,6 +259,8 @@ public class Drawer extends VBox {
 
     public ToggleButton createToggle(ModuleCreator moduleImpl) {
         ToggleButton b = new ToggleButton(moduleImpl.getName());
+//        b.setCache(true);
+//        b.setCacheHint(CacheHint.QUALITY);
         b.setUserData(moduleImpl);
         b.getStyleClass().add("drawer-item");
         b.setAlignment(Pos.CENTER_LEFT);
@@ -264,6 +269,8 @@ public class Drawer extends VBox {
         if (moduleImpl.getGraphic() != null) {
             b.setGraphic(moduleImpl.getGraphic());
         }
+
+
         group.getToggles().add(b);
         new Region();
         return b;
@@ -279,7 +286,7 @@ public class Drawer extends VBox {
 //            label.setCacheHint(CacheHint.QUALITY);
             VBox box = new VBox(label, new Separator());
 //            box.setPadding(new Insets(0, 5,0,5));
-            VBox.setMargin(box, new Insets(10, 5,0,5));
+            VBox.setMargin(box, new Insets(10, 5, 0, 5));
             box.setSpacing(10);
 
             defaultBox.getChildren().addAll(box);
@@ -293,7 +300,7 @@ public class Drawer extends VBox {
         } else {
             TitledPane container = createPanel(module, true);
 
-            container.getStyleClass().add("moduleImpl-first");
+            container.getStyleClass().add("module-first");
 //            this.getChildren().add(container);
             ((VBox) this.drawerContainer.getContent()).getChildren().add(container);
             if (!module.getModules().isEmpty()) {
@@ -304,13 +311,13 @@ public class Drawer extends VBox {
                         TitledPane pane = createPanel(el);
                         ((Pane) container.getContent()).getChildren().add(pane);
                         el.setContainer((Pane) container.getContent());
-//                            System.out.println(el.getModules());
                         el.getModules().forEach(e -> {
                             e.setContainer((Pane) pane.getContent());
                             recurse(e);
                         });
                     } else {
                         ToggleButton button = createToggle(el);
+
                         ((Pane) container.getContent()).getChildren().add(button);
                         button.setOnMouseClicked(e -> currentModule.set(el));
                     }
@@ -370,7 +377,7 @@ public class Drawer extends VBox {
             b.setAlignment(Pos.CENTER_LEFT);
             b.setPrefWidth(230);
             group.getToggles().add(b);
-            titledPane.getStyleClass().add("moduleImpl-item");
+            titledPane.getStyleClass().add("module-item");
 
             titledPane.setGraphic(b);
             titledPane.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

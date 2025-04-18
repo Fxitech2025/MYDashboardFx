@@ -5,6 +5,7 @@ import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
 import io.github.gleidsonmt.dashboardfx.drawer.*;
 import io.github.gleidsonmt.dashboardfx.drawer.Module;
 import io.github.gleidsonmt.dashboardfx.model.User;
+import io.github.gleidsonmt.dashboardfx.presentation.drawer.DrawerExample;
 import io.github.gleidsonmt.dashboardfx.presentation.about.AboutPres;
 import io.github.gleidsonmt.dashboardfx.presentation.core.Behavior;
 import io.github.gleidsonmt.dashboardfx.presentation.core.FlowPres;
@@ -35,7 +36,6 @@ import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -150,11 +150,12 @@ public class Main extends Root {
                         new View("Button", new ButtonExample()),
                         new View("Badge", new BadgeExample()),
                         new View("Avatar View", new AvatarPres()),
-                        new View("Toggle Switch", new ToggleSwitchPres()),
-                        new View("Drawer", new BuildingPage()),
-                        new View("BreadCrumb", new BuildingPage())
+                        new View("Toggle Switch", new ToggleSwitchPres())
+
                 ),
                 new Module("Styled",
+                        new View("Drawer", new DrawerExample()),
+                        new View("BreadCrumb", new BuildingPage()),
                         new View("Tree View", new TreeViewExample()),
                         new View("Label", new LabelExample()),
                         new View("Cards", new CardsPres())
