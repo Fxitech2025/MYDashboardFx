@@ -28,7 +28,6 @@ public class View extends Module implements ModuleCreator {
         this(name, content, onEnter,null);
     }
 
-
     public View(String name, EventHandler<ActionEvent> onEnter ) {
         this(name, null, onEnter,null);
     }

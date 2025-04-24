@@ -1,9 +1,8 @@
-package io.github.gleidsonmt.dashboardfx.presentation.presentations.controls;
+package io.github.gleidsonmt.dashboardfx.presentation.presentations.components;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
-import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
-import io.github.gleidsonmt.glad.controls.avatar.AvatarRectView;
+import io.github.gleidsonmt.glad.controls.avatar.AvatarStatus;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.avatar.StackedAvatar;
 import javafx.scene.Node;
@@ -33,7 +32,7 @@ public class AvatarPres extends StackPane {
                         .code("""
                                 AvatarView avatar = new AvatarView();
                                 avatar.setImage(Assets.getImage("default_avatar.jpg")); // Can be pass in constructor
-                                avatar.setRadius(20); // First 
+                                avatar.setRadius(20); // First
                                 avatar.setRadius(40); // Second
                                 avatar.setRadius(60); // Third
                                 """)
@@ -86,32 +85,50 @@ public class AvatarPres extends StackPane {
                                 createDemo("stroke-2", "depth-2", "raised")
                         })
                         .code("avatar.getStyleClass().add(\"depth-[1|2]\");")
-                        .h3("Grouping")
+                        .h3("Grouping", "Avatar View")
                         .demo(
                                 createCustom()
                         )
                         .code("""
-                                // first max items, second size and the avatar views
-                                return new StackedAvatar(
-                                        4, 40,
-                                        new AvatarView(Assets.getImage("default_avatar.jpg")),
-                                        new AvatarView(Assets.getImage("default_avatar.jpg")),
-                                        new AvatarView(Assets.getImage("default_avatar.jpg")),
-                                        new AvatarView(Assets.getImage("default_avatar.jpg")),
-                                        new AvatarView(Assets.getImage("default_avatar.jpg")),
-                                        new AvatarView(Assets.getImage("default_avatar.jpg")),
-                                        new AvatarView(Assets.getImage("default_avatar.jpg"))
-                                );""")
+                              // first max items, second size and the avatar views
+                              StackedAvatar stackedAvatar = new StackedAvatar();
+                              stackedAvatar.setAvatarSize(40);
+                              stackedAvatar.setAvatarRadius(40);
+                              stackedAvatar.setMax(4);
+                              stackedAvatar.getAvatarViews().setAll(
+                                      new AvatarView(Assets.getImage("default_avatar.jpg")),
+                                      new AvatarView(Assets.getImage("default_avatar.jpg")),
+                                      new AvatarView(Assets.getImage("default_avatar.jpg")),
+                                      new AvatarView(Assets.getImage("default_avatar.jpg")),
+                                      new AvatarView(Assets.getImage("default_avatar.jpg")),
+                                      new AvatarView(Assets.getImage("default_avatar.jpg")),
+                                      new AvatarView(Assets.getImage("default_avatar.jpg"))
+                              );""")
+                        .h3("Status", "Avatar View")
+                        .demo(createAvatar())
+                        .code("""
+                                AvatarStatus avatarStatus = new AvatarStatus(Assets.getImage("default_avatar.jpg"));
+                                avatarStatus.setMinSize(50,50);
+                                """)
                         .build().getRoot()
         );
     }
 
+    private Node createAvatar() {
+        AvatarStatus avatarStatus = new AvatarStatus(Assets.getImage("default_avatar.jpg"));
+        avatarStatus.setMinSize(50,50);
+        return avatarStatus;
+    }
 
     private Node createCustom() {
 //        new AvatarView().setRadius(0);
         // first max items, second size and the avatar views
-        return new StackedAvatar(
-                4, 40,
+        StackedAvatar stackedAvatar = new StackedAvatar();
+        stackedAvatar.setAvatarSize(40);
+        stackedAvatar.setAvatarRadius(40);
+        stackedAvatar.setMax(4);
+
+        stackedAvatar.getAvatarViews().setAll(
                 new AvatarView(Assets.getImage("default_avatar.jpg")),
                 new AvatarView(Assets.getImage("default_avatar.jpg")),
                 new AvatarView(Assets.getImage("default_avatar.jpg")),
@@ -120,6 +137,7 @@ public class AvatarPres extends StackPane {
                 new AvatarView(Assets.getImage("default_avatar.jpg")),
                 new AvatarView(Assets.getImage("default_avatar.jpg"))
         );
+        return stackedAvatar;
     }
 
 
@@ -134,7 +152,7 @@ public class AvatarPres extends StackPane {
     }
 
     private Node createRectDemo(int size, double arc, String... classes) {
-        AvatarRectView avatar = new AvatarRectView(Assets.getImage("default_avatar.jpg"), size, size, arc);
+        AvatarView avatar = new AvatarView(Assets.getImage("default_avatar.jpg"), size, size, arc);
         avatar.getStyleClass().addAll(classes);
         return avatar;
     }

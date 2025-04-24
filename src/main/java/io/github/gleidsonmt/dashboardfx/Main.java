@@ -2,6 +2,7 @@ package io.github.gleidsonmt.dashboardfx;
 
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.*;
 import io.github.gleidsonmt.dashboardfx.drawer.*;
 import io.github.gleidsonmt.dashboardfx.drawer.Module;
 import io.github.gleidsonmt.dashboardfx.model.User;
@@ -41,6 +42,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  10/03/2025
@@ -59,10 +64,6 @@ public class Main extends Root {
         super(new Layout());
         configLayout();
 
-        this.behavior();
-        this.wrapper();
-        this.flow();
-
         navBar.setPadding(new Insets(10));
         navBar.setMinHeight(60);
         navBar.setAlignment(Pos.CENTER_LEFT);
@@ -78,14 +79,94 @@ public class Main extends Root {
 
         Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5, 10);
         badgeNotification.setStyle("-fx-box-color: -info;");
+
+        NotificationManager notificationManager = new NotificationManager();
+
+        badgeNotification.setOnMouseClicked(e -> {
+            Root root = (Root) getScene().getRoot();
+
+            root.flow().openByCursor(notificationManager.getRoot(), e, 10, 20);
+
+            root.wrapper().setOnClick(ev -> {
+                root.flow().remove(notificationManager.getRoot());
+                root.wrapper().hide();
+            });
+
+            root.wrapper().show();
+            notificationManager.getRoot().toFront();
+
+        });
+
+
         Badge badgeMessage = new Badge(Icon.CHAT, 8, 10);
         badgeMessage.setStyle("-fx-box-color: -red-500;;");
 
+        badgeMessage.setOnMouseClicked(e -> {
+            notificationManager.add(
+                    new FollowNotification(
+                            new User(
+                                    Assets.getImage("default_avatar.jpg", 80),
+                                    "@gleidsonmt", "Gleidson Neves"
+                            ),
+                            LocalDateTime.of(LocalDate.of(2024,11,2), LocalTime.of(14,23)),
+                            false
+                    )
+            );
+
+            notificationManager.add(
+                    new FollowNotification(
+                            new User(
+                                    Assets.getImage("avatar1.png", 70),
+                                    "@noelly", "Noelly Richards"
+                            ),
+                            LocalDateTime.of(LocalDate.of(2025,2,22), LocalTime.of(12,12)),
+//                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
+                            false
+                    )
+            );
+
+
+            notificationManager.add(
+                    new CommentNotification(
+                            new User(
+                                    Assets.getImage("avatar2.jpg", 70),
+                                    "@noelly", "Noelly Richards"
+                            ),
+                            LocalDateTime.of(LocalDate.of(2025,2,22), LocalTime.of(12,12)),
+//                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
+                            false,
+                            "Love the background on this! Wold love to learn how to create the mesh gradient effect."
+                    )
+            );
+
+            notificationManager.add(
+                    new LikeNotification(
+                            new User(
+                                    Assets.getImage("avatar3.png", 70),
+                                    "@noelly", "Noelly Richards"
+                            ),
+                            LocalDateTime.of(LocalDate.of(2025,3,05), LocalTime.of(12,12)),
+//                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
+                            false
+                    )
+            );
+
+            notificationManager.add(
+                    new InviteNotification(
+                            new User(
+                                    Assets.getImage("avatar4.png", 70),
+                                    "@noelly", "Noelly Richards"
+                            ),
+                            LocalDateTime.of(LocalDate.of(2025,3,05), LocalTime.of(12,12)),
+//                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
+                            false
+                    )
+            );
+        });
 
         navBar.add(badgeNotification, 2, 0);
         navBar.add(badgeMessage, 1, 0);
         navBar.add(card, 3, 0);
-
 
         GridPane.setValignment(crumb, VPos.CENTER);
         GridPane.setValignment(badgeNotification, VPos.CENTER);
@@ -180,6 +261,7 @@ public class Main extends Root {
             if (newValue instanceof View view) {
                 if (view.getContent() != null) body.setContent(view.getContent());
                 if (view.getOnEnter() != null) view.getOnEnter().handle(new ActionEvent());
+                if (view.getContent() instanceof ModuleLoad mod) mod.load();
             } else {
                 body.setContent(new ErrorPage(newValue.getName()));
             }
@@ -222,7 +304,7 @@ public class Main extends Root {
 
         getContainer().addPoint(_ -> {
             if (behavior().isDrawerAbsolute()) {
-                wrapper().close();
+                wrapper().hide();
             }
             getContainer().setLeft(drawer);
             navBar.getChildren().remove(hamb);

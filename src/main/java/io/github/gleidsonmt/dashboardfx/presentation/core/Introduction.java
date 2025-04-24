@@ -2,6 +2,7 @@ package io.github.gleidsonmt.dashboardfx.presentation.core;
 
 import io.github.gleidsonmt.dashboardfx.Main;
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
+import io.github.gleidsonmt.dashboardfx.drawer.ModuleLoad;
 import io.github.gleidsonmt.dashboardfx.presentation.drawer.SimpleDrawer;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
@@ -40,9 +41,257 @@ import java.net.URISyntaxException;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  20/03/2025
  */
-public class Introduction extends StackPane {
+public class Introduction extends StackPane implements ModuleLoad {
 
-    public Introduction() {
+    private Node createWarning() {
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setStyle("-fx-background-color: derive(-warning, 95%); " +
+                      "-fx-background-radius: 10px; " +
+                      "-fx-border-width: 0px 0px 0px 2px;" +
+                      "-fx-border-color: -warning;"
+        );
+        grid.setPadding(new Insets(20));
+        SVGIcon icon = new SVGIcon(Icon.NOTIFICATION_IMPORTANT);
+        icon.setScale(2);
+        icon.getPath().setStyle("-fx-fill: -warning;");
+        icon.getStyleClass().add("warning");
+
+        Label flow = new Label("This libs it's only used in runtime do not create an jar file, or an .exe with this, they will probably crash.");
+        flow.getStyleClass().addAll("text-warning","h5");
+        flow.setWrapText(true);
+
+        grid.setAlignment(Pos.CENTER_LEFT);
+        grid.add(icon, 0, 0);
+        grid.add(flow, 1, 0);
+        GridPane.setVgrow(flow, Priority.ALWAYS);
+        return grid;
+    }
+
+    private Node createStep8() {
+        return createButton(e -> {
+            Stage stage = new Stage();
+            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
+            body.setAlignment(Pos.CENTER);
+
+            Layout layout = new Layout(body);
+            Root root = new Root(layout);
+            SimpleDrawer drawer = new SimpleDrawer();
+
+            NavBar nav = new NavBar();
+
+            IconButton hamb = new IconButton(new SVGIcon(Icon.MENU));
+            hamb.getStyleClass().add("flat");
+            Text title = new Text("Dashboard");
+            title.getStyleClass().addAll("text-accent", "h3", "bold");
+
+            hamb.setOnMouseClicked(_ -> root.behavior().openDrawer());
+
+            nav.add(hamb, 0,0);
+            nav.add(title, 1,0);
+
+            layout.centerProperty().bind(Bindings.select(drawer.selectedProperty(), "content"));
+
+            layout.addPoint(_ -> {
+                layout.setLeft(null);
+                layout.setTop(nav);
+            }, Break.MOBILE);
+
+            layout.addPoint(_ -> {
+                layout.setLeft(drawer);
+                layout.setTop(null);
+            }, Break.values());
+
+
+            Scene scene = new Scene(root, 800, 600);
+            ThemeProvider.install(scene, Font.POPPINS);
+            ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON, Css.LIST_VIEW);
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    private Node createStep6() {
+        return createButton(e -> {
+            Stage stage = new Stage();
+            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
+            body.setAlignment(Pos.CENTER);
+
+            Layout layout = new Layout(body);
+            Root root = new Root(layout);
+            SimpleDrawer drawer = new SimpleDrawer();
+
+            NavBar nav = new NavBar();
+
+            IconButton hamb = new IconButton(new SVGIcon(Icon.MENU));
+            hamb.getStyleClass().add("flat");
+            Text title = new Text("Dashboard");
+            title.getStyleClass().addAll("text-accent", "h3", "bold");
+
+            nav.add(hamb, 0,0);
+            nav.add(title, 1,0);
+
+            layout.centerProperty().bind(Bindings.select(drawer.selectedProperty(), "content"));
+
+            layout.addPoint(_ -> {
+                layout.setLeft(null);
+                layout.setTop(nav);
+            }, Break.MOBILE);
+
+            layout.addPoint(_ -> {
+                layout.setLeft(drawer);
+                layout.setTop(null);
+            }, Break.values());
+
+
+            Scene scene = new Scene(root, 800, 600);
+            ThemeProvider.install(scene, Font.POPPINS);
+            ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON, Css.LIST_VIEW);
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    private Node createStep7() {
+        return createButton(e -> {
+            Stage stage = new Stage();
+            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
+            body.setAlignment(Pos.CENTER);
+
+            Layout layout = new Layout(body);
+            Root root = new Root(layout);
+            SimpleDrawer drawer = new SimpleDrawer();
+
+
+            layout.centerProperty().bind(Bindings.select(drawer.selectedProperty(), "content"));
+
+            layout.addPoint(_ -> {
+                layout.setLeft(null);
+            }, Break.MOBILE);
+
+            layout.addPoint(_ -> {
+                layout.setLeft(drawer);
+            }, Break.values());
+
+            Scene scene = new Scene(root, 800, 600);
+            ThemeProvider.install(scene, Font.POPPINS);
+            ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON, Css.LIST_VIEW);
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    private Node createStep5() {
+        return createButton(e -> {
+            Stage stage = new Stage();
+            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
+            body.setAlignment(Pos.CENTER);
+            Layout layout = new Layout(body);
+            Root root = new Root(layout);
+            SimpleDrawer drawer = new SimpleDrawer();
+
+            layout.addPoint(_ -> {
+                layout.setLeft(null);
+            }, Break.MOBILE);
+
+            layout.addPoint(_ -> {
+                layout.setLeft(drawer);
+            }, Break.values());
+
+            Scene scene = new Scene(root, 800, 600);
+            ThemeProvider.install(scene, Font.POPPINS);
+            ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON, Css.LIST_VIEW);
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    private Node createRootExample() {
+        return createButton(e -> {
+            Main main = (Main) getScene().getRoot();
+            IconButton button = new IconButton(new SVGIcon(Icon.APPS));
+            button.getStyleClass().addAll("padding-20", "raised");
+            button.setOnAction(ev -> {
+                main.flow().clear();
+            });
+            main.flow()
+                    .openByCursor(button, e);
+//
+        });
+    }
+
+    private Node createStep3() {
+        return createButton(e -> {
+            Stage stage = new Stage();
+            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
+            body.setAlignment(Pos.CENTER);
+            Root root = new Root(new Layout(body));
+            Scene scene = new Scene(root, 800, 600);
+            ThemeProvider.install(scene, Font.POPPINS);
+            ThemeProvider.install(scene, Css.COLORS, Css.TYPOGRAPHIC, Css.BUTTON);
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    private Node createStep4() {
+        return createButton(e -> {
+            Stage stage = new Stage();
+            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
+            body.setAlignment(Pos.CENTER);
+            Layout layout = new Layout(body);
+            layout.setLeft(new SimpleDrawer());
+            Root root = new Root(layout);
+            Scene scene = new Scene(root, 800, 600);
+            ThemeProvider.install(scene, Font.POPPINS);
+            ThemeProvider.install(scene,
+                    Css.DEFAULT,
+                    Css.BUTTON,
+                    Css.IMMERSIVE_SCROLL,
+                    Css.SHAPES,
+                    Css.LIST_VIEW);
+
+            stage.setScene(scene);
+            stage.show();
+            ScenicView.show(scene);
+
+        });
+    }
+
+    private Node createActionStart() {
+        return createButton(e -> {
+            Stage stage = new Stage();
+            Root root = new Root(new Layout(new Text("You do it!")));
+            Scene scene = new Scene(root, 800, 600);
+            stage.setScene(scene);
+            stage.show();
+        });
+    }
+
+    private Button createButton(EventHandler<MouseEvent> event) {
+        Button button = new Button("Try on!");
+        button.setPadding(new Insets(10));
+        VBox.setMargin(button, new Insets(20));
+        button.setOnMouseClicked(event);
+        return button;
+    }
+
+    private Node createStep2() {
+        return createButton(e -> {
+            Stage stage = new Stage();
+            Root root = new Root(new Layout(new Text("You do it!")));
+            Scene scene = new Scene(root, 800, 600);
+            ThemeProvider.install(scene, Font.POPPINS);
+            ThemeProvider.install(scene, Css.COLORS, Css.TYPOGRAPHIC);
+            stage.setScene(scene);
+            stage.show();
+
+        });
+    }
+
+    @Override
+    public void load() {
+        System.out.println("Loading");
         try {
             getChildren().setAll(
                     new Tutorial()
@@ -288,253 +537,5 @@ public class Introduction extends StackPane {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private Node createWarning() {
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setStyle("-fx-background-color: derive(-warning, 95%); " +
-                      "-fx-background-radius: 10px; " +
-                      "-fx-border-width: 0px 0px 0px 2px;" +
-                      "-fx-border-color: -warning;"
-        );
-        grid.setPadding(new Insets(20));
-        SVGIcon icon = new SVGIcon(Icon.NOTIFICATION_IMPORTANT);
-        icon.setScale(2);
-        icon.getPath().setStyle("-fx-fill: -warning;");
-        icon.getStyleClass().add("warning");
-
-        Label flow = new Label("This libs it's only used in runtime do not create an jar file, or an .exe with this, they will probably crash.");
-        flow.getStyleClass().addAll("text-warning","h5");
-        flow.setWrapText(true);
-
-        grid.setAlignment(Pos.CENTER_LEFT);
-        grid.add(icon, 0, 0);
-        grid.add(flow, 1, 0);
-        GridPane.setVgrow(flow, Priority.ALWAYS);
-        return grid;
-    }
-
-    private Node createStep8() {
-        return createButton(e -> {
-            Stage stage = new Stage();
-            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
-            body.setAlignment(Pos.CENTER);
-
-            Layout layout = new Layout(body);
-            Root root = new Root(layout);
-            SimpleDrawer drawer = new SimpleDrawer();
-
-            NavBar nav = new NavBar();
-
-            IconButton hamb = new IconButton(new SVGIcon(Icon.MENU));
-            hamb.getStyleClass().add("flat");
-            Text title = new Text("Dashboard");
-            title.getStyleClass().addAll("text-accent", "h3", "bold");
-
-            hamb.setOnMouseClicked(_ -> root.behavior().openDrawer());
-
-            nav.add(hamb, 0,0);
-            nav.add(title, 1,0);
-
-            layout.centerProperty().bind(Bindings.select(drawer.selectedProperty(), "content"));
-
-            layout.addPoint(_ -> {
-                layout.setLeft(null);
-                layout.setTop(nav);
-            }, Break.MOBILE);
-
-            layout.addPoint(_ -> {
-                layout.setLeft(drawer);
-                layout.setTop(null);
-            }, Break.values());
-
-
-            Scene scene = new Scene(root, 800, 600);
-            ThemeProvider.install(scene, Font.POPPINS);
-            ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON, Css.LIST_VIEW);
-            stage.setScene(scene);
-            stage.show();
-        });
-    }
-
-    private Node createStep6() {
-        return createButton(e -> {
-            Stage stage = new Stage();
-            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
-            body.setAlignment(Pos.CENTER);
-
-
-            Layout layout = new Layout(body);
-            Root root = new Root(layout);
-            SimpleDrawer drawer = new SimpleDrawer();
-
-            NavBar nav = new NavBar();
-
-            IconButton hamb = new IconButton(new SVGIcon(Icon.MENU));
-            hamb.getStyleClass().add("flat");
-            Text title = new Text("Dashboard");
-            title.getStyleClass().addAll("text-accent", "h3", "bold");
-
-            nav.add(hamb, 0,0);
-            nav.add(title, 1,0);
-
-            layout.centerProperty().bind(Bindings.select(drawer.selectedProperty(), "content"));
-
-            layout.addPoint(_ -> {
-                layout.setLeft(null);
-                layout.setTop(nav);
-            }, Break.MOBILE);
-
-            layout.addPoint(_ -> {
-                layout.setLeft(drawer);
-                layout.setTop(null);
-            }, Break.values());
-
-
-            Scene scene = new Scene(root, 800, 600);
-            ThemeProvider.install(scene, Font.POPPINS);
-            ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON, Css.LIST_VIEW);
-            stage.setScene(scene);
-            stage.show();
-        });
-    }
-
-    private Node createStep7() {
-        return createButton(e -> {
-            Stage stage = new Stage();
-            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
-            body.setAlignment(Pos.CENTER);
-
-
-            Layout layout = new Layout(body);
-            Root root = new Root(layout);
-            SimpleDrawer drawer = new SimpleDrawer();
-
-
-            layout.centerProperty().bind(Bindings.select(drawer.selectedProperty(), "content"));
-
-            layout.addPoint(_ -> {
-                layout.setLeft(null);
-            }, Break.MOBILE);
-
-            layout.addPoint(_ -> {
-                layout.setLeft(drawer);
-            }, Break.values());
-
-            Scene scene = new Scene(root, 800, 600);
-            ThemeProvider.install(scene, Font.POPPINS);
-            ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON, Css.LIST_VIEW);
-            stage.setScene(scene);
-            stage.show();
-        });
-    }
-
-    private Node createStep5() {
-        return createButton(e -> {
-            Stage stage = new Stage();
-            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
-            body.setAlignment(Pos.CENTER);
-            Layout layout = new Layout(body);
-            Root root = new Root(layout);
-            SimpleDrawer drawer = new SimpleDrawer();
-
-            layout.addPoint(_ -> {
-                layout.setLeft(null);
-            }, Break.MOBILE);
-
-            layout.addPoint(_ -> {
-                layout.setLeft(drawer);
-            }, Break.values());
-
-            Scene scene = new Scene(root, 800, 600);
-            ThemeProvider.install(scene, Font.POPPINS);
-            ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON, Css.LIST_VIEW);
-            stage.setScene(scene);
-            stage.show();
-        });
-    }
-
-    private Node createRootExample() {
-        return createButton(e -> {
-            Main main = (Main) getScene().getRoot();
-            IconButton button = new IconButton(new SVGIcon(Icon.APPS));
-            button.getStyleClass().addAll("padding-20", "raised");
-            button.setOnAction(ev -> {
-                main.flow().clear();
-            });
-            main.flow()
-                    .openByCursor(button, e);
-//
-        });
-    }
-
-    private Node createStep3() {
-        return createButton(e -> {
-            Stage stage = new Stage();
-            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
-            body.setAlignment(Pos.CENTER);
-            Root root = new Root(new Layout(body));
-            Scene scene = new Scene(root, 800, 600);
-            ThemeProvider.install(scene, Font.POPPINS);
-            ThemeProvider.install(scene, Css.COLORS, Css.TYPOGRAPHIC, Css.BUTTON);
-            stage.setScene(scene);
-            stage.show();
-        });
-    }
-
-    private Node createStep4() {
-        return createButton(e -> {
-            Stage stage = new Stage();
-            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
-            body.setAlignment(Pos.CENTER);
-            Layout layout = new Layout(body);
-            layout.setLeft(new SimpleDrawer());
-            Root root = new Root(layout);
-            Scene scene = new Scene(root, 800, 600);
-            ThemeProvider.install(scene, Font.POPPINS);
-            ThemeProvider.install(scene,
-                    Css.DEFAULT,
-                    Css.BUTTON,
-                    Css.IMMERSIVE_SCROLL,
-                    Css.SHAPES,
-                    Css.LIST_VIEW);
-
-            stage.setScene(scene);
-            stage.show();
-            ScenicView.show(scene);
-
-        });
-    }
-
-    private Node createActionStart() {
-        return createButton(e -> {
-            Stage stage = new Stage();
-            Root root = new Root(new Layout(new Text("You do it!")));
-            Scene scene = new Scene(root, 800, 600);
-            stage.setScene(scene);
-            stage.show();
-        });
-    }
-
-    private Button createButton(EventHandler<MouseEvent> event) {
-        Button button = new Button("Try on!");
-        button.setPadding(new Insets(10));
-        VBox.setMargin(button, new Insets(20));
-        button.setOnMouseClicked(event);
-        return button;
-    }
-
-    private Node createStep2() {
-        return createButton(e -> {
-            Stage stage = new Stage();
-            Root root = new Root(new Layout(new Text("You do it!")));
-            Scene scene = new Scene(root, 800, 600);
-            ThemeProvider.install(scene, Font.POPPINS);
-            ThemeProvider.install(scene, Css.COLORS, Css.TYPOGRAPHIC);
-            stage.setScene(scene);
-            stage.show();
-
-        });
     }
 }

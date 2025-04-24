@@ -3,6 +3,7 @@ package io.github.gleidsonmt.dashboardfx.presentation.presentations.pages;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.glad.base.Container;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
+import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import io.github.gleidsonmt.glad.responsive.Break;
@@ -129,7 +130,7 @@ public class HomePage extends Container {
     }
 
     private @NotNull Node createLogo() {
-        AvatarCircleView avatar = new AvatarCircleView();
+        AvatarView avatar = new AvatarView();
         avatar.setImage(Assets.getImage("logo_128.png", 100));
         return avatar;
     }

@@ -112,7 +112,7 @@ public class Behavior extends StackPane {
                             Button apply = new Button("Apply");
                             cancel.setCancelButton(true);
                             cancel.setOnAction(_ -> {
-                                root.wrapper().close();
+                                root.wrapper().hide();
                                 root.behavior().alert().close();
                             });
                             root.wrapper().show(WrapperEffect.BLUR);

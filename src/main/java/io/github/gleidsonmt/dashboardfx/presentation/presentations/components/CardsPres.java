@@ -5,6 +5,7 @@ import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarRectView;
+import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import javafx.geometry.HPos;
@@ -70,7 +71,7 @@ public class CardsPres extends StackPane {
                                 title.getStyleClass().addAll("h5", "bold");
                                 Text legend = new Text("Tech Lead");
                                 legend.getStyleClass().addAll("h5");
-                                AvatarCircleView avatar = new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 20);
+                                AvatarView avatar = new AvatarView(Assets.getImage("default_avatar.jpg"), 20);
                                 card.add(avatar, 0,0);
                                 card.add(title, 1,0);
                                 card.add(legend, 1,1);
@@ -87,7 +88,7 @@ public class CardsPres extends StackPane {
         title.getStyleClass().addAll("h5", "bold");
         Text legend = new Text("Tech Lead");
         legend.getStyleClass().addAll("h5");
-        AvatarCircleView avatar = new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 20);
+        AvatarView avatar = new AvatarView(Assets.getImage("default_avatar.jpg"), 40);
         card.add(avatar, 0,0);
         card.add(title, 1,0);
         card.add(legend, 1,1);
@@ -139,18 +140,12 @@ public class CardsPres extends StackPane {
         return hyperlink;
     }
 
-    private Node createDemo(String... classes) {
-        AvatarCircleView avatar = new AvatarCircleView(Assets.getImage("default_avatar.jpg"), 40);
-        avatar.getStyleClass().addAll(classes);
-        return avatar;
-    }
-
     private Node createRectDemo(int size, String... classes) {
         return createRectDemo(size, 0, classes);
     }
 
     private Node createRectDemo(int size, double arc, String... classes) {
-        AvatarRectView avatar = new AvatarRectView(Assets.getImage("default_avatar.jpg"), size, size, arc);
+        AvatarView avatar = new AvatarView(Assets.getImage("default_avatar.jpg"), size, size, arc);
         avatar.getStyleClass().addAll(classes);
         return avatar;
     }

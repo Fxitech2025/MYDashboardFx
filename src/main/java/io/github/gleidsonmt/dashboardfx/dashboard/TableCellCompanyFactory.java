@@ -4,6 +4,7 @@ import io.github.gleidsonmt.dashboardfx.model.Activity;
 import io.github.gleidsonmt.dashboardfx.model.Company;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarRectView;
+import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import javafx.geometry.Insets;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -30,7 +31,7 @@ public class TableCellCompanyFactory implements Callback<TableColumn<Activity, C
                     title.getStyleClass().addAll("h5", "bold");
                     Text legend = new Text(item.getAddress());
                     legend.getStyleClass().addAll("h5");
-                    AvatarRectView avatar = new AvatarRectView(item.getAvatar(), 40);
+                    AvatarView avatar = new AvatarView(item.getAvatar(), 40);
 //                    avatar.getStyleClass().addAll("stroke-light-gray-2");
                     grid.add(avatar, 0,0);
                     grid.add(title, 1,0);

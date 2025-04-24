@@ -1,9 +1,10 @@
 package io.github.gleidsonmt.dashboardfx.dashboard;
 
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.NotificationManager;
 import io.github.gleidsonmt.dashboardfx.model.*;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.glad.charts.DonutChart;
-import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
+import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.responsive.Break;
 import io.github.gleidsonmt.glad.responsive.ResponsiveGrid;
@@ -29,6 +30,8 @@ public class Dashboard extends ResponsiveGrid {
 
     public Dashboard() {
         super(true);
+
+
 
         setPadding(new Insets(20));
 
@@ -345,7 +348,7 @@ public class Dashboard extends ResponsiveGrid {
                     text.getStyleClass().addAll("bold", "h5");
                     text.setGraphicTextGap(10);
 
-                    text.setGraphic(new AvatarCircleView(item.getAvatar(), 15));
+                    text.setGraphic(new AvatarView(item.getAvatar(), 15));
 
                     ProgressBar progressBar = new ProgressBar();
 

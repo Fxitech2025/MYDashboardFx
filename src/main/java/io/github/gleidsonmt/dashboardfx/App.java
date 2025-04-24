@@ -44,9 +44,7 @@ public class App extends Application {
 
         ThemeProvider.install(scene, Font.POPPINS, Font.INSTAGRAM);
         ThemeProvider.install(scene,
-                Css.COLORS,
-                Css.PROPERTIES,
-                Css.TYPOGRAPHIC,
+                Css.DEFAULT,
                 Css.TABLE_VIEW,
                 Css.TAB_PANE,
                 Css.IMMERSIVE_SCROLL,
@@ -70,6 +68,7 @@ public class App extends Application {
                 Assets.getCss("master.css")
         );
 
+        stage.getIcons().addAll(Assets.getImage("logo_128.png"));
         stage.setScene(scene);
         stage.setMaximized(true);
         stage.show();

@@ -48,12 +48,12 @@ public class LoginPage extends Container {
                 createOptions(),
                 createBar());
         getChildren().add(body);
+        body.setSpacing(20);
     }
 
     private Text createTitle() {
         Text text = new Text("Welcome");
-        text.getStyleClass().addAll("h1", "text-accent", "font-instagram-headline", "bold");
-
+        text.getStyleClass().addAll("h1", "text-accent", "font-instagram", "bold");
         VBox.setMargin(text, new Insets(0,0,10,0));
         return text;
     }
@@ -73,14 +73,14 @@ public class LoginPage extends Container {
     }
 
     private TextBox createTextField() {
-        TextBox pass = new TextBox(Icon.ACCOUNT);
+        TextBox pass = new TextBox(Icon.ACCOUNT_CIRCLE);
         pass.setPromptText("Name");
         pass.setAction(true);
         return pass;
     }
 
     private PasswordBox createPass() {
-        PasswordBox pass = new PasswordBox(Icon.VPN_KEY_FILLED);
+        PasswordBox pass = new PasswordBox(Icon.LOCK);
         pass.setPromptText("Password");
         pass.setAction(true);
         return pass;

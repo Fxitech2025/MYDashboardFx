@@ -3,7 +3,10 @@ package io.github.gleidsonmt.dashboardfx.presentation.presentations.components;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.glad.controls.toggle_switch.ToggleSwitch;
 import io.github.gleidsonmt.presentation.Row;
+import javafx.css.StyleableProperty;
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -29,19 +32,46 @@ public class ToggleSwitchPres extends StackPane {
                                     """)
 
                         .table(
-                                new Row("-fx-color-animation", "-fx-accent"),
-                                new Row("-fx-track-color", "-fx-background")
+                                "Property", "Value",
+                                new Row("-fx-arc-size", "<number>"),
+                                new Row("-fx-color-animation", "<paint>"),
+                                new Row("-fx-track-size", "<paint>"),
+                                new Row("-fx-track-color", "<paint>")
                         )
-                        .code("""
-                                .toggle-switch {
-                                    -fx-color-animation: fx-accent;
-                                    -fx-track-color: -fx-background;
+
+                        .h3("Custom","Toggle Switch")
+                        .demo(
+                                new Node[] {
+                                        createDemo("-fx-arc-size: 0px;"),
+                                        createDemo("-fx-track-size: 5px; -fx-arc-size: 0px;"),
+                                        createDemo("-fx-track-size: 5px; -fx-arc-size: 5px;"),
+
                                 }
+                        )
+
+                        .code("""
+                                // Example 01
+                                ToggleSwitch toggleSwitch = new ToggleSwitch();
+                                toggleSwitch.setStyle("-fx-arc-size: 0px;");
+                                
+                                // Example 02
+                                ToggleSwitch toggleSwitch = new ToggleSwitch();
+                                toggleSwitch.setStyle("-fx-track-size: 5px; -fx-arc-size: 0px;");
+                                
+                                // Example 03
+                                ToggleSwitch toggleSwitch = new ToggleSwitch();
+                                toggleSwitch.setStyle("-fx-track-size: 5px; -fx-arc-size: 5px;");
                                 """)
 
                         .build()
                         .getRoot()
         );
+    }
+
+    private Node createDemo(String style) {
+        ToggleSwitch toggleSwitch = new ToggleSwitch();
+        toggleSwitch.setStyle(style);
+        return toggleSwitch;
     }
 
 }

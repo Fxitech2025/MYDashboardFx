@@ -3,24 +3,19 @@ package io.github.gleidsonmt.dashboardfx.drawer;
 import io.github.gleidsonmt.dashboardfx.Main;
 import io.github.gleidsonmt.dashboardfx.dashboard.Aside;
 import io.github.gleidsonmt.dashboardfx.model.User;
-import io.github.gleidsonmt.glad.Assets;
-import io.github.gleidsonmt.glad.base.Root;
-import io.github.gleidsonmt.glad.base.Wrapper;
 import io.github.gleidsonmt.glad.base.WrapperEffect;
 import io.github.gleidsonmt.glad.base.internal.animations.Anchor;
-import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
+import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.GridPane;
@@ -36,11 +31,10 @@ import javafx.util.Duration;
 public class CardUserOptions extends GridPane {
 
     //    private final ObjectProperty<Image> avatar = new SimpleObjectProperty<>();
-    private final AvatarCircleView avatarView = new AvatarCircleView();
+    private final AvatarView avatarView = new AvatarView();
     private final GridPane email;
     private final Text name;
     private final ContextMenu options;
-
 
     public CardUserOptions(User user) {
         this.avatarView.setImage(user.getAvatar());

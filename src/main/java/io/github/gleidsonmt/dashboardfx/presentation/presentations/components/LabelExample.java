@@ -70,6 +70,7 @@ public class LabelExample extends StackPane {
                                 label.getStyleClass().addAll("min-size-20", "size-20",  "bg-success", "lbl", "padding-5");
                                 """)
 
+                        .demo(createDemo(createDemo("", "min-size-20", "size-20", "bg-warning", "star", "padding-5"),  "4.7", "bold"))
 
                         .build()
                         .getRoot()

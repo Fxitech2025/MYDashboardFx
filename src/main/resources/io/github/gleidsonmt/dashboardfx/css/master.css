@@ -1,10 +1,15 @@
 .root {
     -fx-accent: #0085ff;
 }
+
+.toggle-switch {
+    -fx-track-color: -light-gray;
+
+}
+
 .icon {
     -fx-fill: -text-color;
 }
-
 
 .menu {
     -fx-padding: 0px;
@@ -146,4 +151,19 @@
 
     -fx-padding: 10px;
 
+}
+
+.notification-item:selected {
+    -fx-background-color: -light-gray-2;
+}
+
+.notification-item:hover {
+    -fx-background-color: -light-gray;
+}
+
+.notification-item
+{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-background-radius: 10px;
 }
