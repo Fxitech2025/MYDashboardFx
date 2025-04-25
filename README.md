@@ -1,5 +1,4 @@
 <h1 align="center">DashboardFx</h1>
-<h6 align="center"> This project is part of the set of custom components created for JavaFx. </h6>
 <h1></h1>
 
 
@@ -29,43 +28,31 @@
 * [📝 License](#-license)
 <!-- TOC -->
 
+<br>
+
 # 📑 Overview
 
-In this example, you can see how components in Javafx can be worked to align with a good design. This lib contains methods to fast understand how JavaFX and properties work. As a dashboard separated as moduleImpls, you can see the appearance and properties for controls and layouts, and base classes for implementing pre-build views.
+Hy guys, I'm back, with more, after these years I looked for some things that can be really good-looking to build, and I want to share with you.
+In this example, you can see how components in Javafx can be worked to align with a good design (I try). 
+This time I use more time to create more tutorials and unify libs.
 
 
 # 💻 Environment
 
-This lib is a component for JavaFx:   Get in the official website [JavaFx](https://openjfx.io/), Tutorial [Getting Started](https://openjfx.io/openjfx-docs/)
+This is a project build using JavaFx, Official website [JavaFx](https://openjfx.io/), Tutorial [Getting Started](https://openjfx.io/openjfx-docs/)
 
-I have a great workstation here, then I've using a gradle 7.2 and Java and JavaFx +17 on Windows. (I really want to test in other systems in future).
+I've used a gradle 8.10 and Java and JavaFx +23 on Windows to build.
+You'll find the jars in the folder called vendor.
 
 # 🚀 Installing
 I really recommend to use jpackage to create your jar and the .exe. <br>
 !🗒️Note ** The generate you .exe you need the wix tool, you can get the url if you using intellij or from here  https://wixtoolset.org 🥸***
 In intellij or visual studio (in visual you need to prepare the  ide to use javafx) it's really simple, only open the tab gradle and run the command build after jpackage.
 
-## Using in SceneBuilder
-If you want or had an error on opening the fxml files, you need the jar with the custom components,
-using gradle create a jar and import in your SceneBuilder.
-...
 # ☕ Using Dashboard
 Just build and run -(º-º)- there's no trick.. only use gradle to build and run in your ide.
 If you have problem, or a tip do an issue.
 ...
-# 🧬  Basic Structure
-<pre>
-+ java
-  |-- controllers // your controller class
-  |-- core	// dash core.. controls, routes..
-  |-- views       // java views build
-+ Resources
-  |-- style // all stylesheets of this dash
-  |-- views // directory of fxml views
-  |-- web   // there's a directory used for web contents
-  -- views.yml
-</pre>
-
 # 📺 On Youtube
 ...
 # 🛠 Enhancements
