@@ -15,6 +15,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.shape.Circle;
 import org.jetbrains.annotations.ApiStatus;
 
+import java.util.Objects;
+
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  12/08/2024
@@ -49,11 +51,11 @@ public class BreadCrumbBar extends FlowPane {
             }
 
             if (getChildren().size() == 1) {
-                getChildren().get(0).getStyleClass().remove("last");
-                if (getChildren().get(0) instanceof Hyperlink h) {
+                getChildren().getFirst().getStyleClass().remove("last");
+                if (getChildren().getFirst() instanceof Hyperlink h) {
                     h.setVisited(false);
                 }
-                getChildren().get(0).setMouseTransparent(true);
+                getChildren().getFirst().setMouseTransparent(true);
             }
         });
 
@@ -61,7 +63,7 @@ public class BreadCrumbBar extends FlowPane {
     }
 
     public void setVariant(String number) {
-        getStylesheets().add(getClass().getResource("variant_" + number + ".css").toExternalForm());
+        getStylesheets().add(Objects.requireNonNull(getClass().getResource("variant_" + number + ".css")).toExternalForm());
         if (number.equals("four")) {
             setSeparator(BreadSeparator.NONE);
             this.setHgap(0);

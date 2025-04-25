@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
  */
 public class LoginPage extends Container {
 
-
+   private final VBox body = new VBox();
 
     public LoginPage() {
         init();
@@ -36,10 +36,11 @@ public class LoginPage extends Container {
     }
 
     private void configLayout() {
-        VBox body = new VBox();
         body.setAlignment(Pos.CENTER);
-        body.setPrefWidth(500);
-        body.maxWidthProperty().bind(body.prefWidthProperty());
+//        body.setPrefWidth(500);
+        body.setFillWidth(false);
+//        body.maxWidthProperty().bind(body.prefWidthProperty());
+
         body.getChildren().addAll(
                 createTitle(),
                 createText(),
@@ -67,6 +68,7 @@ public class LoginPage extends Container {
 
     private TextBoxBase createField(boolean pass) {
         TextBoxBase textBox = pass ? createPass() : createTextField();
+        textBox.setPrefWidth(600);
         textBox.getStyleClass().addAll("min-h-50");
         VBox.setMargin(textBox, new Insets(10,0,10,0));
         return textBox;
@@ -88,6 +90,7 @@ public class LoginPage extends Container {
 
     private GridPane createOptions() {
         GridPane grid = new GridPane();
+        grid.setPrefWidth(500);
         CheckBox checkBox = new CheckBox("Remember");
         Hyperlink hyperlink = new Hyperlink("Forgot your password?");
 

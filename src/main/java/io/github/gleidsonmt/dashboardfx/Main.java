@@ -101,6 +101,9 @@ public class Main extends Root {
                 ),
                 new NotificationItem<>(
                         new InviteNotification(new User(Assets.getImage("avatar4.png", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 3, 05), LocalTime.of(12, 12)), false)
+                ),
+                new NotificationItem<>(
+                        new FollowNotification(new User(Assets.getImage("default_avatar.jpg", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 2, 22), LocalTime.of(12, 12)), false)
                 )
         );
 
@@ -126,17 +129,6 @@ public class Main extends Root {
         badgeMessage.setOnMouseClicked(e -> {
 
 
-//            notificationManager.add(new LikeNotification(new User(Assets.getImage("avatar3.png", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 3, 05), LocalTime.of(12, 12)),
-////                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
-//                    false));
-
-//            notificationManager.clear();
-
-            notificationManager.add(
-                    new NotificationItem<>(
-                            new FollowNotification(new User(Assets.getImage("default_avatar.jpg", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 2, 22), LocalTime.of(12, 12)), false)
-                    )
-            );
 
         });
 

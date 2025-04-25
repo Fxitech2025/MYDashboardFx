@@ -36,6 +36,7 @@ public class NotificationBody extends ScrollPane {
 
                 if (change.wasReplaced()) {
                     container.getChildren().setAll(change.getAddedSubList());
+                    return;
                 }
 
                 if (change.wasAdded()) {

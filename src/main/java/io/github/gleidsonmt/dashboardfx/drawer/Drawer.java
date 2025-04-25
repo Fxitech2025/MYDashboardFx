@@ -157,7 +157,7 @@ public class Drawer extends VBox {
 
     private @Nullable ModuleCreator _find(@NotNull List<ModuleCreator> modules, List<ModuleCreator> findedList, Predicate<String> predicate) {
         for (ModuleCreator mod : modules) {
-            if (predicate.test(mod.getName())) {
+            if (predicate.test(mod.getName().toLowerCase())) {
                 findedList.add(mod);
             } else {
                 if (!(mod instanceof ModuleSeparator) && !mod.getModules().isEmpty()) {
