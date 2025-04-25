@@ -166,4 +166,29 @@
     -fx-background-color: transparent;
     -fx-cursor: hand;
     -fx-background-radius: 10px;
+
+}
+
+.notifications-toggle
+{
+    -fx-padding: 5px;
+    -fx-background-color: -light-gray;
+}
+
+.notification-toggle:selected,
+.toggle-button:selected .text
+{
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,.1) , 5, 0 , 0 , 1 );
+    -fx-background-color: white;
+    -fx-fill: -text-color;
+}
+
+.notification-toggle {
+    -fx-background-color: transparent;
+    -text-color: -dark-gray-2;
+}
+
+.popup {
+    -fx-background-color: -fx-background;
+    -fx-background-insets: 0px;
 }

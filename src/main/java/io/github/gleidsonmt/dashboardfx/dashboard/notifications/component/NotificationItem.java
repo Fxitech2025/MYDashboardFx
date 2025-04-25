@@ -1,5 +1,8 @@
-package io.github.gleidsonmt.dashboardfx.dashboard.notifications;
+package io.github.gleidsonmt.dashboardfx.dashboard.notifications.component;
 
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.CommentNotification;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory.Notification;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory.NotificationType;
 import io.github.gleidsonmt.dashboardfx.utils.StringUtils;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.button.Button;
@@ -29,17 +32,34 @@ import static javafx.scene.layout.GridPane.REMAINING;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  24/04/2025
  */
-public class NotificationFactory {
+public class NotificationItem<T extends Notification> extends ToggleButton {
 
     private final ToggleGroup group = new ToggleGroup();
+    private final T value;
 
-    public Node create(Notification notification) {
+    public NotificationItem(T value) {
+        this.value = value;
+        getStyleClass().add("notification-item");
+        setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+        setMaxWidth(Double.MAX_VALUE);
+        setText(value.getType().name());
+        create(value);
+    }
 
-        NotificationItem item = new NotificationItem();
-        group.getToggles().add(item);
+    public T getValue() {
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(getValue().getType());
+    }
+
+    private void create(Notification notification) {
+        group.getToggles().add(this);
         GridPane card = createCard();
-        item.maxHeightProperty().bind(card.heightProperty());
-        item.setGraphic(card);
+        this.maxHeightProperty().bind(card.heightProperty());
+        this.setGraphic(card);
 
         TextFlow title = new TextFlow();
         Text titleUsername = new Text(notification.getUser().getUsername());
@@ -114,7 +134,6 @@ public class NotificationFactory {
             }
         }
 
-        return item;
     }
 
     private Node createActions() {

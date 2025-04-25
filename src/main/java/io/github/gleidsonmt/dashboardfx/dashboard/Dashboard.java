@@ -1,6 +1,5 @@
 package io.github.gleidsonmt.dashboardfx.dashboard;
 
-import io.github.gleidsonmt.dashboardfx.dashboard.notifications.NotificationManager;
 import io.github.gleidsonmt.dashboardfx.model.*;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.glad.charts.DonutChart;

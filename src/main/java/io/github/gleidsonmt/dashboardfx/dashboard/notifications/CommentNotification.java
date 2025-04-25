@@ -1,5 +1,7 @@
 package io.github.gleidsonmt.dashboardfx.dashboard.notifications;
 
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory.NotificationBase;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory.NotificationType;
 import io.github.gleidsonmt.dashboardfx.model.User;
 
 import java.time.LocalDateTime;
@@ -10,7 +12,7 @@ import java.time.LocalDateTime;
  */
 public class CommentNotification extends NotificationBase {
 
-    private String post;
+    private final String post;
 
     public CommentNotification(User user, LocalDateTime dateTime, boolean visualized, String post) {
         super(user, dateTime, visualized);

@@ -3,6 +3,8 @@ package io.github.gleidsonmt.dashboardfx;
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
 import io.github.gleidsonmt.dashboardfx.dashboard.notifications.*;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.component.NotificationItem;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory.NotificationManager;
 import io.github.gleidsonmt.dashboardfx.drawer.*;
 import io.github.gleidsonmt.dashboardfx.drawer.Module;
 import io.github.gleidsonmt.dashboardfx.model.User;
@@ -72,15 +74,35 @@ public class Main extends Root {
 
         navBar.add(crumb, 0, 0);
 
-        card = new CardUserOptions(new User(
-                Assets.getImage("default_avatar.jpg", 80),
-                "johndoe54@gmail.com", "Jhon Doe")
-        );
+        card = new CardUserOptions(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe"));
 
         Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5, 10);
         badgeNotification.setStyle("-fx-box-color: -info;");
 
         NotificationManager notificationManager = new NotificationManager();
+
+        notificationManager.addAll(
+                new NotificationItem<>(
+                        new FollowNotification(
+                                new User(
+                                        Assets.getImage("default_avatar.jpg", 80),
+                                        "@gleidsonmt", "Gleidson Neves"
+                                ),
+                                LocalDateTime.of(LocalDate.of(2024, 11, 2), LocalTime.of(14, 23)),
+                                false
+                        )
+                ),
+                new NotificationItem<>(
+                        new FollowNotification(new User(Assets.getImage("avatar1.png", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 2, 22), LocalTime.of(12, 12)), false)
+                ),
+                new NotificationItem<>(
+                        new CommentNotification(new User(Assets.getImage("avatar2.jpg", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 2, 22), LocalTime.of(12, 12)), false,
+                                "Love the background on this! Wold love to learn how to create the mesh gradient effect.")
+                ),
+                new NotificationItem<>(
+                        new InviteNotification(new User(Assets.getImage("avatar4.png", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 3, 05), LocalTime.of(12, 12)), false)
+                )
+        );
 
         badgeNotification.setOnMouseClicked(e -> {
             Root root = (Root) getScene().getRoot();
@@ -102,66 +124,20 @@ public class Main extends Root {
         badgeMessage.setStyle("-fx-box-color: -red-500;;");
 
         badgeMessage.setOnMouseClicked(e -> {
+
+
+//            notificationManager.add(new LikeNotification(new User(Assets.getImage("avatar3.png", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 3, 05), LocalTime.of(12, 12)),
+////                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
+//                    false));
+
+//            notificationManager.clear();
+
             notificationManager.add(
-                    new FollowNotification(
-                            new User(
-                                    Assets.getImage("default_avatar.jpg", 80),
-                                    "@gleidsonmt", "Gleidson Neves"
-                            ),
-                            LocalDateTime.of(LocalDate.of(2024,11,2), LocalTime.of(14,23)),
-                            false
+                    new NotificationItem<>(
+                            new FollowNotification(new User(Assets.getImage("default_avatar.jpg", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 2, 22), LocalTime.of(12, 12)), false)
                     )
             );
 
-            notificationManager.add(
-                    new FollowNotification(
-                            new User(
-                                    Assets.getImage("avatar1.png", 70),
-                                    "@noelly", "Noelly Richards"
-                            ),
-                            LocalDateTime.of(LocalDate.of(2025,2,22), LocalTime.of(12,12)),
-//                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
-                            false
-                    )
-            );
-
-
-            notificationManager.add(
-                    new CommentNotification(
-                            new User(
-                                    Assets.getImage("avatar2.jpg", 70),
-                                    "@noelly", "Noelly Richards"
-                            ),
-                            LocalDateTime.of(LocalDate.of(2025,2,22), LocalTime.of(12,12)),
-//                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
-                            false,
-                            "Love the background on this! Wold love to learn how to create the mesh gradient effect."
-                    )
-            );
-
-            notificationManager.add(
-                    new LikeNotification(
-                            new User(
-                                    Assets.getImage("avatar3.png", 70),
-                                    "@noelly", "Noelly Richards"
-                            ),
-                            LocalDateTime.of(LocalDate.of(2025,3,05), LocalTime.of(12,12)),
-//                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
-                            false
-                    )
-            );
-
-            notificationManager.add(
-                    new InviteNotification(
-                            new User(
-                                    Assets.getImage("avatar4.png", 70),
-                                    "@noelly", "Noelly Richards"
-                            ),
-                            LocalDateTime.of(LocalDate.of(2025,3,05), LocalTime.of(12,12)),
-//                            LocalDateTime.of(LocalDate.now(), LocalTime.of(8,12)),
-                            false
-                    )
-            );
         });
 
         navBar.add(badgeNotification, 2, 0);
@@ -188,71 +164,11 @@ public class Main extends Root {
             behavior().openDrawer();
         });
 
-        drawer = new Drawer(
-                new View("Dashboard", new Dashboard()),
-                new ModuleSeparator(new SVGIcon(Icon.HUB), "Project"),
-                new Module("Core",
-                        new View("Introduction", new Introduction()),
-                        new View("Wrapper", new Wrapper()),
-                        new View("Flow", new FlowPres()),
-                        new View("Behavior", new Behavior())
-                ),
-                new ModuleSeparator(new SVGIcon(Icon.DESIGN_SERVICES), "Theme"),
-                new Module("Shapes",
-                        new View("Text", new TextPres()),
-                        new View("Circle", new BuildingPage())
-                ),
-                new Module("Controls",
-                        new View("Region", new RegionPres()),
-                        new View("Labeled", new LabeledPres()),
-                        new View("Text Input", new TextInputPres()),
-                        new View("Progress Bar", new ProgressBarPres()),
-                        new View("Table View", new TableViewPres()),
-                        new View("Tree View", new TreeViewPres()),
-                        new View("List View", new ListViewPres())
-                ),
-                new Module("Containers",
-                        new View("TitledPane", new BuildingPage()),
-                        new View("TabPane", new TabPres()),
-                        new View("Text Flow", new TextFlowPres())
-                ),
-                new Module("Charts",
-                        new View("Bar Chart", new BarChartPres()),
-                        new View("Area Chart", new AreaChartPres()),
-                        new View("Stacked Area Chart", new StackedAreaChartPres()),
-                        new View("Stacked Bar Chart", new StackedBarChartPres()),
-                        new View("Pie Chart", new DonutChartPres()),
-                        new View("Line Chart", new LineChartPres())
-                ),
-                new ModuleSeparator(new SVGIcon(Icon.STACK), "Examples"),
-                new Module("Components",
+        drawer = new Drawer(new View("Dashboard", new Dashboard()), new ModuleSeparator(new SVGIcon(Icon.HUB), "Project"), new Module("Core", new View("Introduction", new Introduction()), new View("Wrapper", new Wrapper()), new View("Flow", new FlowPres()), new View("Behavior", new Behavior())), new ModuleSeparator(new SVGIcon(Icon.DESIGN_SERVICES), "Theme"), new Module("Shapes", new View("Text", new TextPres()), new View("Circle", new BuildingPage())), new Module("Controls", new View("Region", new RegionPres()), new View("Labeled", new LabeledPres()), new View("Text Input", new TextInputPres()), new View("Progress Bar", new ProgressBarPres()), new View("Table View", new TableViewPres()), new View("Tree View", new TreeViewPres()), new View("List View", new ListViewPres())), new Module("Containers", new View("TitledPane", new BuildingPage()), new View("TabPane", new TabPres()), new View("Text Flow", new TextFlowPres())), new Module("Charts", new View("Bar Chart", new BarChartPres()), new View("Area Chart", new AreaChartPres()), new View("Stacked Area Chart", new StackedAreaChartPres()), new View("Stacked Bar Chart", new StackedBarChartPres()), new View("Pie Chart", new DonutChartPres()), new View("Line Chart", new LineChartPres())), new ModuleSeparator(new SVGIcon(Icon.STACK), "Examples"), new Module("Components",
 
-                        new View("SVGIcon", new SVGIconPres()),
-                        new View("Button", new ButtonExample()),
-                        new View("Badge", new BadgeExample()),
-                        new View("Avatar View", new AvatarPres()),
-                        new View("Toggle Switch", new ToggleSwitchPres())
+                new View("SVGIcon", new SVGIconPres()), new View("Button", new ButtonExample()), new View("Badge", new BadgeExample()), new View("Avatar View", new AvatarPres()), new View("Toggle Switch", new ToggleSwitchPres())
 
-                ),
-                new Module("Styled",
-                        new View("Drawer", new DrawerExample()),
-                        new View("BreadCrumb", new BuildingPage()),
-                        new View("Tree View", new TreeViewExample()),
-                        new View("Label", new LabelExample()),
-                        new View("Cards", new CardsPres())
-                ),
-                new Module("Pages",
-                        new View("Home Page", new HomePage()),
-                        new View("Login", new LoginPage()),
-                        new View("Error Page 404", new ErrorPage("ModuleCreator not found"))
-                ),
-                new ModuleSeparator(new SVGIcon(Icon.HELP), "Theme"),
-                new Module("Utils",
-                        new View("Pallet Color", new ColorsPres()),
-                        new View("Alignment", new BuildingPage())
-                ),
-                new View("About", new AboutPres())
-        );
+        ), new Module("Styled", new View("Drawer", new DrawerExample()), new View("BreadCrumb", new BuildingPage()), new View("Tree View", new TreeViewExample()), new View("Label", new LabelExample()), new View("Cards", new CardsPres())), new Module("Pages", new View("Home Page", new HomePage()), new View("Login", new LoginPage()), new View("Error Page 404", new ErrorPage("ModuleCreator not found"))), new ModuleSeparator(new SVGIcon(Icon.HELP), "Theme"), new Module("Utils", new View("Pallet Color", new ColorsPres()), new View("Alignment", new BuildingPage())), new View("About", new AboutPres()));
 
         drawer.setHeader(new DrawerHeader());
         drawer.setFooter(new DrawerFooter());

@@ -1,4 +1,4 @@
-package io.github.gleidsonmt.dashboardfx.dashboard.notifications;
+package io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory;
 
 import io.github.gleidsonmt.dashboardfx.model.User;
 
@@ -8,11 +8,12 @@ import java.time.LocalDateTime;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  24/04/2025
  */
+@SuppressWarnings("unused")
 public class NotificationBase implements Notification {
 
     private User user;
     private LocalDateTime dateTime;
-    private boolean visualized = false;
+    private boolean visualized;
 
     public NotificationBase(User user, LocalDateTime dateTime, boolean visualized) {
         this.user = user;

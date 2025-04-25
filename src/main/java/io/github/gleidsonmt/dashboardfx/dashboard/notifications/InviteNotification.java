@@ -1,5 +1,7 @@
 package io.github.gleidsonmt.dashboardfx.dashboard.notifications;
 
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory.NotificationBase;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory.NotificationType;
 import io.github.gleidsonmt.dashboardfx.model.User;
 
 import java.time.LocalDateTime;

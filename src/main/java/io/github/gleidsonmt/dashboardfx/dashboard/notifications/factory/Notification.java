@@ -1,4 +1,4 @@
-package io.github.gleidsonmt.dashboardfx.dashboard.notifications;
+package io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory;
 
 import io.github.gleidsonmt.dashboardfx.model.User;
 
