@@ -18,7 +18,7 @@ import java.util.Objects;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  31/03/2025
  */
-public class BoxModule extends VBox {
+public class  BoxModule extends VBox {
 
     private String name;
 

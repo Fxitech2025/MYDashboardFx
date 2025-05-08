@@ -1,8 +1,8 @@
 package io.github.gleidsonmt.dashboardfx.dashboard;
 
+import io.github.gleidsonmt.glad.base.responsive.Break;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
-import io.github.gleidsonmt.glad.responsive.Break;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;

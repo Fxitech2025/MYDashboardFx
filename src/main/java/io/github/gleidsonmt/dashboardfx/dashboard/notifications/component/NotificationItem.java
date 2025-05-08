@@ -15,10 +15,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -83,7 +80,7 @@ public class NotificationItem<T extends Notification> extends ToggleButton {
         card.add(title, 1, 0);
         card.add(legend, 1, 1);
 
-        Text passed = new Text(StringUtils.formatDuration(notification.getDateTime(), LocalDateTime.now()));
+        Text passed =  new Text(StringUtils.formatDuration(notification.getDateTime(), LocalDateTime.now()));
 
         if (!notification.visualized()) {
             Circle circle = new Circle();
@@ -97,18 +94,19 @@ public class NotificationItem<T extends Notification> extends ToggleButton {
         GridPane.setHalignment(passed, HPos.RIGHT);
         GridPane.setColumnSpan(passed, REMAINING);
         GridPane.setRowSpan(avatar, 2);
+        GridPane.setHgrow(title, Priority.ALWAYS);
 
         switch (notification.getType()) {
             case FOLLOW -> {
                 Text textContent = new Text(" followed you");
                 textContent.getStyleClass().addAll("h5");
-                title.getChildren().add(textContent);
+                title.getChildren().add(new TextFlow(textContent));
             }
             case COMMENT -> {
                 Text textContent = new Text(" commented on your post");
                 textContent.getStyleClass().addAll("h5");
 
-                title.getChildren().add(textContent);
+                title.getChildren().add(new TextFlow(textContent));
 
                 if (notification instanceof CommentNotification commentNotification) {
                     Text comment = new Text(commentNotification.getPost());
@@ -165,16 +163,16 @@ public class NotificationItem<T extends Notification> extends ToggleButton {
         GridPane card = new GridPane();
         card.setHgap(15);
         card.setPadding(new Insets(5));
-
-        ColumnConstraints one = new ColumnConstraints();
-        one.setPercentWidth(10);
-        ColumnConstraints two = new ColumnConstraints();
-        two.setPercentWidth(70);
-        ColumnConstraints three = new ColumnConstraints();
-        three.setPercentWidth(10);
-        ColumnConstraints four = new ColumnConstraints();
-        four.setPercentWidth(10);
-        card.getColumnConstraints().addAll(one, two, three, four);
+//
+//        ColumnConstraints one = new ColumnConstraints();
+//        one.setPercentWidth(10);
+//        ColumnConstraints two = new ColumnConstraints();
+//        two.setPercentWidth(70);
+//        ColumnConstraints three = new ColumnConstraints();
+//        three.setPercentWidth(10);
+//        ColumnConstraints four = new ColumnConstraints();
+//        four.setPercentWidth(10);
+//        card.getColumnConstraints().addAll(one, two, three, four);
 
         return card;
     }

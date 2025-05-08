@@ -39,6 +39,8 @@ dependencies {
     implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+    implementation project(":blockcode")
 }
 
 test {

@@ -31,7 +31,7 @@ import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.controls.badge.Badge;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
-import io.github.gleidsonmt.glad.responsive.Break;
+import io.github.gleidsonmt.glad.base.responsive.Break;
 import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -40,13 +40,12 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Stack;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -108,29 +107,41 @@ public class Main extends Root {
         );
 
         badgeNotification.setOnMouseClicked(e -> {
+
             Root root = (Root) getScene().getRoot();
 
-            root.flow().openByCursor(notificationManager.getRoot(), e, 10, 20);
+            Layout layout = root.getLayout();
 
+            Layout old = root.getLayout();
             root.wrapper().setOnClick(ev -> {
-                root.flow().remove(notificationManager.getRoot());
                 root.wrapper().hide();
+//                root.setLayout(old);
+                root.flow().remove(notificationManager.getRoot());
+//                System.out.println("what");
+//                drawer.currentModuleProperty().set(old);
             });
 
-            root.wrapper().show();
-            notificationManager.getRoot().toFront();
+            if (layout.lowerThan(layout.getSize(), Break.MD)) {
+//                drawer.currentModuleProperty().set(new View("Test", notificationManager.getRoot()));
+                root.flow().remove(notificationManager.getRoot());
+                notificationManager.useHeader();
+                StackPane.clearConstraints(notificationManager.getRoot());
+                notificationManager.getRoot().setTranslateX(0);
+                notificationManager.getRoot().setTranslateY(0);
+                notificationManager.getRoot().setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+                root.setLayout(new Layout(notificationManager.getRoot()));
+            } else {
+                root.wrapper().show();
+                root.flow().openByCursor(notificationManager.getRoot(), e, 10, 20);
+            }
 
+
+
+//            notificationManager.getRoot().toFront();
         });
-
 
         Badge badgeMessage = new Badge(Icon.CHAT, 8, 10);
         badgeMessage.setStyle("-fx-box-color: -red-500;;");
-
-        badgeMessage.setOnMouseClicked(e -> {
-
-
-
-        });
 
         navBar.add(badgeNotification, 2, 0);
         navBar.add(badgeMessage, 1, 0);
@@ -156,20 +167,74 @@ public class Main extends Root {
             behavior().openDrawer();
         });
 
-        drawer = new Drawer(new View("Dashboard", new Dashboard()), new ModuleSeparator(new SVGIcon(Icon.HUB), "Project"), new Module("Core", new View("Introduction", new Introduction()), new View("Wrapper", new Wrapper()), new View("Flow", new FlowPres()), new View("Behavior", new Behavior())), new ModuleSeparator(new SVGIcon(Icon.DESIGN_SERVICES), "Theme"), new Module("Shapes", new View("Text", new TextPres()), new View("Circle", new BuildingPage())), new Module("Controls", new View("Region", new RegionPres()), new View("Labeled", new LabeledPres()), new View("Text Input", new TextInputPres()), new View("Progress Bar", new ProgressBarPres()), new View("Table View", new TableViewPres()), new View("Tree View", new TreeViewPres()), new View("List View", new ListViewPres())), new Module("Containers", new View("TitledPane", new BuildingPage()), new View("TabPane", new TabPres()), new View("Text Flow", new TextFlowPres())), new Module("Charts", new View("Bar Chart", new BarChartPres()), new View("Area Chart", new AreaChartPres()), new View("Stacked Area Chart", new StackedAreaChartPres()), new View("Stacked Bar Chart", new StackedBarChartPres()), new View("Pie Chart", new DonutChartPres()), new View("Line Chart", new LineChartPres())), new ModuleSeparator(new SVGIcon(Icon.STACK), "Examples"), new Module("Components",
+        drawer = new Drawer(
+                new View("Dashboard", new Dashboard()),
+                new ModuleSeparator(new SVGIcon(Icon.HUB), "Project"),
+                new Module("Core",
+                        new View("Introduction", new Introduction()),
+                        new View("Wrapper", new Wrapper()),
+                        new View("Flow", new FlowPres()),
+                        new View("Behavior", new Behavior())),
+                new ModuleSeparator(new SVGIcon(Icon.DESIGN_SERVICES), "Theme"),
+                new Module("Shapes",
+                        new View("Text", new TextPres()),
+                        new View("Circle", new BuildingPage())),
+                new Module("Controls",
+                        new View("Region", new RegionPres()),
+                        new View("Labeled", new LabeledPres()),
+                        new View("Text Input", new TextInputPres()),
+                        new View("Progress Bar", new ProgressBarPres()),
+                        new View("Table View", new TableViewPres()),
+                        new View("Tree View", new TreeViewPres()),
+                        new View("List View", new ListViewPres())),
+                new Module("Containers",
+                        new View("TitledPane", new BuildingPage()),
+                        new View("TabPane", new TabPres()),
+                        new View("Text Flow", new TextFlowPres())),
+                new Module("Charts",
+                        new View("Bar Chart", new BarChartPres()),
+                        new View("Area Chart", new AreaChartPres()),
+                        new View("Stacked Area Chart", new StackedAreaChartPres()),
+                        new View("Stacked Bar Chart", new StackedBarChartPres()),
+                        new View("Pie Chart", new DonutChartPres()),
+                        new View("Line Chart", new LineChartPres())),
+                new ModuleSeparator(new SVGIcon(Icon.STACK), "Examples"),
+                new Module("Components",
 
-                new View("SVGIcon", new SVGIconPres()), new View("Button", new ButtonExample()), new View("Badge", new BadgeExample()), new View("Avatar View", new AvatarPres()), new View("Toggle Switch", new ToggleSwitchPres())
+                        new View("SVGIcon", new SVGIconPres()),
+                        new View("Button", new ButtonExample()),
+                        new View("Badge", new BadgeExample()),
+                        new View("Avatar View", new AvatarPres()),
+                        new View("Toggle Switch", new ToggleSwitchPres())
 
-        ), new Module("Styled", new View("Drawer", new DrawerExample()), new View("BreadCrumb", new BuildingPage()), new View("Tree View", new TreeViewExample()), new View("Label", new LabelExample()), new View("Cards", new CardsPres())), new Module("Pages", new View("Home Page", new HomePage()), new View("Login", new LoginPage()), new View("Error Page 404", new ErrorPage("ModuleCreator not found"))), new ModuleSeparator(new SVGIcon(Icon.HELP), "Theme"), new Module("Utils", new View("Pallet Color", new ColorsPres()), new View("Alignment", new BuildingPage())), new View("About", new AboutPres()));
+                ),
+                new Module("Styled",
+                        new View("Drawer", new DrawerExample()),
+                        new View("BreadCrumb", new BuildingPage()),
+                        new View("Tree View", new TreeViewExample()),
+                        new View("Label", new LabelExample()),
+                        new View("Cards", new CardsPres())),
+                new Module("Pages",
+                        new View("Home Page", new HomePage()),
+                        new View("Login", new LoginPage()),
+                        new View("Error Page 404", new ErrorPage("ModuleCreator not found"))),
+                new ModuleSeparator(new SVGIcon(Icon.HELP), "Theme"),
+                new Module("Utils",
+                        new View("Pallet Color", new ColorsPres()),
+                        new View("Alignment", new BuildingPage())),
+                new View("About", new AboutPres())
+        );
 
         drawer.setHeader(new DrawerHeader());
         drawer.setFooter(new DrawerFooter());
 
-        drawer.currentModuleProperty().addListener((observableValue, oldValue, newValue) -> {
+        drawer.currentModuleProperty().addListener((_, oldValue, newValue) -> {
             if (newValue instanceof View view) {
+                
                 if (view.getContent() != null) body.setContent(view.getContent());
                 if (view.getOnEnter() != null) view.getOnEnter().handle(new ActionEvent());
                 if (view.getContent() instanceof ModuleLoad mod) mod.load();
+                
             } else {
                 body.setContent(new ErrorPage(newValue.getName()));
             }

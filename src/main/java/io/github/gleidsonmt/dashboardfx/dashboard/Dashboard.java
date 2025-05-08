@@ -2,11 +2,11 @@ package io.github.gleidsonmt.dashboardfx.dashboard;
 
 import io.github.gleidsonmt.dashboardfx.model.*;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
+import io.github.gleidsonmt.glad.base.responsive.Break;
+import io.github.gleidsonmt.glad.base.responsive.ResponsiveGrid;
 import io.github.gleidsonmt.glad.charts.DonutChart;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
-import io.github.gleidsonmt.glad.responsive.Break;
-import io.github.gleidsonmt.glad.responsive.ResponsiveGrid;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -29,8 +29,6 @@ public class Dashboard extends ResponsiveGrid {
 
     public Dashboard() {
         super(true);
-
-
 
         setPadding(new Insets(20));
 

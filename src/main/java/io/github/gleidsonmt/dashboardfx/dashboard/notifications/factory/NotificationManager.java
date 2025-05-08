@@ -4,8 +4,10 @@ import io.github.gleidsonmt.dashboardfx.dashboard.notifications.component.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.control.Button;
 import javafx.scene.control.Separator;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -27,9 +29,13 @@ public class NotificationManager {
                 new Separator(),
                 new NotificationBody(this),
                 new Separator(),
-                new NotificationFooter());
+                new NotificationFooter()
+                );
     }
 
+    public void useHeader() {
+        pane.getChildren().add(0, new Button("close"));
+    }
 
     public void add(NotificationItem<Notification> notification) {
         notifications.add(notification);

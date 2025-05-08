@@ -1,9 +1,10 @@
 module io.github.gleidsonmt.dashboardfx {
+
     requires io.github.gleidsonmt.glad;
     requires io.github.gleidsonmt.presentation;
+    requires io.github.gleidsonmt.blockcode;
 
     requires org.jetbrains.annotations;
-    requires io.github.gleidsonmt.blockcode;
     requires org.scenicview.scenicview;
     requires fr.brouillard.oss.cssfx;
     requires java.net.http;

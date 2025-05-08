@@ -20,11 +20,13 @@ public class NotificationBody extends ScrollPane {
         getStyleClass().add("notification-body");
         VBox container = new VBox();
         setContent(container);
+
         setFitToWidth(true);
         setFitToHeight(true);
-        setMinWidth(600);
-        setPrefWidth(600);
-        setMaxWidth(600);
+
+//        setMinWidth(600);
+//        setPrefWidth(600);
+//        setMaxWidth(600);
 
         container.setFillWidth(true);
         container.setSpacing(10);

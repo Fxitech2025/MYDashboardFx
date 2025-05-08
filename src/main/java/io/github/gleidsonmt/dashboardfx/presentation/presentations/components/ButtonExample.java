@@ -1,8 +1,7 @@
 package io.github.gleidsonmt.dashboardfx.presentation.presentations.components;
 
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
-import io.github.gleidsonmt.glad.controls.button.Button;
-import io.github.gleidsonmt.glad.controls.button.IconButton;
+import io.github.gleidsonmt.glad.controls.button.*;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import javafx.geometry.Insets;
@@ -43,6 +42,16 @@ public class ButtonExample extends StackPane {
                                IconButton button = new IconButton(new SVGIcon(Icon.APPS));
                                button.getStyleClass().add("raised");
                                 """)
+
+                        .h3("Animated", "Button")
+                        .legend("io.github.gleidsonmt.glad.controls.button.AnimatedButton")
+//                        .demo(new Node[]{
+//                                new SwipeDiagonal(),
+//                                new AlternateButton(),
+//                                new SmoothButton(),
+//                                new CornerButton(),
+//                                new CentralizeButton(),
+//                        })
                         .build()
                         .getRoot()
         );

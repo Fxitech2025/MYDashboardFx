@@ -14,6 +14,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +31,7 @@ public class NotificationsToggle extends HBox {
 
     public NotificationsToggle(NotificationManager manager) {
         this.manager = manager;
+
         setMinHeight(50);
         getStyleClass().add("notifications-toggle");
 
@@ -65,7 +67,9 @@ class CustomToggle extends ToggleButton {
     public CustomToggle(String text, NotificationManager manager, NotificationType type) {
         super(text);
         getStyleClass().addAll("notification-toggle", "cursor-hand");
-        setPrefWidth(150);
+        this.prefWidthProperty().bind(this.widthProperty().divide(4));
+        HBox.setHgrow(this, Priority.ALWAYS);
+        setMaxWidth(Double.MAX_VALUE);
         setPrefHeight(35);
         Text textSize = new Text();
         setGraphic(textSize);

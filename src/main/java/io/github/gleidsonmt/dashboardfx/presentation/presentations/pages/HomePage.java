@@ -2,11 +2,10 @@ package io.github.gleidsonmt.dashboardfx.presentation.presentations.pages;
 
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.glad.base.Container;
-import io.github.gleidsonmt.glad.controls.avatar.AvatarCircleView;
+import io.github.gleidsonmt.glad.base.responsive.Break;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
-import io.github.gleidsonmt.glad.responsive.Break;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -123,6 +122,7 @@ public class HomePage extends Container {
     }
 
     private @NotNull Node createLoginLink() {
+
         Hyperlink login = new Hyperlink("Login");
         login.getStyleClass().addAll("h5", "display-right", "min-w-100");
         login.setGraphic(new SVGIcon(Icon.ARROW_RIGHT_ALT));
@@ -136,10 +136,16 @@ public class HomePage extends Container {
     }
 
     private @NotNull Node createLinks() {
-        Hyperlink product = new Hyperlink("Product");
         Hyperlink features = new Hyperlink("Features");
         Hyperlink company = new Hyperlink("Company");
         Hyperlink marketplace = new Hyperlink("Marketplace");
+
+        Hyperlink product = new Hyperlink("Product");
+//        Node features = create("Features");
+//        Node company = create("Company");
+//        Node product = create("Product");
+//        Node marketplace = create("Marketplace");
+
         TilePane box = new TilePane(product, features, company, marketplace);
         box.getChildren().forEach(el -> {
             el.getStyleClass().addAll("h5");
