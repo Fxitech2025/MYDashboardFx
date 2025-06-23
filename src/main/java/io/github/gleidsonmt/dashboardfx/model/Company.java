@@ -6,8 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.scene.image.Image;
 
-import javax.swing.*;
-
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  14/03/2025

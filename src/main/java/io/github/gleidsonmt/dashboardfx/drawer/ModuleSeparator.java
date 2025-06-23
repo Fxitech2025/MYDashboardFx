@@ -1,5 +1,6 @@
 package io.github.gleidsonmt.dashboardfx.drawer;
 
+import io.github.gleidsonmt.glad.base.internal.Module;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
@@ -8,7 +9,7 @@ import javafx.scene.layout.Pane;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  10/04/2025
  */
-public class ModuleSeparator implements ModuleCreator {
+public class ModuleSeparator implements Module {
 
     private String text;
     private Node icon;
@@ -31,7 +32,7 @@ public class ModuleSeparator implements ModuleCreator {
     }
 
     @Override
-    public ObservableList<ModuleCreator> getModules() {
+    public ObservableList<Module> getModules() {
         return null;
     }
 
@@ -46,12 +47,12 @@ public class ModuleSeparator implements ModuleCreator {
     }
 
     @Override
-    public void setParent(ModuleCreator parent) {
+    public void setParent(Module parent) {
 
     }
 
     @Override
-    public ModuleCreator getParent() {
+    public Module getParent() {
         return null;
     }
 

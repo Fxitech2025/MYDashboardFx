@@ -31,6 +31,7 @@ import javafx.scene.text.TextFlow;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  02/07/2023
  */
+@Deprecated(forRemoval = true)
 public class ErrorPage extends ScrollPane {
 
     private final VBox body = new VBox();
@@ -51,7 +52,7 @@ public class ErrorPage extends ScrollPane {
         errorTitle.setText("404");
         title.setText("The module was not found.");
         legend.setText("Sorry, system couldn't find the view.");
-        info.setText("View/Module \'" + name + "\' doesn't exist.");
+        info.setText("View/ModuleView \'" + name + "\' doesn't exist.");
         configLayout();
     }
 

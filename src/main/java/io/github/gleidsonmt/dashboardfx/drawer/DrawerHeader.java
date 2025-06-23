@@ -1,20 +1,13 @@
 package io.github.gleidsonmt.dashboardfx.drawer;
 
-import io.github.gleidsonmt.dashboardfx.App;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-
-import java.util.Objects;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -32,11 +25,11 @@ public class DrawerHeader extends GridPane {
 //        ImageView logoTest = new ImageView();
 //        logoTest.setFitWidth(50);
 //        logoTest.setFitHeight(50);
-//        logoTest.setImage(new Image(Objects.requireNonNull(App.class.getResource("img/logo_128.png")).toExternalForm()));
+//        logoTest.setImage(new Image(Objects.requireNonNull(AppOld.class.getResource("img/logo_128.png")).toExternalForm()));
 
         Text title = new Text("Blue Galaxy");
-//        Font.loadFont(Objects.requireNonNull(App.class.getResource("fonts/Instagram-Sans-Bold.ttf")).toExternalForm(), 16);
-//        title.setFont(Font.loadFont(App.class.getResource("fonts/Instagram-Sans.ttf").toExternalForm(), 16));
+//        Font.loadFont(Objects.requireNonNull(AppOld.class.getResource("fonts/Instagram-Sans-Bold.ttf")).toExternalForm(), 16);
+//        title.setFont(Font.loadFont(AppOld.class.getResource("fonts/Instagram-Sans.ttf").toExternalForm(), 16));
         title.setStyle("-fx-font-family: \"Instagram Sans\"; -fx-font-size: 28px; -fx-fill: -fx-accent; -fx-font-weight: bold;");
 
         Text legend = new Text("Gleidson, Inc. v0.7.223");

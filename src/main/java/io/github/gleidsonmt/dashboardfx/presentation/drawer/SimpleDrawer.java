@@ -1,6 +1,5 @@
 package io.github.gleidsonmt.dashboardfx.presentation.drawer;
 
-import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import javafx.beans.property.ObjectProperty;

@@ -3,7 +3,9 @@ package io.github.gleidsonmt.dashboardfx.presentation.core;
 import io.github.gleidsonmt.dashboardfx.Main;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
+import io.github.gleidsonmt.glad.base.Layout;
 import io.github.gleidsonmt.glad.base.Root;
+import io.github.gleidsonmt.glad.base.RootImpl;
 import io.github.gleidsonmt.glad.base.WrapperEffect;
 import io.github.gleidsonmt.glad.dialog.alert.AlertType;
 import javafx.event.ActionEvent;
@@ -11,7 +13,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -28,7 +29,7 @@ public class Behavior extends StackPane {
 //        layout.addPoint(event -> {
 //
 //        });
-//        Root ro = new Root(new Layout());
+//        RootImpl ro = new RootImpl(new Layout());
 //        ro.behavior().openDrawer();
 
 //        ro.behavior().alert().open();
@@ -36,12 +37,12 @@ public class Behavior extends StackPane {
                 new Tutorial()
                         .h3("Behavior")
                         .text("""
-                                Behavior class has calling the actions on the root.""")
+                                Behavior class has calling the actions on the rootImpl.""")
                         .legend("io.github.gleidsonmt.glad.base.Behavior")
                         .h4("Dialogs", "Behavior")
                         .demo(
                                 createDemo(e -> {
-                                    Main main = (Main) getScene().getRoot();
+                                    Root main = (Root) getScene().getRoot();
                                     Button ok = new Button("Button");
                                     ok.setOnAction(el -> {
                                         main.behavior().dialog().close();
@@ -63,43 +64,43 @@ public class Behavior extends StackPane {
                         .h4("Opening", "Behavior")
                         .demo(new Node[]{
                                         createDemo(e -> {
-                                                    Root root = (Root) this.getScene().getRoot();
-                                                    root.behavior().alert().open("About", new Text("Press escape to close."), AlertType.ERROR);
+                                                    RootImpl rootImpl = (RootImpl) this.getScene().getRoot();
+                                                    rootImpl.behavior().alert().open("About", new Text("Press escape to close."), AlertType.ERROR);
                                                 }
                                         ),
                                         createDemo(e -> {
-                                                    Root root = (Root) this.getScene().getRoot();
-                                                    root.behavior().alert().open("About", new Text("Press  to close."), AlertType.INFO);
+                                                    RootImpl rootImpl = (RootImpl) this.getScene().getRoot();
+                                                    rootImpl.behavior().alert().open("About", new Text("Press  to close."), AlertType.INFO);
                                                 }
                                         ),
                                         createDemo(e -> {
-                                                    Root root = (Root) this.getScene().getRoot();
-                                                    root.behavior().alert().open("About", new Text("Press  to close."), AlertType.WARNING);
+                                                    RootImpl rootImpl = (RootImpl) this.getScene().getRoot();
+                                                    rootImpl.behavior().alert().open("About", new Text("Press  to close."), AlertType.WARNING);
                                                 }
                                         ),
                                         createDemo(e -> {
-                                                    Root root = (Root) this.getScene().getRoot();
-                                                    root.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS);
+                                                    RootImpl rootImpl = (RootImpl) this.getScene().getRoot();
+                                                    rootImpl.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS);
                                                 }
                                         )
                                 }
                         )
                         .code("""
-                                 root.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.INFO);
-                                 root.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.WARNING);
-                                 root.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.DANGER);
-                                 root.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.SUCCESS);
+                                 rootImpl.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.INFO);
+                                 rootImpl.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.WARNING);
+                                 rootImpl.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.DANGER);
+                                 rootImpl.behavior().alert().open("About", new Text("Lorem ipsum dolor color"), AlertType.SUCCESS);
                                 """)
                         .h4("Combine with Wrapper", "Behavior")
                         .demo(createDemo(e -> {
-                            Root root = (Root) this.getScene().getRoot();
-                            root.wrapper().show(WrapperEffect.BLUR);
-                            root.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS);
+                            RootImpl rootImpl = (RootImpl) this.getScene().getRoot();
+                            rootImpl.wrapper().show(WrapperEffect.BLUR);
+                            rootImpl.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS);
                         }))
                         .code("""
-                                Root root = (Root) this.getScene().getRoot();
-                                root.wrapper().show(WrapperEffect.BLUR);
-                                root.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS);
+                                Root rootImpl = (Root) this.getScene().getRoot();
+                                rootImpl.wrapper().show(WrapperEffect.BLUR);
+                                rootImpl.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS);
                                 """)
                         .h4("Add Buttons", "Behavior")
                         .text("""
@@ -107,28 +108,28 @@ public class Behavior extends StackPane {
                                 """)
                         .node(TutorialUtils.createLink("See more in Button Bar", "Button Bar"))
                         .demo(createDemo(e -> {
-                            Root root = (Root) this.getScene().getRoot();
+                            RootImpl rootImpl = (RootImpl) this.getScene().getRoot();
                             Button cancel = new Button("Cancel");
                             Button apply = new Button("Apply");
                             cancel.setCancelButton(true);
                             cancel.setOnAction(_ -> {
-                                root.wrapper().hide();
-                                root.behavior().alert().close();
+                                rootImpl.wrapper().hide();
+                                rootImpl.behavior().alert().close();
                             });
-                            root.wrapper().show(WrapperEffect.BLUR);
-                            root.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS, cancel, apply);
+                            rootImpl.wrapper().show(WrapperEffect.BLUR);
+                            rootImpl.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS, cancel, apply);
                         }))
                         .code("""
                                 Button cancel = new Button("Cancel");
                                 Button apply = new Button("Apply");
-                                root.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS, cancel, apply);
+                                rootImpl.behavior().alert().open("About", new Text("Press  to close."), AlertType.SUCCESS, cancel, apply);
                                 """)
 
                         .h4("Close the Alert", "Behavior")
                         .code("""
                                 Button cancel = new Button("Cancel");
                                 cancel.setOnAction(event -> {
-                                    root.behavior().alert().close();
+                                    rootImpl.behavior().alert().close();
                                 });
                                 """)
 
@@ -140,7 +141,7 @@ public class Behavior extends StackPane {
                                 but the width is larger nothing happens. 
                                 """)
                         .demo(createDemo())
-                        .code("root.behavior().openDrawer();")
+                        .code("rootImpl.behavior().openDrawer();")
 
                         .build()
                         .getRoot()
@@ -158,8 +159,8 @@ public class Behavior extends StackPane {
     private Node createDemo() {
         Button button = new Button("Click on me!");
         button.setOnAction(e -> {
-            Root root = (Root) button.getScene().getRoot();
-            root.behavior().openDrawer();
+            RootImpl rootImpl = (RootImpl) button.getScene().getRoot();
+            rootImpl.behavior().openDrawer();
         });
         return button;
     }

@@ -1,7 +1,10 @@
 package io.github.gleidsonmt.dashboardfx.drawer;
+//
+//import io.github.gleidsonmt.dashboardfx.Main;
+//import io.github.gleidsonmt.dashboardfx.presentation.internal.CardContainerLink;
 
-import io.github.gleidsonmt.dashboardfx.Main;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.CardContainerLink;
+import io.github.gleidsonmt.glad.base.Root;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
@@ -10,19 +13,19 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
+//
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  20/03/2025
  */
 public class DrawerFooter extends StackPane {
-
+//
     private final String jenkovWebSite = "https://jenkov.com/tutorials/javafx/index.html";
     private Hyperlink link;
 
     public DrawerFooter() {
         Text text = new Text("Get deeper");
-        text.getStyleClass().addAll("text-white", "h4", "bold");
+        text.getStyleClass().addAll("text-white h4 bold".split(" "));
 
         this.getChildren().addAll(text);
         StackPane.setAlignment(text, Pos.TOP_CENTER);
@@ -35,9 +38,9 @@ public class DrawerFooter extends StackPane {
         this.getChildren().add(link);
 
         link.setOnAction(e -> {
-            Main main = (Main) getScene().getRoot();
-            main.wrapper().show();
-            main.behavior().dialog().open(new CardContainerLink());
+            Root root = (Root) getScene().getRoot();
+            root.wrapper().show();
+            root.behavior().dialog().open(new CardContainerLink());
         });
 
         addCircles();
@@ -45,8 +48,6 @@ public class DrawerFooter extends StackPane {
         VBox.setMargin(this, new Insets(40, 40, 0,40));
         setAlignment(Pos.BOTTOM_CENTER);
     }
-
-
 
     private void addCircles() {
         Circle circle = createCircle();

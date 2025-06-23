@@ -2,6 +2,8 @@ package io.github.gleidsonmt.dashboardfx.presentation.core;
 
 import io.github.gleidsonmt.dashboardfx.Main;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import io.github.gleidsonmt.glad.base.Layout;
+import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.base.WrapperEffect;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -48,7 +50,7 @@ public class Wrapper extends StackPane {
     private Node createDemo(WrapperEffect wrapperEffect) {
         Button button = new Button("Click on me");
         button.setOnAction(e -> {
-            Main main = (Main) getScene().getRoot();
+            Root main = (Root) getScene().getRoot();
             main.wrapper().show(wrapperEffect);
         });
         return button;

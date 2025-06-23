@@ -1,7 +1,7 @@
 package io.github.gleidsonmt.dashboardfx.breadcrumb;
 
-import io.github.gleidsonmt.dashboardfx.drawer.ModuleCreator;
-import io.github.gleidsonmt.dashboardfx.drawer.View;
+import io.github.gleidsonmt.glad.base.internal.Module;
+import io.github.gleidsonmt.glad.base.internal.View;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import javafx.beans.property.ObjectProperty;
@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.shape.Circle;
 import org.jetbrains.annotations.ApiStatus;
-
+//
 import java.util.Objects;
 
 /**
@@ -24,15 +24,15 @@ import java.util.Objects;
 @ApiStatus.Experimental
 public class BreadCrumbBar extends FlowPane {
 
-    private ObjectProperty<ModuleCreator> currentModule;
+    private ObjectProperty<Module> currentModule;
     private ObjectProperty<BreadSeparator> separator = new SimpleObjectProperty<>(BreadSeparator.BAR);
-
+//
     public BreadCrumbBar() {
         getStyleClass().add("breadcrumb");
         setAlignment(Pos.CENTER_LEFT);
         this.currentModule = new SimpleObjectProperty<>();
-//        this.currentModuleImpl.bindBidirectional(currentModuleImpl);
-
+//        this.currentModule.bindBidirectional(currentModule);
+//
         this.currentModule.addListener((observableValue, module, newValue) -> {
             getChildren().clear();
             recur(newValue);
@@ -50,26 +50,26 @@ public class BreadCrumbBar extends FlowPane {
                 last.setVisited(true);
             }
 
-            if (getChildren().size() == 1) {
-                getChildren().getFirst().getStyleClass().remove("last");
-                if (getChildren().getFirst() instanceof Hyperlink h) {
-                    h.setVisited(false);
-                }
-                getChildren().getFirst().setMouseTransparent(true);
-            }
+//            if (getChildren().size() == 1) {
+//                getChildren().getFirst().getStyleClass().remove("last");
+//                if (getChildren().getFirst() instanceof Hyperlink h) {
+//                    h.setVisited(false);
+//                }
+//                getChildren().getFirst().setMouseTransparent(true);
+//            }
         });
 
-//        getStylesheets().add(getClass().getResource("breadcrumb.css").toExternalForm());
+////        getStylesheets().add(getClass().getResource("breadcrumb.css").toExternalForm());
     }
-
-    public void setVariant(String number) {
-        getStylesheets().add(Objects.requireNonNull(getClass().getResource("variant_" + number + ".css")).toExternalForm());
-        if (number.equals("four")) {
-            setSeparator(BreadSeparator.NONE);
-            this.setHgap(0);
-        }
-    }
-
+//
+//    public void setVariant(String number) {
+//        getStylesheets().add(Objects.requireNonNull(getClass().getResource("variant_" + number + ".css")).toExternalForm());
+//        if (number.equals("four")) {
+//            setSeparator(BreadSeparator.NONE);
+//            this.setHgap(0);
+//        }
+//    }
+//
     public Node getLastChild() {
         return getChildren().get(getChildren().size() - 1);
     }
@@ -78,11 +78,11 @@ public class BreadCrumbBar extends FlowPane {
         return getChildren().get(0);
     }
 
-    public void setSeparator(BreadSeparator separator) {
-        this.separator.set(separator);
-    }
-
-    public void recur(ModuleCreator module) {
+//    public void setSeparator(BreadSeparator separator) {
+//        this.separator.set(separator);
+//    }
+//
+    public void recur(Module module) {
         if (module != null) {
 //            if (moduleImpl instanceof View view) {
 //                getChildren().add(0, createLink(moduleImpl));
@@ -99,7 +99,7 @@ public class BreadCrumbBar extends FlowPane {
         }
     }
 
-    private Hyperlink createLink(ModuleCreator moduleImpl) {
+    private Hyperlink createLink(Module moduleImpl) {
         Hyperlink text = new Hyperlink(moduleImpl.getName());
 
         if (moduleImpl.getGraphic() != null) {
@@ -114,7 +114,7 @@ public class BreadCrumbBar extends FlowPane {
         return text;
     }
 
-    private Hyperlink createText(ModuleCreator moduleImpl) {
+    private Hyperlink createText(Module moduleImpl) {
         Hyperlink text = new Hyperlink(moduleImpl.getName());
         text.getStyleClass().addAll("h5");
 
@@ -166,15 +166,15 @@ public class BreadCrumbBar extends FlowPane {
         return label;
     }
 
-    public ModuleCreator getCurrentModule() {
+    public Module getCurrentModule() {
         return currentModule.get();
     }
 
-    public ObjectProperty<ModuleCreator> currentModuleProperty() {
+    public ObjectProperty<Module> currentModuleProperty() {
         return currentModule;
     }
 
-    public void setCurrentModule(ModuleCreator currentModuleImpl) {
+    public void setCurrentModule(Module currentModuleImpl) {
         this.currentModule.set(currentModuleImpl);
     }
 }

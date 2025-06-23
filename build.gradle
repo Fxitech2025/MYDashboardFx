@@ -23,7 +23,16 @@ tasks.withType(JavaCompile).configureEach {
 
 application {
     mainModule = 'io.github.gleidsonmt.dashboardfx'
-    mainClass = 'io.github.gleidsonmt.dashboardfx.Start'
+    mainClass = 'io.github.gleidsonmt.dashboardfx.App'
+}
+
+subprojects {
+    // Thanks GOD!
+    tasks.configureEach { task ->
+        if (task.name.contains("run")) {
+            task.enabled = false
+        }
+    }
 }
 
 javafx {
@@ -34,14 +43,27 @@ javafx {
 
 dependencies {
     implementation fileTree('vendor') { include '*.jar' }
+//    implementation files('vendor/colors-1.0.jar');
+//    implementation files('vendor/scenicview.jar');
     implementation 'org.jetbrains:annotations:24.0.1'
-    implementation 'fr.brouillard.oss:cssfx:11.5.1' // Special lib to visualize css when app is running.. so amazing!
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
+//    implementation 'fr.brouillard.oss:cssfx:11.5.1' // Special lib to visualize css when app is running.. so amazing!
+//    implementation group: 'org.yaml', name: 'snakeyaml', version: '2.2'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 
     implementation project(":blockcode")
+    implementation project(":glad")
+    implementation project(":presentation")
+
 }
+
+//distTar {
+//    setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+//}
+//
+//distZip {
+//    setDuplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+//}
 
 test {
     useJUnitPlatform()

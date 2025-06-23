@@ -1,7 +1,22 @@
 package io.github.gleidsonmt.dashboardfx.drawer;
 
+import io.github.gleidsonmt.dashboardfx.dashboard.Dashboard;
 import io.github.gleidsonmt.dashboardfx.presentation.Scroll;
+import io.github.gleidsonmt.dashboardfx.presentation.about.AboutPres;
+import io.github.gleidsonmt.dashboardfx.presentation.drawer.DrawerExample;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.*;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.*;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.*;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.TextFlowPres;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.HomePage;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.LoginPage;
+import io.github.gleidsonmt.dashboardfx.presentation.presentations.shapes.TextPres;
+import io.github.gleidsonmt.dashboardfx.presentation.util.ColorsPres;
+import io.github.gleidsonmt.dashboardfx.utils.pages.BuildingPage;
+import io.github.gleidsonmt.glad.base.internal.Module;
+import io.github.gleidsonmt.glad.base.internal.ModuleView;
+import io.github.gleidsonmt.glad.base.internal.View;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import io.github.gleidsonmt.glad.controls.text_box.TextBox;
@@ -9,11 +24,14 @@ import io.github.gleidsonmt.presentation.TreeTitle;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
-import javafx.scene.CacheHint;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.ApiStatus;
@@ -30,24 +48,83 @@ import java.util.function.Predicate;
 @ApiStatus.Experimental
 public class Drawer extends VBox {
 
-    private ObjectProperty<ModuleCreator> currentModule = new SimpleObjectProperty<>();
+    private ObjectProperty<Module> currentModule = new SimpleObjectProperty<>();
 
-    private List<ModuleCreator> modules;
+    private List<Module> modules;
 
-    private DrawerContainer drawerContainer;
+    private final DrawerContainer drawerContainer;
     private ToggleGroup group = new ToggleGroup();
 
-    private TextBox search = new TextBox(Icon.SEARCH);
+    private final TextBox search = new TextBox(Icon.SEARCH);
 //    String text, Icon _icon, boolean animated, boolean mask
 
-    private VBox searchBox = new VBox();
-    private VBox defaultBox = new VBox();
+    private final VBox searchBox = new VBox();
+    private final VBox defaultBox = new VBox();
 
-    public Drawer(ModuleCreator... _modules) {
-        this(List.of(_modules));
+    public Drawer() {
+        this(List.of(
+                new View("Dashboard", new Dashboard()),
+                new ModuleSeparator(new SVGIcon(Icon.HUB), "Project"),
+//                new ModuleView("Core",
+//                        new View("Introduction", new Introduction()),
+//                        new View("Wrapper", new Wrapper()),
+//                        new View("Flow", new FlowPres()),
+//                        new View("Behavior", new Behavior())),
+                new ModuleSeparator(new SVGIcon(Icon.DESIGN_SERVICES), "Theme"),
+                new ModuleView("Shapes",
+                        new View("Text", new TextPres()),
+                        new View("Circle", new BuildingPage())),
+                new ModuleView("Controls",
+                        new View("Region", new RegionPres()),
+                        new View("Labeled", new LabeledPres()),
+                        new View("Text Input", new TextInputPres()),
+                        new View("Progress Bar", new ProgressBarPres()),
+                        new View("Table View", new TableViewPres()),
+                        new View("Tree View", new TreeViewPres()),
+                        new View("List View", new ListViewPres())),
+                new ModuleView("Containers",
+                        new View("TitledPane", new BuildingPage()),
+                        new View("TabPane", new TabPres()),
+                        new View("Text Flow", new TextFlowPres())),
+                new ModuleView("Charts",
+                        new View("Bar Chart", new BarChartPres()),
+                        new View("Area Chart", new AreaChartPres()),
+                        new View("Stacked Area Chart", new StackedAreaChartPres()),
+                        new View("Stacked Bar Chart", new StackedBarChartPres()),
+                        new View("Pie Chart", new DonutChartPres()),
+                        new View("Line Chart", new LineChartPres())),
+                new ModuleSeparator(new SVGIcon(Icon.STACK), "Examples"),
+                new ModuleView("Components",
+
+                        new View("SVGIcon", new SVGIconPres()),
+                        new View("Button", new ButtonExample()),
+                        new View("Badge", new BadgeExample()),
+                        new View("Avatar View", new AvatarPres()),
+                        new View("Toggle Switch", new ToggleSwitchPres())
+
+                ),
+                new ModuleView("Styled",
+                        new View("Drawer", new DrawerExample()),
+                        new View("BreadCrumb", new BuildingPage()),
+                        new View("Tree View", new TreeViewExample()),
+                        new View("Label", new LabelExample()),
+                        new View("Cards", new CardsPres())),
+                new ModuleView("Pages",
+                        new View("Home Page", new HomePage()),
+                        new View("Login", new LoginPage()),
+                        new View("Error Page 404")),
+                new ModuleSeparator(new SVGIcon(Icon.HELP), "Theme"),
+                new ModuleView("Utils",
+                        new View("Pallet Color", new ColorsPres()),
+                        new View("Alignment", new BuildingPage())),
+                new View("About", new AboutPres())
+        ));
+
+        this.setHeader(new DrawerHeader());
+        this.setFooter(new DrawerFooter());
     }
 
-    public Drawer(@NotNull List<ModuleCreator> _modules) {
+    public Drawer(@NotNull List<Module> _modules) {
         this.modules = _modules;
         this.setId("drawer");
         this.drawerContainer = new DrawerContainer(defaultBox);
@@ -94,7 +171,7 @@ public class Drawer extends VBox {
 
         if (!group.getToggles().isEmpty()) {
             group.selectToggle(group.getToggles().get(0));
-            currentModule.setValue((Module) group.getToggles().get(0).getUserData());
+            currentModule.setValue((ModuleView) group.getToggles().get(0).getUserData());
         }
 
         search.textProperty().addListener((_, _, newVal) -> {
@@ -128,7 +205,7 @@ public class Drawer extends VBox {
      * @param module The moduleImpl in the SearchBox.
      * @return The BoxModule (VBox) that is equal to the moduleImpl name.
      */
-    private @NotNull Optional<BoxModule> findModuleInSearchBox(ModuleCreator module) {
+    private @NotNull Optional<BoxModule> findModuleInSearchBox(Module module) {
         return searchBox
                 .getChildren()
                 .stream()
@@ -139,7 +216,7 @@ public class Drawer extends VBox {
                 .findAny();
     }
 
-    private @NotNull Optional<BoxModule> getBoxModule(ModuleCreator e) {
+    private @NotNull Optional<BoxModule> getBoxModule(Module e) {
         return searchBox.getChildren()
                 .stream()
                 .filter(el -> el instanceof BoxModule)
@@ -149,19 +226,19 @@ public class Drawer extends VBox {
     }
 
 
-    private @NotNull List<ModuleCreator> find(Predicate<String> predicate) {
-        List<ModuleCreator> findedList = new ArrayList<>();
+    private @NotNull List<Module> find(Predicate<String> predicate) {
+        List<Module> findedList = new ArrayList<>();
         _find(modules, findedList, predicate);
         return findedList;
     }
 
-    private @Nullable ModuleCreator _find(@NotNull List<ModuleCreator> modules, List<ModuleCreator> findedList, Predicate<String> predicate) {
-        for (ModuleCreator mod : modules) {
+    private @Nullable Module _find(@NotNull List<Module> modules, List<Module> findedList, Predicate<String> predicate) {
+        for (Module mod : modules) {
             if (predicate.test(mod.getName().toLowerCase())) {
                 findedList.add(mod);
             } else {
                 if (!(mod instanceof ModuleSeparator) && !mod.getModules().isEmpty()) {
-                    ModuleCreator module = _find(mod.getModules(), findedList, predicate);
+                    Module module = _find(mod.getModules(), findedList, predicate);
                     if (module != null) {
                         findedList.add(module);
                     }
@@ -171,12 +248,12 @@ public class Drawer extends VBox {
         return null;
     }
 
-    private @Nullable ModuleCreator find(@NotNull List<ModuleCreator> modules, String name) {
-        for (ModuleCreator mod : modules) {
+    private @Nullable Module find(@NotNull List<Module> modules, String name) {
+        for (Module mod : modules) {
             if (!mod.getName().equals(name)) {
                 if (!(mod instanceof ModuleSeparator)) {
                     if (!mod.getModules().isEmpty()) {
-                        ModuleCreator moduleImpl = find(mod.getModules(), name);
+                        Module moduleImpl = find(mod.getModules(), name);
                         if (moduleImpl != null) return moduleImpl;
                     }
                 }
@@ -188,7 +265,7 @@ public class Drawer extends VBox {
     }
 
     public void navigate(String name, String topic) {
-        ModuleCreator moduleImpl = find(this.modules, name);
+        Module moduleImpl = find(this.modules, name);
         currentModule.set(moduleImpl);
 
         TimerTask timerTask = new TimerTask() {
@@ -217,7 +294,7 @@ public class Drawer extends VBox {
     }
 
     public void navigate(String name) {
-        ModuleCreator moduleImpl = find(this.modules, name);
+        Module moduleImpl = find(this.modules, name);
         currentModule.set(moduleImpl);
     }
 
@@ -257,7 +334,7 @@ public class Drawer extends VBox {
         }
     }
 
-    public ToggleButton createToggle(ModuleCreator moduleImpl) {
+    public ToggleButton createToggle(Module moduleImpl) {
         ToggleButton b = new ToggleButton(moduleImpl.getName());
 //        b.setCache(true);
 //        b.setCacheHint(CacheHint.QUALITY);
@@ -276,7 +353,7 @@ public class Drawer extends VBox {
         return b;
     }
 
-    public void makeFirstLevel(ModuleCreator module) {
+    public void makeFirstLevel(Module module) {
         if (module instanceof ModuleSeparator) {
             Label label = new Label(((ModuleSeparator) module).getText());
             label.setGraphic(((ModuleSeparator) module).getIcon());
@@ -326,7 +403,7 @@ public class Drawer extends VBox {
         }
     }
 
-    public void recurse(ModuleCreator moduleImpl) {
+    public void recurse(Module moduleImpl) {
         if (moduleImpl instanceof View) {
             ToggleButton b = createToggle(moduleImpl);
 
@@ -348,11 +425,11 @@ public class Drawer extends VBox {
         }
     }
 
-    private @NotNull TitledPane createPanel(ModuleCreator module) {
+    private @NotNull TitledPane createPanel(Module module) {
         return createPanel(module, false);
     }
 
-    private @NotNull TitledPane createPanel(@NotNull ModuleCreator module, boolean first) {
+    private @NotNull TitledPane createPanel(@NotNull Module module, boolean first) {
         VBox content = new VBox();
         content.getStyleClass().add("container");
         TitledPane titledPane = new TitledPane(module.getName(), content);
@@ -396,11 +473,11 @@ public class Drawer extends VBox {
         return titledPane;
     }
 
-    public ModuleCreator getCurrentModule() {
+    public Module getCurrentModule() {
         return currentModule.get();
     }
 
-    public ObjectProperty<ModuleCreator> currentModuleProperty() {
+    public ObjectProperty<Module> currentModuleProperty() {
         return currentModule;
     }
 

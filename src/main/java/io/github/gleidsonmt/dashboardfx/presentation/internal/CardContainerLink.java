@@ -1,6 +1,8 @@
 package io.github.gleidsonmt.dashboardfx.presentation.internal;
 
 import io.github.gleidsonmt.dashboardfx.Main;
+import io.github.gleidsonmt.glad.base.Layout;
+import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import javafx.geometry.Insets;
@@ -30,7 +32,7 @@ public class CardContainerLink extends VBox {
         grid.setHgap(20);
         Button close = new Button();
         close.setOnAction(e -> {
-            Main main = (Main) getScene().getRoot();
+            Root main = (Root) getScene().getRoot();
             main.behavior().dialog().close();
         });
         close.setGraphic(new SVGIcon(Icon.CLEAR));

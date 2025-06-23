@@ -1,6 +1,5 @@
 package io.github.gleidsonmt.dashboardfx.presentation.about;
 
-import io.github.gleidsonmt.dashboardfx.drawer.ModuleLoad;
 import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 import javafx.scene.layout.StackPane;
 
@@ -8,7 +7,7 @@ import javafx.scene.layout.StackPane;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  02/04/2025
  */
-public class AboutPres extends StackPane implements ModuleLoad {
+public class AboutPres extends StackPane {
 
     public AboutPres() {
         getChildren().setAll(
@@ -29,8 +28,5 @@ public class AboutPres extends StackPane implements ModuleLoad {
         );
     }
 
-    @Override
-    public void load() {
 
-    }
 }

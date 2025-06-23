@@ -56,7 +56,7 @@ import java.util.*;
 public class Tutorial extends Presentation<Tutorial> {
 
     private final ScrollPane scroll = new ScrollPane();
-    private final Layout body = new Layout();
+//    private final Layout body = new Layout();
     private final VBox aside = new VBox();
     private final VBox menu = new VBox();
     private final VBox center = new VBox();
@@ -70,39 +70,39 @@ public class Tutorial extends Presentation<Tutorial> {
     private boolean indicators = false;
 
     public Tutorial() {
-        body.setUserData(this);
-        body.setPadding(new Insets(20));
+//        body.setUserData(this);
+//        body.setPadding(new Insets(20));
         aside.setPadding(new Insets(0, 20, 0, 20));
         aside.setPrefWidth(250);
         btnTop.getStyleClass().addAll("btn-directions", "padding-20", "round");
         center.setId("tutorial-center-body");
         scroll.setId("tutorial-scroll");
-        body.setId("tutorial-body");
+//        body.setId("tutorial-body");
 
         scroll.setMinHeight(500);
 
-        body.addPoint(_ -> {
-            body.getChildren().remove(aside);
-            body.setTop(aside);
-            StackPane.setMargin(btnTop, new Insets(10, 40, 10, 10));
-            aside.setPadding(new Insets(0));
+//        body.addPoint(_ -> {
+//            body.getChildren().remove(aside);
+//            body.setTop(aside);
+//            StackPane.setMargin(btnTop, new Insets(10, 40, 10, 10));
+//            aside.setPadding(new Insets(0));
+//
+//            aside.setMaxHeight(100);
+//            aside.setPrefHeight(100);
+//
+//        }, Break.MOBILE, Break.SM, Break.MD);
 
-            aside.setMaxHeight(100);
-            aside.setPrefHeight(100);
-
-        }, Break.MOBILE, Break.SM, Break.MD);
-
-        body.addPoint(_ -> {
-            menu.setMaxHeight(-1);
-            if (body.getChildren().contains(aside)) {
-                body.getChildren().remove(aside);
-                body.setRight(aside);
-            } else {
-                body.setRight(aside);
-            }
-            aside.setPadding(new Insets(0, 20, 0, 20));
-            StackPane.setMargin(btnTop, new Insets(10, 40 + 250, 10, 10));
-        }, Break.values());
+//        body.addPoint(_ -> {
+//            menu.setMaxHeight(-1);
+//            if (body.getChildren().contains(aside)) {
+//                body.getChildren().remove(aside);
+//                body.setRight(aside);
+//            } else {
+//                body.setRight(aside);
+//            }
+//            aside.setPadding(new Insets(0, 20, 0, 20));
+//            StackPane.setMargin(btnTop, new Insets(10, 40 + 250, 10, 10));
+//        }, Break.values());
 
         StackPane.setAlignment(btnTop, Pos.BOTTOM_RIGHT);
     }
@@ -141,17 +141,17 @@ public class Tutorial extends Presentation<Tutorial> {
 
         this.getRoot().sceneProperty().addListener((_, _, newValue) -> {
             if (newValue != null) {
-                ToggleButton first = firstList.getFirst().getChildren()
-                        .stream()
-                        .filter(e -> e instanceof GridPane)
-                        .map(e -> (GridPane) e)
-                        .findFirst().get().getChildren()
-                        .stream()
-                        .filter(e -> e instanceof ToggleButton)
-                        .map(e -> (ToggleButton) e)
-                        .findFirst().get();
-                first.setSelected(true);
-                first.getParent().requestFocus();
+//                ToggleButton first = firstList.getFirst().getChildren()
+//                        .stream()
+//                        .filter(e -> e instanceof GridPane)
+//                        .map(e -> (GridPane) e)
+//                        .findFirst().get().getChildren()
+//                        .stream()
+//                        .filter(e -> e instanceof ToggleButton)
+//                        .map(e -> (ToggleButton) e)
+//                        .findFirst().get();
+//                first.setSelected(true);
+//                first.getParent().requestFocus();
             }
         });
     }
@@ -345,10 +345,8 @@ public class Tutorial extends Presentation<Tutorial> {
         createTree(data, aside);
 //        ((ToggleButton)aside.getChildren().get(0)).setSelected(true);
 
-        root.getChildren().setAll(body);
-//        body.getChildren().addAll(scroll, aside);
-        body.setCenter(scroll);
-//        body.setRight(aside);
+//        root.getChildren().setAll(body);
+//        body.setCenter(scroll);
 
         scroll.setPadding(new Insets(0, 0, 0, 0));
         scroll.setContent(center);

@@ -1,10 +1,8 @@
 package io.github.gleidsonmt.dashboardfx.utils;
 
 import io.github.gleidsonmt.dashboardfx.App;
-import io.github.gleidsonmt.glad.GladResources;
 import javafx.scene.image.Image;
 
-import java.net.URL;
 import java.util.Objects;
 
 /**

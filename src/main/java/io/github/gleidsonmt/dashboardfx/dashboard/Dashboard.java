@@ -2,6 +2,7 @@ package io.github.gleidsonmt.dashboardfx.dashboard;
 
 import io.github.gleidsonmt.dashboardfx.model.*;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
+import io.github.gleidsonmt.glad.base.Container;
 import io.github.gleidsonmt.glad.base.responsive.Break;
 import io.github.gleidsonmt.glad.base.responsive.ResponsiveGrid;
 import io.github.gleidsonmt.glad.charts.DonutChart;
@@ -25,12 +26,16 @@ import java.util.List;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  12/03/2025
  */
-public class Dashboard extends ResponsiveGrid {
-
+public class Dashboard extends Container {
+    private GridPane grid = new GridPane();
     public Dashboard() {
-        super(true);
-
-        setPadding(new Insets(20));
+//        super(true);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setContent(grid);
+        getChildren().setAll(scrollPane);
+        grid.setPadding(new Insets(20));
 
         TileBlock one = new TileBlock(Icon.CHAT, "39", "Messages", "-info");
         TileBlock two = new TileBlock(Icon.SHOPPING_CART, "125", "Sales", "-danger");
@@ -42,8 +47,8 @@ public class Dashboard extends ResponsiveGrid {
 
         Node boxAudience = createBox("Top Audience for country", createListView());
 
-        this.setHgap(10);
-        this.setVgap(10);
+        grid.setHgap(10);
+        grid.setVgap(10);
 
         Text title = new Text("Welcome, Jhon Doe!");
         title.getStyleClass().addAll("h3", "font-instagram");
@@ -116,11 +121,11 @@ public class Dashboard extends ResponsiveGrid {
         }
 
         Node boxTable = createBox("Companies", tableView);
-        GridPane.setColumnSpan(tableView, REMAINING);
+        GridPane.setColumnSpan(tableView, GridPane.REMAINING);
 
         Node boxLineChart = createBox("Sales", createLineChart());
 
-        this.getChildren().addAll(title, one, two, three, four, barChart, donutChart, boxAudience, boxTable, boxLineChart);
+        grid.getChildren().addAll(title, one, two, three, four, barChart, donutChart, boxAudience, boxTable, boxLineChart);
 
         for (Node node : getChildren()) {
             GridPane.setHgrow(node, Priority.ALWAYS);
@@ -135,15 +140,15 @@ public class Dashboard extends ResponsiveGrid {
         col3.setPercentWidth(25);
         ColumnConstraints col4 = new ColumnConstraints();
         col4.setPercentWidth(25);
-        this.getColumnConstraints().setAll(col1, col2, col3, col4);
-        this.getColumnConstraints().forEach(el -> el.setMinWidth(0));
+        grid.getColumnConstraints().setAll(col1, col2, col3, col4);
+        grid.getColumnConstraints().forEach(el -> el.setMinWidth(0));
         RowConstraints rowOne = new RowConstraints();
         rowOne.setMaxHeight(60);
-        this.getRowConstraints().add(rowOne);
+        grid.getRowConstraints().add(rowOne);
 
         addPoint(_ -> {
 //            getRowConstraints().clear();
-            GridPane.setConstraints(title, 0, 0, REMAINING,1);
+            GridPane.setConstraints(title, 0, 0, GridPane.REMAINING,1);
             GridPane.setConstraints(one, 0, 1, 4,1);
             GridPane.setConstraints(two, 0, 2,4,1);
             GridPane.setConstraints(three, 0, 3,4,1);
@@ -193,7 +198,7 @@ public class Dashboard extends ResponsiveGrid {
         },  Break.LG);
 
         addPoint(_ -> {
-//            getRowConstraints().clear();
+////            getRowConstraints().clear();
             GridPane.setConstraints(title, 0, 0, 1,1);
             GridPane.setConstraints(one, 0, 1, 1,1);
             GridPane.setConstraints(two, 1, 1,1,1);
@@ -206,8 +211,8 @@ public class Dashboard extends ResponsiveGrid {
             GridPane.setConstraints(boxAudience, 0, 3, 1,1);
             GridPane.setConstraints(boxTable, 1, 3,2,1);
             GridPane.setConstraints(boxLineChart, 3, 3,2,1);
-
-        }, Break.values());
+//
+        }, Break.XL, Break.WIDE);
     }
 
     private Node createLineChart() {
@@ -363,7 +368,7 @@ public class Dashboard extends ResponsiveGrid {
                     GridPane.setHgrow(progressBar, Priority.ALWAYS);
                     GridPane.setVgrow(text, Priority.ALWAYS);
 
-                    GridPane.setColumnSpan(progressBar, REMAINING);
+                    GridPane.setColumnSpan(progressBar, GridPane.REMAINING);
                     progressBar.setMaxWidth(Double.MAX_VALUE);
 
                     setGraphic(grid);
