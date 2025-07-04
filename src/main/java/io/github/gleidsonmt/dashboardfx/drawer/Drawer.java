@@ -9,8 +9,6 @@ import io.github.gleidsonmt.dashboardfx.presentation.presentations.charts.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.components.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.controls.*;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.layout.TextFlowPres;
-import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.HomePage;
-import io.github.gleidsonmt.dashboardfx.presentation.presentations.pages.LoginPage;
 import io.github.gleidsonmt.dashboardfx.presentation.presentations.shapes.TextPres;
 import io.github.gleidsonmt.dashboardfx.presentation.util.ColorsPres;
 import io.github.gleidsonmt.dashboardfx.utils.pages.BuildingPage;
@@ -24,14 +22,10 @@ import io.github.gleidsonmt.presentation.TreeTitle;
 import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.ApiStatus;
@@ -110,8 +104,8 @@ public class Drawer extends VBox {
                         new View("Label", new LabelExample()),
                         new View("Cards", new CardsPres())),
                 new ModuleView("Pages",
-                        new View("Home Page", new HomePage()),
-                        new View("Login", new LoginPage()),
+//                        new View("Home Page", new HomePage()),
+//                        new View("Login", new LoginPage()),
                         new View("Error Page 404")),
                 new ModuleSeparator(new SVGIcon(Icon.HELP), "Theme"),
                 new ModuleView("Utils",
@@ -120,11 +114,13 @@ public class Drawer extends VBox {
                 new View("About", new AboutPres())
         ));
 
-        this.setHeader(new DrawerHeader());
-        this.setFooter(new DrawerFooter());
+//        this();
+
+
     }
 
     public Drawer(@NotNull List<Module> _modules) {
+//    public Drawer(List _modules) {
         this.modules = _modules;
         this.setId("drawer");
         this.drawerContainer = new DrawerContainer(defaultBox);
@@ -137,7 +133,7 @@ public class Drawer extends VBox {
         VBox.setVgrow(drawerContainer, Priority.ALWAYS);
         search.setMinHeight(40);
 
-        _modules.forEach(this::makeFirstLevel);
+        this.modules.forEach(this::makeFirstLevel);
         this.setPrefWidth(250);
         this.setMaxWidth(250);
 //        getStylesheets().add(Objects.requireNonNull(Start.class.getResource("css/drawer/variante_one.css")).toExternalForm());
@@ -197,6 +193,9 @@ public class Drawer extends VBox {
                 VBox.setVgrow(drawerContainer, Priority.ALWAYS);
             }
         });
+
+        this.setHeader(new DrawerHeader());
+        this.setFooter(new DrawerFooter());
     }
 
     /**

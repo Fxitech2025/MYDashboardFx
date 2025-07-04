@@ -2,12 +2,12 @@ package io.github.gleidsonmt.dashboardfx.dashboard;
 
 import io.github.gleidsonmt.dashboardfx.model.*;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
-import io.github.gleidsonmt.glad.base.Container;
+import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.base.responsive.Break;
-import io.github.gleidsonmt.glad.base.responsive.ResponsiveGrid;
 import io.github.gleidsonmt.glad.charts.DonutChart;
 import io.github.gleidsonmt.glad.controls.avatar.AvatarView;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -26,34 +26,42 @@ import java.util.List;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  12/03/2025
  */
-public class Dashboard extends Container {
+public class Dashboard extends StackPane implements ActionableView {
+
     private GridPane grid = new GridPane();
+    ScrollPane scrollPane = new ScrollPane();
+
+    Text title = new Text("Welcome, Jhon Doe!");
+
+    TileBlock one = new TileBlock(Icon.CHAT, "39", "Messages", "-info");
+    TileBlock two = new TileBlock(Icon.SHOPPING_CART, "125", "Sales", "-danger");
+    TileBlock three = new TileBlock(Icon.NOTIFICATION_IMPORTANT, "4", "Notifications", "-warning");
+    TileBlock four = new TileBlock(Icon.TODAY, "18", "Schedules", "-success");
+    TableView<Activity> tableView = new TableView<>();
+    Node boxTable = createBox("Companies", tableView);
+    BarChart<String, Number> barChart = createBarchart();
+    DonutChart donutChart = createDonut();
+
+    Node boxAudience = createBox("Top Audience for country", createListView());
+    Node boxLineChart = createBox("Sales", createLineChart());
+
+
     public Dashboard() {
-//        super(true);
-        ScrollPane scrollPane = new ScrollPane();
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
         scrollPane.setContent(grid);
-        getChildren().setAll(scrollPane);
         grid.setPadding(new Insets(20));
+        getChildren().add(scrollPane);
 
-        TileBlock one = new TileBlock(Icon.CHAT, "39", "Messages", "-info");
-        TileBlock two = new TileBlock(Icon.SHOPPING_CART, "125", "Sales", "-danger");
-        TileBlock three = new TileBlock(Icon.NOTIFICATION_IMPORTANT, "4", "Notifications", "-warning");
-        TileBlock four = new TileBlock(Icon.TODAY, "18", "Schedules", "-success");
 
-        BarChart<String, Number> barChart = createBarchart();
-        DonutChart donutChart = createDonut();
 
-        Node boxAudience = createBox("Top Audience for country", createListView());
 
         grid.setHgap(10);
         grid.setVgap(10);
 
-        Text title = new Text("Welcome, Jhon Doe!");
         title.getStyleClass().addAll("h3", "font-instagram");
+        title.minHeight(180);
 
-        TableView<Activity> tableView = new TableView<>();
         tableView.getStyleClass().addAll("transparent-table");
         tableView.setMinHeight(300);
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
@@ -120,14 +128,13 @@ public class Dashboard extends Container {
             column.setMinWidth(100);
         }
 
-        Node boxTable = createBox("Companies", tableView);
         GridPane.setColumnSpan(tableView, GridPane.REMAINING);
 
-        Node boxLineChart = createBox("Sales", createLineChart());
 
         grid.getChildren().addAll(title, one, two, three, four, barChart, donutChart, boxAudience, boxTable, boxLineChart);
+//        grid.getChildren().addAll(title, one, two, three, four);
 
-        for (Node node : getChildren()) {
+        for (Node node : grid.getChildren()) {
             GridPane.setHgrow(node, Priority.ALWAYS);
             GridPane.setVgrow(node, Priority.ALWAYS);
         }
@@ -143,28 +150,16 @@ public class Dashboard extends Container {
         grid.getColumnConstraints().setAll(col1, col2, col3, col4);
         grid.getColumnConstraints().forEach(el -> el.setMinWidth(0));
         RowConstraints rowOne = new RowConstraints();
-        rowOne.setMaxHeight(60);
+        rowOne.setMaxHeight(90);
         grid.getRowConstraints().add(rowOne);
 
-        addPoint(_ -> {
-//            getRowConstraints().clear();
-            GridPane.setConstraints(title, 0, 0, GridPane.REMAINING,1);
-            GridPane.setConstraints(one, 0, 1, 4,1);
-            GridPane.setConstraints(two, 0, 2,4,1);
-            GridPane.setConstraints(three, 0, 3,4,1);
-            GridPane.setConstraints(four, 0, 4,4,1);
 
-            GridPane.setConstraints(barChart, 0, 5,4,1);
-            GridPane.setConstraints(donutChart, 0, 6, 4,1);
+    }
 
-            GridPane.setConstraints(boxAudience, 0, 7, 4,1);
-            GridPane.setConstraints(boxTable, 0, 8,4,1);
-            GridPane.setConstraints(boxLineChart, 0, 9,4,1);
-        }, Break.MOBILE, Break.SM);
-
-        addPoint(_ -> {
+    @Override
+    public void onEnter(Root root) {
+        root.addPoint(_ -> {
 //            getColumnConstraints().clear();
-//            System.out.println("rowOne = " + rowOne);
             GridPane.setConstraints(title, 0, 0, 1,1);
             GridPane.setConstraints(one, 0, 1, 2,1);
             GridPane.setConstraints(two, 2, 1,2,1);
@@ -179,9 +174,9 @@ public class Dashboard extends Container {
             GridPane.setConstraints(boxLineChart, 0, 7,4,1);
 
 //            GridPane.setConstraints(boxLineChart, 0, 9,4,1);
-        },  Break.MD);
+        },  Break.MD, Break.SM, Break.MOBILE);
 
-        addPoint(_ -> {
+        root.addPoint(_ -> {
 //            getRowConstraints().clear();
             GridPane.setConstraints(title, 0, 0, 1,1);
             GridPane.setConstraints(one, 0, 1, 2,1);
@@ -197,8 +192,8 @@ public class Dashboard extends Container {
             GridPane.setConstraints(boxLineChart, 0, 7,4,1);
         },  Break.LG);
 
-        addPoint(_ -> {
-////            getRowConstraints().clear();
+        root.addPoint(_ -> {
+//            getRowConstraints().clear();
             GridPane.setConstraints(title, 0, 0, 1,1);
             GridPane.setConstraints(one, 0, 1, 1,1);
             GridPane.setConstraints(two, 1, 1,1,1);
@@ -325,6 +320,7 @@ public class Dashboard extends Container {
         return box;
     }
 
+
     private Node createListView() {
 
         ListView<CountryBox> listView = new ListView<>();
@@ -383,6 +379,8 @@ public class Dashboard extends Container {
 
         return listView;
     }
+
+
 }
 
 

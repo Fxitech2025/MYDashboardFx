@@ -6,7 +6,7 @@
 //import io.github.gleidsonmt.dashboardfx.presentation.internal.Tutorial;
 //import io.github.gleidsonmt.dashboardfx.utils.Assets;
 //import io.github.gleidsonmt.dashboardfx.utils.TutorialUtils;
-//import io.github.gleidsonmt.glad.base.RootImpl;
+//import io.github.gleidsonmt.glad.base.Root;
 //import io.github.gleidsonmt.glad.base.responsive.Break;
 //import io.github.gleidsonmt.glad.controls.button.IconButton;
 //import io.github.gleidsonmt.glad.controls.icon.Icon;
@@ -71,7 +71,7 @@
 //            body.setAlignment(Pos.CENTER);
 //
 //            Layout layout = new Layout(body);
-//            RootImpl rootImpl = new RootImpl(layout);
+//            Root rootImpl = new Root(layout);
 //            SimpleDrawer drawer = new SimpleDrawer();
 //
 //            NavBar nav = new NavBar();
@@ -114,7 +114,7 @@
 //            body.setAlignment(Pos.CENTER);
 //
 //            Layout layout = new Layout(body);
-//            RootImpl rootImpl = new RootImpl(layout);
+//            Root rootImpl = new Root(layout);
 //            SimpleDrawer drawer = new SimpleDrawer();
 //
 //            NavBar nav = new NavBar();
@@ -155,7 +155,7 @@
 //            body.setAlignment(Pos.CENTER);
 //
 //            Layout layout = new Layout(body);
-//            RootImpl rootImpl = new RootImpl(layout);
+//            Root rootImpl = new Root(layout);
 //            SimpleDrawer drawer = new SimpleDrawer();
 //
 //
@@ -183,7 +183,7 @@
 //            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
 //            body.setAlignment(Pos.CENTER);
 //            Layout layout = new Layout(body);
-//            RootImpl rootImpl = new RootImpl(layout);
+//            Root rootImpl = new Root(layout);
 //            SimpleDrawer drawer = new SimpleDrawer();
 //
 //            layout.addPoint(_ -> {
@@ -221,7 +221,7 @@
 //            Stage stage = new Stage();
 //            VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
 //            body.setAlignment(Pos.CENTER);
-//            RootImpl rootImpl = new RootImpl(new Layout(body));
+//            Root rootImpl = new Root(new Layout(body));
 //            Scene scene = new Scene(rootImpl, 800, 600);
 //            ThemeProvider.install(scene, Font.POPPINS);
 //            ThemeProvider.install(scene, Css.COLORS, Css.TYPOGRAPHIC, Css.BUTTON);
@@ -237,7 +237,7 @@
 //            body.setAlignment(Pos.CENTER);
 //            Layout layout = new Layout(body);
 //            layout.setLeft(new SimpleDrawer());
-//            RootImpl rootImpl = new RootImpl(layout);
+//            Root rootImpl = new Root(layout);
 //            Scene scene = new Scene(rootImpl, 800, 600);
 //            ThemeProvider.install(scene, Font.POPPINS);
 //            ThemeProvider.install(scene,
@@ -256,7 +256,7 @@
 //    private Node createActionStart() {
 //        return createButton(e -> {
 //            Stage stage = new Stage();
-//            RootImpl rootImpl = new RootImpl(new Layout(new Text("You do it!")));
+//            Root rootImpl = new Root(new Layout(new Text("You do it!")));
 //            Scene scene = new Scene(rootImpl, 800, 600);
 //            stage.setScene(scene);
 //            stage.show();
@@ -274,7 +274,7 @@
 //    private Node createStep2() {
 //        return createButton(e -> {
 //            Stage stage = new Stage();
-//            RootImpl rootImpl = new RootImpl(new Layout(new Text("You do it!")));
+//            Root rootImpl = new Root(new Layout(new Text("You do it!")));
 //            Scene scene = new Scene(rootImpl, 800, 600);
 //            ThemeProvider.install(scene, Font.POPPINS);
 //            ThemeProvider.install(scene, Css.COLORS, Css.TYPOGRAPHIC);
@@ -321,7 +321,7 @@
 //                                    public class AppOld extends Application {
 //                                        @Override
 //                                        public void start(Stage stage) {
-//                                            RootImpl rootImpl = new RootImpl(new Layout(new Button("Welcome")));
+//                                            Root rootImpl = new Root(new Layout(new Button("Welcome")));
 //                                            Scene scene = new Scene(rootImpl, 800, 600);
 //                                            stage.setScene(scene);
 //                                            stage.show();
@@ -356,7 +356,7 @@
 //                                    ...
 //                                    VBox body = new VBox(new Text("You Do it!"), new Button("Welcome!"));
 //                                    body.setAlignment(Pos.CENTER); // align in center
-//                                    RootImpl rootImpl = new RootImpl(new Layout(body));
+//                                    Root rootImpl = new Root(new Layout(body));
 //                                    ...
 //                                    """)
 //                            .text("Now add theme")
@@ -373,10 +373,10 @@
 //                            .node(TutorialUtils.createTextWithLink("You can see more about button styling right here", "Button", "Labeled", "Button"))
 //
 //
-//                            .h4("RootImpl", "Start an AppOld")
-//                            .legend("io.gleidsonmt.glad.base.RootImpl")
+//                            .h4("Root", "Start an AppOld")
+//                            .legend("io.gleidsonmt.glad.base.Root")
 //                            .text("""
-//                                    The RootImpl class is an ideia to have stacked components, actual apps has flow components,
+//                                    The Root class is an ideia to have stacked components, actual apps has flow components,
 //                                    usually stacked, like snacks, alerts etc. So the rootImpl class is wrapper to a StackPane.
 //                                    These methods can be called as behavior.
 //                                    This app actually uses a rootImpl class.
@@ -395,7 +395,7 @@
 //                                                .openByCursor(button, event);
 //                                    });""")
 //
-//                            .h4("Global Methods", "RootImpl")
+//                            .h4("Global Methods", "Root")
 //                            .text("""
 //                                    These global methods are called when application needs to update the rootImpl.
 //                                    Calling notifications and custom alerts.
@@ -410,7 +410,7 @@
 //                                    The combinations of these two layouts, creates an empty region with five separating blocks.
 //                                    """)
 //                            .legend("io.gleidsonmt.glad.base.Layout")
-//                            .code("RootImpl rootImpl = new RootImpl(new Layout());")
+//                            .code("Root rootImpl = new Root(new Layout());")
 //                            .image(Assets.getImage("part3.png"))
 //                            .text("""
 //                                    As knowing to much nodes cause leaks of memory, using BorderPane or a
@@ -422,7 +422,7 @@
 //                                    ...
 //                                    Layout layout = new Layout(body);
 //
-//                                    RootImpl rootImpl = new RootImpl(layout);
+//                                    Root rootImpl = new Root(layout);
 //                                    ...
 //                                    """)
 //                            .text("Let's add list view css")

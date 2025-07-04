@@ -25,6 +25,7 @@ import io.github.gleidsonmt.blockcode.CodeType;
 import io.github.gleidsonmt.blockcode.Theme;
 import io.github.gleidsonmt.dashboardfx.presentation.Scroll;
 import io.github.gleidsonmt.glad.base.Layout;
+import io.github.gleidsonmt.glad.base.internal.View;
 import io.github.gleidsonmt.glad.base.responsive.Break;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
@@ -348,11 +349,13 @@ public class Tutorial extends Presentation<Tutorial> {
 //        root.getChildren().setAll(body);
 //        body.setCenter(scroll);
 
+
         scroll.setPadding(new Insets(0, 0, 0, 0));
         scroll.setContent(center);
-
+        root.getChildren().setAll(scroll);
         root.getChildren().add(btnTop);
         root.setAlignment(Pos.BOTTOM_RIGHT);
+        root.getStyleClass().addAll("padding-10".split(" "));
 
         aside.setMinWidth(250);
 //        body.setSpacing(10);

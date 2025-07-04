@@ -18,20 +18,20 @@ public class TreeViewPres extends StackPane {
                 new Tutorial()
                         .h3("Tree View")
                         .text("""
-                                The TreeView control provides a view on to a tree rootImpl (of type TreeItem).
+                                The TreeView control provides a view on to a tree root (of type TreeItem).
                                 By using a TreeView, it is possible to drill down into the children of a TreeItem, recursively until a TreeItem has no children (that is, it is a leaf node in the tree). 
-                                To facilitate this, unlike controls like ListView, in TreeView it is necessary to only specify the rootImpl node.""")
+                                To facilitate this, unlike controls like ListView, in TreeView it is necessary to only specify the root node.""")
                         .legend("javafx.scene.control.TreeView")
                         .h3("Default", "Tree View")
                         .demo(createDemo())
                         .code("""
                                 TreeView<String> treeView = new TreeView<>();
-                                TreeItem<String> rootImpl = new TreeItem<>("RootImpl");
+                                TreeItem<String> root = new TreeItem<>("Root");
                                 TreeItem<String> leafOne = new TreeItem<>("Leaf One");
                                 TreeItem<String> leafTwo = new TreeItem<>("Leaf Two");
                         
-                                rootImpl.getChildren().addAll(leafOne, leafTwo);
-                                treeView.setRoot(rootImpl);
+                                root.getChildren().addAll(leafOne, leafTwo);
+                                treeView.setRoot(root);
                                 """)
                         .h3("Check List", "Tree View")
                         .demo(createTreeCheck())
@@ -82,12 +82,12 @@ public class TreeViewPres extends StackPane {
 
     private TreeView<String> createDemo() {
         TreeView<String> treeView = new TreeView<>();
-        TreeItem<String> rootImpl = new TreeItem<>("RootImpl");
+        TreeItem<String> root = new TreeItem<>("Root");
         TreeItem<String> leafOne = new TreeItem<>("Leaf One");
         TreeItem<String> leafTwo = new TreeItem<>("Leaf Two");
 
-        rootImpl.getChildren().addAll(leafOne, leafTwo);
-        treeView.setRoot(rootImpl);
+        root.getChildren().addAll(leafOne, leafTwo);
+        treeView.setRoot(root);
         return treeView;
     }
 }

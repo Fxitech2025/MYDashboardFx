@@ -27,7 +27,7 @@
 //import io.github.gleidsonmt.dashboardfx.utils.pages.BuildingPage;
 //import io.github.gleidsonmt.dashboardfx.utils.pages.ErrorPage;
 //import io.github.gleidsonmt.glad.base.Layout;
-//import io.github.gleidsonmt.glad.base.RootImpl;
+//import io.github.gleidsonmt.glad.base.Root;
 //import io.github.gleidsonmt.glad.controls.badge.Badge;
 //import io.github.gleidsonmt.glad.controls.icon.Icon;
 //import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
@@ -50,7 +50,7 @@
 // * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
 // * Create on  10/03/2025
 // */
-//public class MainOld extends RootImpl {
+//public class MainOld extends Root {
 //
 //    private Drawer drawer;
 //    private GridPane navBar;
@@ -107,7 +107,7 @@
 //
 //        badgeNotification.setOnMouseClicked(e -> {
 //
-//            RootImpl rootImpl = (RootImpl) getScene().getRoot();
+//            Root rootImpl = (Root) getScene().getRoot();
 //
 //            Layout layout = rootImpl.getLayout();
 //

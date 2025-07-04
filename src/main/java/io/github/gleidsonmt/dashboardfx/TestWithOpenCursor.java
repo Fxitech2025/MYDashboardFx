@@ -2,7 +2,7 @@
 //
 //import io.github.gleidsonmt.glad.base.Container;
 //import io.github.gleidsonmt.glad.base.Layout;
-//import io.github.gleidsonmt.glad.base.RootImpl;
+//import io.github.gleidsonmt.glad.base.Root;
 //import io.github.gleidsonmt.glad.controls.button.Button;
 //import io.github.gleidsonmt.glad.theme.Css;
 //import io.github.gleidsonmt.glad.theme.ThemeProvider;
@@ -26,7 +26,7 @@
 //        body.setAlignment(Pos.CENTER);
 //
 //
-////        RootImpl rootImpl = new RootImpl(new Layout(body));
+////        Root rootImpl = new Root(new Layout(body));
 //        stage.setScene(new Scene(rootImpl, 800, 800));
 //        Container container = new Container();
 //        container.setStyle("-fx-background-color: #ff000022;");

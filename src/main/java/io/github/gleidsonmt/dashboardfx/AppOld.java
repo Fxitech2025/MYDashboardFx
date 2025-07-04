@@ -1,7 +1,7 @@
 //package io.github.gleidsonmt.dashboardfx;
 //
 //import io.github.gleidsonmt.dashboardfx.utils.Assets;
-//import io.github.gleidsonmt.glad.base.RootImpl;
+//import io.github.gleidsonmt.glad.base.Root;
 //import io.github.gleidsonmt.glad.theme.Css;
 //import io.github.gleidsonmt.glad.theme.Font;
 //import io.github.gleidsonmt.glad.theme.ThemeProvider;
@@ -25,7 +25,7 @@
 //
 //        Main main = new Main();
 //
-//        RootImpl rootImpl = new RootImpl(new Layout(new Button("Welcome")));
+//        Root rootImpl = new Root(new Layout(new Button("Welcome")));
 //
 //        Scene scene = new Scene(main, 800, 600);
 //

@@ -1,23 +1,23 @@
 package io.github.gleidsonmt.dashboardfx;
 
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
+import io.github.gleidsonmt.dashboardfx.dashboard.ActionableView;
 import io.github.gleidsonmt.dashboardfx.drawer.Drawer;
-import io.github.gleidsonmt.dashboardfx.presentation.Scroll;
-import io.github.gleidsonmt.glad.base.Container;
-import io.github.gleidsonmt.glad.base.Layout;
+import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.base.internal.Module;
 import io.github.gleidsonmt.glad.base.internal.View;
 import io.github.gleidsonmt.glad.base.responsive.Break;
 import io.github.gleidsonmt.glad.controls.button.IconButton;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
+import javafx.application.Platform;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -27,63 +27,110 @@ import javafx.scene.layout.VBox;
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
  * Create on  10/06/2025
  */
-public class Main extends View {
+public class Main extends BorderPane {
 
-    private VBox container = new VBox();
-    private ScrollPane body = new ScrollPane();
+    private VBox wrapper;
+    private ScrollPane container;
 
     private IconButton hamb = new IconButton(new SVGIcon(Icon.MENU));
     private NavBar navBar = new NavBar();
     private BreadCrumbBar crumb = new BreadCrumbBar();
 
-//    private CardUserOptions card;
+    private Drawer drawer;
 
-    public Main(Layout layout, Drawer drawer) {
-        super("Main");
-        setContent(container);
-        layout.setView(this);
-        body.getStyleClass().addAll("fit-width fit-height".split(" "));
+    private ObjectProperty<Module> currentModule = new SimpleObjectProperty<>();
 
-        container.getChildren().setAll(navBar, body);
-        VBox.setVgrow(body, Priority.ALWAYS);
+
+    public Main() {
 
         navBar.add(crumb, 0, 0);
 
-        crumb.currentModuleProperty().bind(drawer.currentModuleProperty());
 //        card = new CardUserOptions(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe"));
 
-        drawer.currentModuleProperty().addListener((_, oldValue, newValue) -> {
-            if (newValue != null) {
-                if (newValue instanceof View view) {
-                    if (view.getOnEnter() != null) view.getOnEnter().handle(new ActionEvent());
-                    updateView(view.getContent());
-                }
-            } else if (oldValue != null) {
-                if (oldValue instanceof View view) {
-                    if (view.getOnExit() != null) view.getOnExit().handle(new ActionEvent());
-                }
-            }
-        });
+//        drawer.currentModuleProperty().addListener((_, oldValue, newValue) -> {
+//            if (newValue != null) {
+//                if (newValue instanceof View view) {
+//                    if (view.getOnEnter() != null) view.getOnEnter().handle(new ActionEvent());
+//                    updateView(view.getContent());
+//                }
+//            } else if (oldValue != null) {
+//                if (oldValue instanceof View view) {
+//                    if (view.getOnExit() != null) view.getOnExit().handle(new ActionEvent());
+//                }
+//            }
+//        });
+        init();
+        configLayout();
+        bind();
 
-        layout.addPoint(_ -> {
-            navBar.getChildren().add(0, hamb);
-            GridPane.setColumnIndex(crumb, 1);
+        Platform.runLater(() -> {
+            Root root = (Root) this.getScene().getRoot();
+            root.addPoint(_ -> {
+                setLeft(null);
+                navBar.getChildren().add(0, hamb);
+                GridPane.setColumnIndex(crumb, 1);
 //            GridPane.setColumnIndex(card, 4);
-        }, Break.MOBILE);
+            }, Break.MOBILE);
 
-        layout.addPoint(_ -> {
+            root.addPoint(_ -> {
 //            if (behavior().isDrawerAbsolute()) {
 //                wrapper().hide();
 //            }
 //            getContainer().setLeft(drawer);
-            navBar.getChildren().remove(hamb);
-//            GridPane.setColumnIndex(crumb, 0);
-//            GridPane.setColumnIndex(card, 3);
-        },  Break.SM, Break.MD, Break.WIDE);
+                setLeft(drawer);
+                navBar.getChildren().remove(hamb);
+
+            //GridPane.setColumnIndex(crumb, 0);
+            //GridPane.setColumnIndex(card, 3);
+            }, Break.SM, Break.MD, Break.WIDE);
+        });
     }
 
-    private void updateView(Node node) {
-        body.setContent(node);
+//    public Main updateContent(View view) {
+//        super.setContent(view.getContent());
+//        return this;
+//    }
+
+    private void init() {
+        this.wrapper = new VBox();
+        this.container = new ScrollPane();
+        this.drawer = new Drawer();
+        setLeft(drawer);
+        setCenter(this.wrapper);
+    }
+
+    private void configLayout() {
+        container.getStyleClass().addAll("fit-width fit-height".split(" "));
+        this.wrapper.getChildren().setAll(navBar, container);
+        VBox.setVgrow(container, Priority.ALWAYS);
+    }
+
+    private void bind() {
+        currentModule.addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                updateView(newValue);
+            }
+        });
+
+        currentModule.bind(drawer.currentModuleProperty());
+        crumb.currentModuleProperty().bind(currentModule);
+    }
+
+    private void updateView(Module node) {
+        System.out.println("node = " + node);
+        if (node instanceof View view) {
+            this.container.setContent(view.getContent());
+
+            if (view.getContent() instanceof ActionableView actionableView) {
+                Platform.runLater(() -> {
+                    Root root = (Root) this.getScene().getRoot();
+                    actionableView.onEnter(root);
+                });
+            }
+
+        }
+
+
     }
 
 }

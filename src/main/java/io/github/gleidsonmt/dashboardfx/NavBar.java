@@ -12,7 +12,7 @@ public class NavBar extends GridPane {
 
     public NavBar() {
         setPadding(new Insets(10));
-        setMinHeight(60);
+        setMinHeight(40);
         setAlignment(Pos.CENTER_LEFT);
     }
 }
