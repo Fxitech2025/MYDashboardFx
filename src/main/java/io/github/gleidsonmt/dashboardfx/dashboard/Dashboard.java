@@ -207,7 +207,7 @@ public class Dashboard extends StackPane implements ActionableView {
             GridPane.setConstraints(boxTable, 1, 3,2,1);
             GridPane.setConstraints(boxLineChart, 3, 3,2,1);
 //
-        }, Break.XL, Break.WIDE);
+        }, Break.XL, Break.XXL, Break.WIDE);
     }
 
     private Node createLineChart() {

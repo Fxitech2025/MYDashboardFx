@@ -22,8 +22,12 @@ public class App extends Application {
         stage.setScene(scene);
         ThemeProvider.install(scene, Font.POPPINS, Font.INSTAGRAM);
         ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON,
-                Css.HYPERLINK, Css.CONTEXT_MENU,
+                Css.SHAPES,  Css.CONTEXT_MENU,
+                Css.HYPERLINK,   Css.COMBO_BOX,
+                Css.RADIO_BUTTON, Css.CHECK_BOX,
+                Css.TREE_VIEW, Css.TOGGLE_BUTTON,
                 Css.PROGRESS_BAR, Css.LIST_VIEW, Css.TABLE_VIEW,
+                Css.TAB_PANE,Css.IMMERSIVE_SCROLL,
                 Css.TEXT_FIELD, Css.TEXT_BOX);
 
         scene.getStylesheets().add(Assets.getCss("drawer.css"));

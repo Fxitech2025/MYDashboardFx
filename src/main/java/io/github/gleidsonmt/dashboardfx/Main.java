@@ -82,7 +82,7 @@ public class Main extends BorderPane {
 
             //GridPane.setColumnIndex(crumb, 0);
             //GridPane.setColumnIndex(card, 3);
-            }, Break.SM, Break.MD, Break.WIDE);
+            }, Break.SM, Break.MD, Break.LG, Break.XL, Break.XXL, Break.WIDE);
         });
     }
 
