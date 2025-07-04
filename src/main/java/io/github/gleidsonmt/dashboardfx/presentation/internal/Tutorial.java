@@ -355,7 +355,7 @@ public class Tutorial extends Presentation<Tutorial> {
         root.getChildren().setAll(scroll);
         root.getChildren().add(btnTop);
         root.setAlignment(Pos.BOTTOM_RIGHT);
-        root.getStyleClass().addAll("padding-10".split(" "));
+        root.getStyleClass().addAll("padding-20".split(" "));
 
         aside.setMinWidth(250);
 //        body.setSpacing(10);
