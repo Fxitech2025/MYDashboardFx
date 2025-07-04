@@ -24,9 +24,6 @@ import io.github.gleidsonmt.blockcode.BlockCode;
 import io.github.gleidsonmt.blockcode.CodeType;
 import io.github.gleidsonmt.blockcode.Theme;
 import io.github.gleidsonmt.dashboardfx.presentation.Scroll;
-import io.github.gleidsonmt.glad.base.Layout;
-import io.github.gleidsonmt.glad.base.internal.View;
-import io.github.gleidsonmt.glad.base.responsive.Break;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
 import io.github.gleidsonmt.presentation.Presentation;
@@ -75,7 +72,7 @@ public class Tutorial extends Presentation<Tutorial> {
 //        body.setPadding(new Insets(20));
         aside.setPadding(new Insets(0, 20, 0, 20));
         aside.setPrefWidth(250);
-        btnTop.getStyleClass().addAll("btn-directions", "padding-20", "round");
+        btnTop.getStyleClass().addAll("btn-directions padding-20 round".split(" "));
         center.setId("tutorial-center-body");
         scroll.setId("tutorial-scroll");
 //        body.setId("tutorial-body");

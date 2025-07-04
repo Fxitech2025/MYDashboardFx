@@ -2,11 +2,15 @@ package io.github.gleidsonmt.dashboardfx;
 
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.dashboardfx.dashboard.ActionableView;
+import io.github.gleidsonmt.dashboardfx.drawer.CardUserOptions;
 import io.github.gleidsonmt.dashboardfx.drawer.Drawer;
+import io.github.gleidsonmt.dashboardfx.model.User;
+import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.glad.base.Root;
 import io.github.gleidsonmt.glad.base.internal.Module;
 import io.github.gleidsonmt.glad.base.internal.View;
 import io.github.gleidsonmt.glad.base.responsive.Break;
+import io.github.gleidsonmt.glad.controls.badge.Badge;
 import io.github.gleidsonmt.glad.controls.button.IconButton;
 import io.github.gleidsonmt.glad.controls.icon.Icon;
 import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
@@ -15,6 +19,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
@@ -36,16 +42,34 @@ public class Main extends BorderPane {
     private NavBar navBar = new NavBar();
     private BreadCrumbBar crumb = new BreadCrumbBar();
 
+
     private Drawer drawer;
+    private CardUserOptions card;
 
     private ObjectProperty<Module> currentModule = new SimpleObjectProperty<>();
 
 
     public Main() {
+        card = new CardUserOptions(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe"));
 
         navBar.add(crumb, 0, 0);
+        Badge badgeMessage = new Badge(Icon.CHAT, 8, 10);
+        badgeMessage.setStyle("-fx-box-color: -red-500;");
+//
+        Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5, 10);
+        badgeNotification.setStyle("-fx-box-color: -info;");
 
-//        card = new CardUserOptions(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe"));
+        navBar.add(badgeNotification, 2, 0);
+        navBar.add(badgeMessage, 1, 0);
+        navBar.add(card, 3, 0);
+
+                GridPane.setValignment(crumb, VPos.CENTER);
+        GridPane.setValignment(badgeNotification, VPos.CENTER);
+        GridPane.setValignment(badgeMessage, VPos.CENTER);
+        GridPane.setHalignment(card, HPos.RIGHT);
+        GridPane.setValignment(card, VPos.CENTER);
+        GridPane.setHgrow(crumb, Priority.ALWAYS);
+
 
 //        drawer.currentModuleProperty().addListener((_, oldValue, newValue) -> {
 //            if (newValue != null) {
@@ -69,7 +93,7 @@ public class Main extends BorderPane {
                 setLeft(null);
                 navBar.getChildren().add(0, hamb);
                 GridPane.setColumnIndex(crumb, 1);
-//            GridPane.setColumnIndex(card, 4);
+            GridPane.setColumnIndex(card, 4);
             }, Break.MOBILE);
 
             root.addPoint(_ -> {
@@ -80,8 +104,8 @@ public class Main extends BorderPane {
                 setLeft(drawer);
                 navBar.getChildren().remove(hamb);
 
-            //GridPane.setColumnIndex(crumb, 0);
-            //GridPane.setColumnIndex(card, 3);
+            GridPane.setColumnIndex(crumb, 0);
+            GridPane.setColumnIndex(card, 3);
             }, Break.SM, Break.MD, Break.LG, Break.XL, Break.XXL, Break.WIDE);
         });
     }
