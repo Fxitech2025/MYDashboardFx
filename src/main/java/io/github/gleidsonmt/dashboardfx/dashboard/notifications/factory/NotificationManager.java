@@ -1,19 +1,27 @@
 package io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory;
 
-import io.github.gleidsonmt.dashboardfx.Main;
 import io.github.gleidsonmt.dashboardfx.dashboard.CloseButton;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.CommentNotification;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.FollowNotification;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.InviteNotification;
 import io.github.gleidsonmt.dashboardfx.dashboard.notifications.component.*;
-import io.github.gleidsonmt.glad.controls.icon.Icon;
-import io.github.gleidsonmt.glad.controls.icon.SVGIcon;
+import io.github.gleidsonmt.dashboardfx.model.User;
+import io.github.gleidsonmt.dashboardfx.utils.Assets;
+import io.github.gleidsonmt.glad.base.Root;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Separator;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 /**
  * @author Gleidson Neves da Silveira | gleidisonmt@gmail.com
@@ -27,8 +35,51 @@ public class NotificationManager {
     private final FilteredList<NotificationItem<Notification>> filteredNotifications;
 
     public NotificationManager() {
-        notifications = FXCollections.observableArrayList();
-        filteredNotifications = new FilteredList<>(notifications, (_) -> true);
+        this(
+                new NotificationItem<>(
+                        new FollowNotification(
+                                new User(
+                                        Assets.getImage("default_avatar.jpg", 80),
+                                        "@gleidsonmt", "Gleidson Neves"
+                                ),
+                                LocalDateTime.of(LocalDate.of(2024, 11, 2), LocalTime.of(14, 23)),
+                                false
+                        )
+                ),
+                new NotificationItem<>(
+                        new FollowNotification(new User(Assets.getImage("avatar1.png", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 2, 22), LocalTime.of(12, 12)), false)
+                ),
+                new NotificationItem<>(
+                        new CommentNotification(new User(Assets.getImage("avatar2.jpg", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 2, 22), LocalTime.of(12, 12)), false,
+                                "Love the background on this! Wold love to learn how to create the mesh gradient effect.")
+                ),
+                new NotificationItem<>(
+                        new InviteNotification(new User(Assets.getImage("avatar4.png", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 3, 05), LocalTime.of(12, 12)), false)
+                ),
+                new NotificationItem<>(
+                        new FollowNotification(new User(Assets.getImage("default_avatar.jpg", 70), "@noelly", "Noelly Richards"), LocalDateTime.of(LocalDate.of(2025, 2, 22), LocalTime.of(12, 12)), false)
+                )
+
+        );
+    }
+
+    public void show(Scene scene, MouseEvent e, double y) {
+        Root root = (Root) scene.getRoot();
+
+        root.wrapper().setOnClick(_ -> {
+            root.wrapper().hide();
+            root.flow().remove(pane);
+        });
+
+        root.wrapper().show();
+        root.flow().openByCursor(pane,
+                e, Pos.BOTTOM_CENTER, 0, y);
+    }
+
+    @SafeVarargs
+    public NotificationManager(NotificationItem<Notification>... _notifications) {
+        notifications = FXCollections.observableArrayList(_notifications);
+        filteredNotifications = new FilteredList<>(notifications, _ -> true);
 
         pane = new NotificationPane(
                 new NotificationHeader(this),
@@ -36,15 +87,15 @@ public class NotificationManager {
                 new NotificationBody(this),
                 new Separator(),
                 new NotificationFooter()
-                );
+        );
     }
 
     public void useHeader(EventHandler<ActionEvent> event) {
-        pane.getChildren().add(0, new CloseButton(event));
+        pane.getChildren().addFirst(new CloseButton(event));
     }
 
     public void removeHeader() {
-        pane.getChildren().remove(0);
+        pane.getChildren().removeFirst();
     }
 
     public void add(NotificationItem<Notification> notification) {
@@ -61,7 +112,7 @@ public class NotificationManager {
         notifications.removeAll(notification);
     }
 
-    public void remove(NotificationItem<Notification>  notification) {
+    public void remove(NotificationItem<Notification> notification) {
         notifications.remove(notification);
     }
 
@@ -81,11 +132,11 @@ public class NotificationManager {
         return pane;
     }
 
-    public ObservableList<NotificationItem<Notification> > getNotifications() {
+    public ObservableList<NotificationItem<Notification>> getNotifications() {
         return notifications;
     }
 
-    public FilteredList<NotificationItem<Notification> > getFilteredNotifications() {
+    public FilteredList<NotificationItem<Notification>> getFilteredNotifications() {
         return filteredNotifications;
     }
 

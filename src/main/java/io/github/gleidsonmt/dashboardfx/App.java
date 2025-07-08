@@ -27,10 +27,12 @@ public class App extends Application {
                 Css.RADIO_BUTTON, Css.CHECK_BOX,
                 Css.TREE_VIEW, Css.TOGGLE_BUTTON,
                 Css.PROGRESS_BAR, Css.LIST_VIEW, Css.TABLE_VIEW,
-                Css.TAB_PANE,Css.IMMERSIVE_SCROLL,
+                Css.TAB_PANE, Css.IMMERSIVE_SCROLL,
+
                 Css.TEXT_FIELD, Css.TEXT_BOX);
 
         scene.getStylesheets().add(Assets.getCss("drawer.css"));
+        scene.getStylesheets().add(Assets.getCss("master.css"));
         stage.getIcons().add(Assets.getImage("logo_128.png"));
         stage.show();
 

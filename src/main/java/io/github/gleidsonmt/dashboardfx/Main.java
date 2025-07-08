@@ -2,6 +2,7 @@ package io.github.gleidsonmt.dashboardfx;
 
 import io.github.gleidsonmt.dashboardfx.breadcrumb.BreadCrumbBar;
 import io.github.gleidsonmt.dashboardfx.dashboard.ActionableView;
+import io.github.gleidsonmt.dashboardfx.dashboard.notifications.factory.NotificationManager;
 import io.github.gleidsonmt.dashboardfx.drawer.CardUserOptions;
 import io.github.gleidsonmt.dashboardfx.drawer.Drawer;
 import io.github.gleidsonmt.dashboardfx.model.User;
@@ -22,6 +23,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -52,6 +54,7 @@ public class Main extends BorderPane {
     public Main() {
         card = new CardUserOptions(new User(Assets.getImage("default_avatar.jpg", 80), "johndoe54@gmail.com", "Jhon Doe"));
 
+        navBar.setMinHeight(60);
         navBar.add(crumb, 0, 0);
         Badge badgeMessage = new Badge(Icon.CHAT, 8, 10);
         badgeMessage.setStyle("-fx-box-color: -red-500;");
@@ -59,16 +62,25 @@ public class Main extends BorderPane {
         Badge badgeNotification = new Badge(Icon.NOTIFICATION_IMPORTANT, 5, 10);
         badgeNotification.setStyle("-fx-box-color: -info;");
 
+        NotificationManager notificationManager = new NotificationManager();
+        badgeNotification.setOnMouseClicked(e -> notificationManager.show(getScene(), e, navBar.getHeight() / 2));
+
         navBar.add(badgeNotification, 2, 0);
         navBar.add(badgeMessage, 1, 0);
         navBar.add(card, 3, 0);
 
-                GridPane.setValignment(crumb, VPos.CENTER);
+        GridPane.setValignment(crumb, VPos.CENTER);
         GridPane.setValignment(badgeNotification, VPos.CENTER);
         GridPane.setValignment(badgeMessage, VPos.CENTER);
         GridPane.setHalignment(card, HPos.RIGHT);
         GridPane.setValignment(card, VPos.CENTER);
         GridPane.setHgrow(crumb, Priority.ALWAYS);
+
+        navBar.setHgap(10);
+        navBar.getStyleClass().addAll("border-light-gray-2");
+        navBar.setStyle("-fx-border-width: 0px 0px 2px 0px;");
+
+        hamb.setCancelButton(true);
 
 
 //        drawer.currentModuleProperty().addListener((_, oldValue, newValue) -> {
@@ -93,7 +105,9 @@ public class Main extends BorderPane {
                 setLeft(null);
                 navBar.getChildren().add(0, hamb);
                 GridPane.setColumnIndex(crumb, 1);
-            GridPane.setColumnIndex(card, 4);
+                GridPane.setColumnIndex(badgeMessage, 2);
+                GridPane.setColumnIndex(badgeNotification, 3);
+                GridPane.setColumnIndex(card, 4);
             }, Break.MOBILE);
 
             root.addPoint(_ -> {
@@ -104,8 +118,10 @@ public class Main extends BorderPane {
                 setLeft(drawer);
                 navBar.getChildren().remove(hamb);
 
-            GridPane.setColumnIndex(crumb, 0);
-            GridPane.setColumnIndex(card, 3);
+                GridPane.setColumnIndex(crumb, 0);
+                GridPane.setColumnIndex(badgeMessage, 1);
+                GridPane.setColumnIndex(badgeNotification, 2);
+                GridPane.setColumnIndex(card, 3);
             }, Break.SM, Break.MD, Break.LG, Break.XL, Break.XXL, Break.WIDE);
         });
     }
