@@ -63,7 +63,8 @@ public class Main extends BorderPane {
         badgeNotification.setStyle("-fx-box-color: -info;");
 
         NotificationManager notificationManager = new NotificationManager();
-        badgeNotification.setOnMouseClicked(e -> notificationManager.show(getScene(), e, navBar.getHeight() / 2));
+//        badgeNotification.setOnMouseClicked(e -> notificationManager.show(getScene(), e, navBar.getHeight() / 2));
+        badgeNotification.setOnMouseClicked(e -> notificationManager.show(getScene(), navBar));
 
         navBar.add(badgeNotification, 2, 0);
         navBar.add(badgeMessage, 1, 0);
@@ -157,7 +158,7 @@ public class Main extends BorderPane {
     }
 
     private void updateView(Module node) {
-        System.out.println("node = " + node);
+
         if (node instanceof View view) {
             this.container.setContent(view.getContent());
 

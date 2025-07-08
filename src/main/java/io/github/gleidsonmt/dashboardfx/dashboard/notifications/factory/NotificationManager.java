@@ -8,12 +8,15 @@ import io.github.gleidsonmt.dashboardfx.dashboard.notifications.component.*;
 import io.github.gleidsonmt.dashboardfx.model.User;
 import io.github.gleidsonmt.dashboardfx.utils.Assets;
 import io.github.gleidsonmt.glad.base.Root;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
@@ -62,18 +65,68 @@ public class NotificationManager {
 
         );
     }
-
-    public void show(Scene scene, MouseEvent e, double y) {
+    public void show(Scene scene,  Node target) {
         Root root = (Root) scene.getRoot();
+
+        Region old = (Region) root.getChildren().getFirst();
 
         root.wrapper().setOnClick(_ -> {
             root.wrapper().hide();
             root.flow().remove(pane);
         });
 
-        root.wrapper().show();
-        root.flow().openByCursor(pane,
-                e, Pos.BOTTOM_CENTER, 0, y);
+        if (!root.flow().fits(pane)) {
+            root.getChildren().clear();
+            root.getChildren().add(pane);
+            root.flow().clearConstraints(pane);
+            useHeader(_ -> root.getChildren().setAll(old));
+            root.widthProperty().addListener(new ChangeListener<>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    root.getChildren().setAll(old);
+                    root.widthProperty().removeListener(this);
+                    removeHeader();
+                }
+            });
+        } else {
+            root.wrapper().show();
+            root.flow().openByNode(pane,
+                   target, Pos.BOTTOM_RIGHT);
+        }
+    }
+
+
+    public void show(Scene scene, MouseEvent e, double y) {
+        Root root = (Root) scene.getRoot();
+
+        Region old = (Region) root.getChildren().getFirst();
+
+        root.wrapper().setOnClick(_ -> {
+            root.wrapper().hide();
+            root.flow().remove(pane);
+        });
+
+        if (!root.flow().fits(pane)) {
+            root.flow().clearConstraints(pane);
+            root.flow().remove(pane);
+            root.getChildren().clear();
+            root.getChildren().add(pane);
+            useHeader(_ -> root.getChildren().setAll(old));
+            root.widthProperty().addListener(new ChangeListener<>() {
+                @Override
+                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                    root.getChildren().setAll(old);
+                    root.widthProperty().removeListener(this);
+                    removeHeader();
+                }
+            });
+        } else {
+            root.wrapper().show();
+            root.flow().openByCursor(pane,
+                    e, Pos.BOTTOM_CENTER, 0, y);
+        }
+
+
     }
 
     @SafeVarargs
