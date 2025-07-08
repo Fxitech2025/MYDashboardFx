@@ -20,6 +20,8 @@ public class App extends Application {
         Root root = new Root(new Main());
         Scene scene = new Scene(root, 1200,800);
         stage.setScene(scene);
+        stage.setMinWidth(400);
+        stage.setMinHeight(600);
         ThemeProvider.install(scene, Font.POPPINS, Font.INSTAGRAM);
         ThemeProvider.install(scene, Css.DEFAULT, Css.BUTTON,
                 Css.SHAPES,  Css.CONTEXT_MENU,
